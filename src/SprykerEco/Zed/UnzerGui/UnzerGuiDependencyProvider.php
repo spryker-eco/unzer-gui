@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\UnzerGui;
 
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
+use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeBridge;
 
 class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
 {
