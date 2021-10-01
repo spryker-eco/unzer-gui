@@ -8,12 +8,32 @@
 namespace SprykerEco\Zed\UnzerGui\Communication;
 
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
+use SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormExpander;
+use SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormExpanderInterface;
+use SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormTabExpander;
+use SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormTabExpanderInterface;
 use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\MerchantUnzerFormDataProvider;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface;
 use SprykerEco\Zed\UnzerGui\UnzerGuiDependencyProvider;
 
 class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
 {
+    /**
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormTabExpanderInterface
+     */
+    public function createMerchantUnzerFormTabExpander(): MerchantUnzerFormTabExpanderInterface
+    {
+        return new MerchantUnzerFormTabExpander();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormExpanderInterface
+     */
+    public function createMerchantUnzerFormExpander(): MerchantUnzerFormExpanderInterface
+    {
+        return new MerchantUnzerFormExpander($this->createMerchantUnzerFormDataProvider());
+    }
+
     /**
      * @return \SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\MerchantUnzerFormDataProvider
      */

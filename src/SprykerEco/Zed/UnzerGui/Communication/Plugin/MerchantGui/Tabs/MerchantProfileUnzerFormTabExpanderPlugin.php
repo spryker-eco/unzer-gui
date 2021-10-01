@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Plugin\MerchantGui\Tabs;
 
-use Generated\Shared\Transfer\TabItemTransfer;
 use Generated\Shared\Transfer\TabsViewTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\MerchantGuiExtension\Dependency\Plugin\MerchantFormTabExpanderPluginInterface;
@@ -28,12 +27,6 @@ class MerchantProfileUnzerFormTabExpanderPlugin extends AbstractPlugin implement
      */
     public function expand(TabsViewTransfer $tabsViewTransfer): TabsViewTransfer
     {
-        $tabItemTransfer = (new TabItemTransfer())->setName('unzer')
-            ->setTitle('Unzer')
-            ->setTemplate('@UnzerGui/_partials/unzer-tab.twig');
-
-        $tabsViewTransfer->addTab($tabItemTransfer);
-
-        return $tabsViewTransfer;
+        return $this->getFactory()->createMerchantUnzerFormTabExpander()->expand($tabsViewTransfer);
     }
 }
