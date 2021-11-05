@@ -12,11 +12,6 @@ use Generated\Shared\Transfer\TabsViewTransfer;
 interface MerchantUnzerFormTabExpanderInterface
 {
     /**
-     * Specification:
-     * - Expands tabs for Merchant form.
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
      *
      * @return \Generated\Shared\Transfer\TabsViewTransfer

@@ -18,10 +18,6 @@ class MerchantUnzerFormTabExpander implements MerchantUnzerFormTabExpanderInterf
     protected const UNZER_TAB_TEMPLATE = '@UnzerGui/_partials/unzer-tab.twig';
 
     /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
      *
      * @return \Generated\Shared\Transfer\TabsViewTransfer
