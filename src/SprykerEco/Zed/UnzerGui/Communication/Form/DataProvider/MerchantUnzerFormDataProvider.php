@@ -32,13 +32,13 @@ class MerchantUnzerFormDataProvider
      */
     public function getData(MerchantTransfer $merchantTransfer): ?string
     {
-        $unzerMerchant = $this->unzerFacade->getUnzerMerchantByMerchantReference($merchantTransfer->getMerchantReference());
+        $unzerMerchant = $this->unzerFacade->getUnzerMerchantByMerchantReference($merchantTransfer->getMerchantReferenceOrFail());
 
         return $unzerMerchant->getParticipantId();
     }
 
     /**
-     * @return string[]
+     * @return array<string, string>
      */
     public function getOptions(): array
     {
