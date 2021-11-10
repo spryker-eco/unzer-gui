@@ -14,10 +14,11 @@ use Spryker\Zed\MerchantGuiExtension\Dependency\Plugin\MerchantFormTabExpanderPl
 /**
  * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
  */
-class MerchantProfileUnzerFormTabExpanderPlugin extends AbstractPlugin implements MerchantFormTabExpanderPluginInterface
+class UnzerProfileMerchantFormTabExpanderPlugin extends AbstractPlugin implements MerchantFormTabExpanderPluginInterface
 {
     /**
      * {@inheritDoc}
+     * - Expands form with new Unzer profile tab.
      *
      * @api
      *

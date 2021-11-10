@@ -14,10 +14,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
  */
-class MerchantUnzerFormExpanderPlugin extends AbstractPlugin implements MerchantFormExpanderPluginInterface
+class UnzerMerchantFormExpanderPlugin extends AbstractPlugin implements MerchantFormExpanderPluginInterface
 {
     /**
      * {@inheritDoc}
+     * - Expands MerchantForm with form field for merchant Unzer participant.
      *
      * @api
      *
