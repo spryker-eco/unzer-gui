@@ -32,10 +32,6 @@ class MerchantUnzerFormExpander implements MerchantUnzerFormExpanderInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
@@ -64,7 +60,7 @@ class MerchantUnzerFormExpander implements MerchantUnzerFormExpanderInterface
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return string[]
+     * @return array<string, null|string>
      */
     protected function getMerchantUnzerFormOptions(FormBuilderInterface $builder): array
     {
