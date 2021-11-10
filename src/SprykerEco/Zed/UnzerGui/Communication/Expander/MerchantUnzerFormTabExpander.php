@@ -18,18 +18,24 @@ class MerchantUnzerFormTabExpander implements MerchantUnzerFormTabExpanderInterf
     protected const UNZER_TAB_TEMPLATE = '@UnzerGui/_partials/unzer-tab.twig';
 
     /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
+     * @var string
+     */
+    protected const UNZER_TAB_ITEM_NAME = 'unzer';
+
+    /**
+     * @var string
+     */
+    protected const UNZER_TAB_ITEM_TITLE = 'Unzer';
+
+    /**
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
      *
      * @return \Generated\Shared\Transfer\TabsViewTransfer
      */
     public function expand(TabsViewTransfer $tabsViewTransfer): TabsViewTransfer
     {
-        $tabItemTransfer = (new TabItemTransfer())->setName('unzer')
-            ->setTitle('Unzer')
+        $tabItemTransfer = (new TabItemTransfer())->setName(static::UNZER_TAB_ITEM_NAME)
+            ->setTitle(static::UNZER_TAB_ITEM_TITLE)
             ->setTemplate(static::UNZER_TAB_TEMPLATE);
 
         $tabsViewTransfer->addTab($tabItemTransfer);
