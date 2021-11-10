@@ -37,7 +37,7 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addUnzerFacade(Container $container)
+    protected function addUnzerFacade(Container $container): Container
     {
         $container->set(static::FACADE_UNZER, function (Container $container) {
             return new UnzerGuiToUnzerFacadeBridge($container->getLocator()->unzer()->facade());
