@@ -12,11 +12,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 interface MerchantUnzerFormExpanderInterface
 {
     /**
-     * Specification:
-     * - Expands Merchant form.
-     *
-     * @api
-     *
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
