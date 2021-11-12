@@ -1,0 +1,42 @@
+{
+    "name": "spryker-eco/unzer-gui",
+    "type": "library",
+    "description": "UnzerGui module",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "spryker-eco/unzer": "dev-feature/cc-14610/cc-14662/code-migration as 1.0",
+        "spryker/kernel": "^3.30.0",
+        "spryker/merchant-gui-extension": "^1.1.0",
+        "spryker/symfony": "^3.7.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "*",
+        "spryker/code-sniffer": "*",
+        "spryker/testify": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SprykerEco\\": "src/SprykerEco/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/codecept run",
+        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/",
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/",
+        "stan": "phpstan analyse -c phpstan.neon -l 8 src/",
+        "stan-setup": "cp composer.json composer.backup && COMPOSER_MEMORY_LIMIT=-1 composer require --dev phpstan/phpstan:^0.12 && mv composer.backup composer.json"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "process-timeout": 600
+    }
+}
