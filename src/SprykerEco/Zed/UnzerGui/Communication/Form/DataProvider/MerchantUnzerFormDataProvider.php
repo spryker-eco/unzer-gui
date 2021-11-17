@@ -8,6 +8,9 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider;
 
 use Generated\Shared\Transfer\MerchantTransfer;
+use Generated\Shared\Transfer\MerchantUnzerParticipantConditionsTransfer;
+use Generated\Shared\Transfer\MerchantUnzerParticipantCriteriaTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface;
 
 class MerchantUnzerFormDataProvider
@@ -32,9 +35,18 @@ class MerchantUnzerFormDataProvider
      */
     public function getData(MerchantTransfer $merchantTransfer): ?string
     {
-        $unzerMerchant = $this->unzerFacade->getUnzerMerchantByMerchantReference($merchantTransfer->getMerchantReferenceOrFail());
+        $merchantUnzerParticipantCriteriaTransfer = (new MerchantUnzerParticipantCriteriaTransfer())
+            ->setMerchantUnzerParticipantConditions(
+                (new MerchantUnzerParticipantConditionsTransfer())->setReferences([$merchantTransfer->getMerchantReferenceOrFail()]),
+            );
 
-        return $unzerMerchant->getParticipantId();
+        $merchantUnzerParticipantCollectionTransfer = $this->unzerFacade->getMerchantUnzerParticipantCollection($merchantUnzerParticipantCriteriaTransfer);
+
+        if ($merchantUnzerParticipantCollectionTransfer->getMerchantUnzerParticipants()->count() === 1) {
+            return $merchantUnzerParticipantCollectionTransfer->getMerchantUnzerParticipants()[0]->getParticipantIdOrFail();
+        }
+
+        return null;
     }
 
     /**

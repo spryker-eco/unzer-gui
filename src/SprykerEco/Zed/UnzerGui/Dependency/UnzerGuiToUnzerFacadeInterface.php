@@ -7,14 +7,15 @@
 
 namespace SprykerEco\Zed\UnzerGui\Dependency;
 
-use Generated\Shared\Transfer\MerchantUnzerParticipantTransfer;
+use Generated\Shared\Transfer\MerchantUnzerParticipantCollectionTransfer;
+use Generated\Shared\Transfer\MerchantUnzerParticipantCriteriaTransfer;
 
 interface UnzerGuiToUnzerFacadeInterface
 {
     /**
      * @param string $merchantReference
      *
-     * @return \Generated\Shared\Transfer\MerchantUnzerParticipantTransfer
+     * @return \Generated\Shared\Transfer\MerchantUnzerParticipantCollectionTransfer
      */
-    public function getUnzerMerchantByMerchantReference(string $merchantReference): MerchantUnzerParticipantTransfer;
+    public function getMerchantUnzerParticipantCollection(MerchantUnzerParticipantCriteriaTransfer $merchantUnzerParticipantCriteriaTransfer): MerchantUnzerParticipantCollectionTransfer;
 }
