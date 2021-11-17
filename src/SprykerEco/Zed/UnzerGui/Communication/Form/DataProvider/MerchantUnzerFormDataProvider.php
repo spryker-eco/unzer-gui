@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider;
 use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\MerchantUnzerParticipantConditionsTransfer;
 use Generated\Shared\Transfer\MerchantUnzerParticipantCriteriaTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface;
 
 class MerchantUnzerFormDataProvider

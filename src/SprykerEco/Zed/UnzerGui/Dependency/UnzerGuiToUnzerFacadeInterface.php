@@ -17,5 +17,7 @@ interface UnzerGuiToUnzerFacadeInterface
      *
      * @return \Generated\Shared\Transfer\MerchantUnzerParticipantCollectionTransfer
      */
-    public function getMerchantUnzerParticipantCollection(MerchantUnzerParticipantCriteriaTransfer $merchantUnzerParticipantCriteriaTransfer): MerchantUnzerParticipantCollectionTransfer;
+    public function getMerchantUnzerParticipantCollection(
+        MerchantUnzerParticipantCriteriaTransfer $merchantUnzerParticipantCriteriaTransfer
+    ): MerchantUnzerParticipantCollectionTransfer;
 }
