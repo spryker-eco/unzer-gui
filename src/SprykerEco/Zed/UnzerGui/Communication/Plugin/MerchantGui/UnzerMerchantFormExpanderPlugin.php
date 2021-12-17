@@ -18,6 +18,7 @@ class UnzerMerchantFormExpanderPlugin extends AbstractPlugin implements Merchant
 {
     /**
      * {@inheritDoc}
+     * - Requires `MerchantTransfer::merchantReference` to be set.
      * - Expands MerchantForm with form field for merchant Unzer participant.
      *
      * @api

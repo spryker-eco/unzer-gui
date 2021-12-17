@@ -7,7 +7,8 @@
 
 namespace SprykerEco\Zed\UnzerGui\Dependency;
 
-use Generated\Shared\Transfer\MerchantUnzerParticipantTransfer;
+use Generated\Shared\Transfer\MerchantUnzerParticipantCollectionTransfer;
+use Generated\Shared\Transfer\MerchantUnzerParticipantCriteriaTransfer;
 
 class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
 {
@@ -25,12 +26,13 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     }
 
     /**
-     * @param string $merchantReference
+     * @param \Generated\Shared\Transfer\MerchantUnzerParticipantCriteriaTransfer $merchantUnzerParticipantCriteriaTransfer
      *
-     * @return \Generated\Shared\Transfer\MerchantUnzerParticipantTransfer
+     * @return \Generated\Shared\Transfer\MerchantUnzerParticipantCollectionTransfer
      */
-    public function getUnzerMerchantByMerchantReference(string $merchantReference): MerchantUnzerParticipantTransfer
-    {
-        return $this->unzerFacade->getUnzerMerchantByMerchantReference($merchantReference);
+    public function getMerchantUnzerParticipantCollection(
+        MerchantUnzerParticipantCriteriaTransfer $merchantUnzerParticipantCriteriaTransfer
+    ): MerchantUnzerParticipantCollectionTransfer {
+        return $this->unzerFacade->getMerchantUnzerParticipantCollection($merchantUnzerParticipantCriteriaTransfer);
     }
 }
