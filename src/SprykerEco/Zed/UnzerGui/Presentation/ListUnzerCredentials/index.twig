@@ -1,0 +1,21 @@
+{% extends '@Gui/layout/layout.twig' %}
+
+{% set widget_title = 'Overview of Unzer Credentials' | trans %}
+
+{% block head_title widget_title %}
+{% block section_title widget_title %}
+
+{% block action %}
+    {{ createActionButton('/unzer-gui/create-unzer-credentials', 'Add Unzer Credentials' | trans) }}
+{% endblock %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' %}
+        {% block widget_title -%}
+            <h5>{{ 'List of Unzer Credentials' | trans}}</h5>
+        {%- endblock %}
+        {% block widget_content %}
+            {{ unzerCredentials | raw }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

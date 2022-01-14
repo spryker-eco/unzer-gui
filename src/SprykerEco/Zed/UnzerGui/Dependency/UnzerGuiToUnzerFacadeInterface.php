@@ -7,17 +7,35 @@
 
 namespace SprykerEco\Zed\UnzerGui\Dependency;
 
-use Generated\Shared\Transfer\MerchantUnzerParticipantCollectionTransfer;
-use Generated\Shared\Transfer\MerchantUnzerParticipantCriteriaTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsCollectionTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsResponseTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 
 interface UnzerGuiToUnzerFacadeInterface
 {
     /**
-     * @param string $merchantReference
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      *
-     * @return \Generated\Shared\Transfer\MerchantUnzerParticipantCollectionTransfer
+     * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
      */
-    public function getMerchantUnzerParticipantCollection(
-        MerchantUnzerParticipantCriteriaTransfer $merchantUnzerParticipantCriteriaTransfer
-    ): MerchantUnzerParticipantCollectionTransfer;
+    public function createUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer;
+
+    /**
+     * @param UnzerCredentialsCriteriaTransfer $unzerCredentialsCriteriaTransfer
+     *
+     * @return UnzerCredentialsCollectionTransfer
+     */
+    public function getUnzerCredentialsCollection(
+        UnzerCredentialsCriteriaTransfer $unzerCredentialsCriteriaTransfer
+    ): UnzerCredentialsCollectionTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     *
+     * @throws \SprykerEco\Zed\Unzer\Business\Exception\UnzerException
+     *
+     * @return void
+     */
+    public function setUnzerNotificationUrl(UnzerCredentialsTransfer $unzerCredentialsTransfer): void;
 }

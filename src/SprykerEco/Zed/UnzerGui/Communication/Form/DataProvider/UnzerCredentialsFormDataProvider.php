@@ -1,0 +1,97 @@
+<?php
+
+namespace SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider;
+
+use Generated\Shared\Transfer\UnzerCredentialsConditionsTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsTransfer;
+use Generated\Shared\Transfer\UnzerKeypairTransfer;
+use SprykerEco\Shared\Unzer\UnzerConstants;
+use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsCreateForm;
+use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface;
+use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
+
+class UnzerCredentialsFormDataProvider
+{
+    /**
+     * @var UnzerGuiToUnzerFacadeInterface
+     */
+    protected $unzerFacade;
+
+    /**
+     * @var UnzerGuiConfig
+     */
+    protected $unzerGuiConfig;
+
+    /**
+     * @param UnzerGuiToUnzerFacadeInterface $unzerFacade
+     */
+    public function __construct(
+        UnzerGuiToUnzerFacadeInterface $unzerFacade,
+        UnzerGuiConfig                 $unzerGuiConfig
+    )
+    {
+        $this->unzerFacade = $unzerFacade;
+        $this->unzerGuiConfig = $unzerGuiConfig;
+    }
+
+    /**
+     * @param int|null $idUnzerCredentials
+     *
+     * @return \Generated\Shared\Transfer\UnzerCredentialsTransfer
+     */
+    public function getData(?int $idUnzerCredentials = null): UnzerCredentialsTransfer
+    {
+        $unzerCredentialsTransfer = (new UnzerCredentialsTransfer())->setUnzerKeypair(new UnzerKeypairTransfer());
+
+        if (!$idUnzerCredentials) {
+            return $unzerCredentialsTransfer;
+        }
+
+        $unzerCredentialsCriteriaTransfer = (new UnzerCredentialsCriteriaTransfer())
+            ->setUnzerCredentialsConditions(
+                (new UnzerCredentialsConditionsTransfer())->addId($idUnzerCredentials)
+            );
+
+        $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerCredentialsCriteriaTransfer);
+
+        $unzerCredentialsTransfer = $unzerCredentialsCollectionTransfer[0] ?? $unzerCredentialsTransfer;
+        if ($unzerCredentialsTransfer->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
+            $unzerCredentialsTransfer = $this->setChildUnzerCredentials($unzerCredentialsTransfer);
+        }
+
+        return $unzerCredentialsCollectionTransfer[0] ?? $unzerCredentialsTransfer;
+    }
+
+    /**
+     * @param int|null $idUnzerCredentials
+     *
+     * @return array
+     */
+    public function getOptions(?int $idUnzerCredentials = null): array
+    {
+        return [
+            'data_class' => UnzerCredentialsTransfer::class,
+            'label' => false,
+            UnzerCredentialsCreateForm::OPTION_CURRENT_ID => $idUnzerCredentials,
+            UnzerCredentialsCreateForm::CREDENTIALS_TYPE_CHOICES_OPTION => $this->unzerGuiConfig->getUnzerCredentialsTypeChoices(),
+        ];
+    }
+
+    /**
+     * @param UnzerCredentialsTransfer $unzerCredentialsTransfer
+     *
+     * @return UnzerCredentialsTransfer
+     */
+    protected function setChildUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsTransfer
+    {
+        $unzerChildCredentialsCriteriaTransfer = (new UnzerCredentialsCriteriaTransfer())
+            ->setUnzerCredentialsConditions(
+                (new UnzerCredentialsConditionsTransfer())->addParentId($unzerCredentialsTransfer->getIdUnzerCredentials())
+            );
+
+        $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerChildCredentialsCriteriaTransfer);
+
+        return $unzerCredentialsTransfer->setChildUnzerCredentials($unzerCredentialsCollectionTransfer[0] ?? null);
+    }
+}
