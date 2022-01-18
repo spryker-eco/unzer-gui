@@ -1,17 +1,23 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui\Communication\Form;
 
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
-use Spryker\Zed\Gui\Communication\Form\Type\SelectType;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ */
 class UnzerMainMerchantCredentialsType extends AbstractType
 {
     /**
@@ -39,16 +45,21 @@ class UnzerMainMerchantCredentialsType extends AbstractType
      */
     protected const LABEL_PARTICIPANT_ID = 'Participant Id';
 
+    /**
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'data_class' => UnzerCredentialsTransfer::class
+            'data_class' => UnzerCredentialsTransfer::class,
         ]);
     }
 
-
+    /**
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this
@@ -60,7 +71,8 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     }
 
     /**
-     * @param FormBuilderInterface $builder
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
      * @return $this
      */
     protected function addIdUnzerCredentialsField(FormBuilderInterface $builder)
@@ -71,7 +83,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     }
 
     /**
-     * @param FormBuilderInterface $builder
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
      * @return $this
      */

@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
  */
 class UnzerMerchantFormExpanderPlugin extends AbstractPlugin implements MerchantFormExpanderPluginInterface
 {

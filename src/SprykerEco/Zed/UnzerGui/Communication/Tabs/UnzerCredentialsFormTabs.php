@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui\Communication\Tabs;
 
 use Generated\Shared\Transfer\TabItemTransfer;
@@ -27,7 +32,7 @@ class UnzerCredentialsFormTabs extends AbstractTabs
      *
      * @return $this
      */
-    protected function addGeneralTab(TabsViewTransfer $tabsViewTransfer): UnzerCredentialsFormTabs
+    protected function addGeneralTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer->setName('general')
@@ -44,7 +49,7 @@ class UnzerCredentialsFormTabs extends AbstractTabs
      *
      * @return $this
      */
-    protected function setFooter(TabsViewTransfer $tabsViewTransfer): UnzerCredentialsFormTabs
+    protected function setFooter(TabsViewTransfer $tabsViewTransfer)
     {
         $tabsViewTransfer->setFooterTemplate('@UnzerGui/_partials/_form-submit.twig')
             ->setIsNavigable(true);

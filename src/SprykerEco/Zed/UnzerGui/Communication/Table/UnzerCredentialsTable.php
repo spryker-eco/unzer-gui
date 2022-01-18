@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui\Communication\Table;
 
 use Orm\Zed\Store\Persistence\Map\SpyStoreTableMap;
@@ -37,23 +42,22 @@ class UnzerCredentialsTable extends AbstractTable
     protected const STORE_CLASS_LABEL = 'label-info';
 
     /**
-     * @var SpyUnzerCredentialsQuery
+     * @var \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery
      */
     protected $unzerCredentialsQuery;
 
     /**
-     * @param SpyUnzerCredentialsQuery $unzerCredentialsQuery
+     * @param \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery $unzerCredentialsQuery
      */
     public function __construct(SpyUnzerCredentialsQuery $unzerCredentialsQuery)
     {
         $this->unzerCredentialsQuery = $unzerCredentialsQuery;
     }
 
-
     /**
-     * @param TableConfiguration $config
+     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
      *
-     * @return TableConfiguration
+     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
      */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
@@ -80,9 +84,9 @@ class UnzerCredentialsTable extends AbstractTable
     }
 
     /**
-     * @param TableConfiguration $config
+     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
      *
-     * @return TableConfiguration
+     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
      */
     protected function setHeader(TableConfiguration $tableConfiguration): TableConfiguration
     {
@@ -98,7 +102,7 @@ class UnzerCredentialsTable extends AbstractTable
     }
 
     /**
-     * @param TableConfiguration $config
+     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
      *
      * @return array
      */
@@ -113,7 +117,7 @@ class UnzerCredentialsTable extends AbstractTable
                 SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $item[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
                 SpyUnzerCredentialsTableMap::COL_TYPE => $this->mapTypeName($item),
                 SpyUnzerCredentialsStoreTableMap::COL_FK_STORE => $this->createStoresLabel($item),
-                static::COL_ACTIONS =>$this->buildLinks($item),
+                static::COL_ACTIONS => $this->buildLinks($item),
             ];
             $results[] = $rowData;
         }
@@ -123,7 +127,7 @@ class UnzerCredentialsTable extends AbstractTable
     }
 
     /**
-     * @return SpyUnzerCredentialsQuery
+     * @return \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery
      */
     protected function prepareQuery(): SpyUnzerCredentialsQuery
     {
@@ -179,16 +183,16 @@ class UnzerCredentialsTable extends AbstractTable
     {
         $buttons = [];
         $buttons[] = $this->generateEditButton(
-            Url::generate(UnzerGuiConfig::URL_UNZER_CREDENTIALS_EDIT, [EditUnzerCredentialsController::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(UnzerGuiConfig::URL_UNZER_CREDENTIALS_EDIT, [EditUnzerCredentialsController::URL_PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Edit',
         );
         $buttons[] = $this->generateButton(
-            Url::generate(UnzerGuiConfig::URL_UNZER_CREDENTIALS_SYNC, [EditUnzerCredentialsController::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(UnzerGuiConfig::URL_UNZER_CREDENTIALS_SYNC, [EditUnzerCredentialsController::URL_PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Sync payment methods',
-            []
+            [],
         );
         $buttons[] = $this->generateRemoveButton(
-            Url::generate(UnzerGuiConfig::URL_MERCHANT_REMOVE, [EditUnzerCredentialsController::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(UnzerGuiConfig::URL_MERCHANT_REMOVE, [EditUnzerCredentialsController::URL_PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Remove',
         );
 

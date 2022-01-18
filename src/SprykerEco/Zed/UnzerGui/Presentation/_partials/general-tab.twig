@@ -3,4 +3,6 @@
 {{ form_row(unzerCredentialsForm.unzerKeypair) }}
 {{ form_row(unzerCredentialsForm.type) }}
 {{ form_row(unzerCredentialsForm.storeRelation) }}
-{{ form_row(unzerCredentialsForm.childUnzerCredentials) }}
+{% if unzerCredentialsForm.childUnzerCredentials is defined %}
+    {{ form_row(unzerCredentialsForm.childUnzerCredentials) }}
+{% endif %}

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
 use FFI\Exception;
@@ -9,14 +14,12 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Shared\Unzer\UnzerConstants;
 use SprykerEco\Zed\Unzer\Business\Exception\UnzerException;
-use SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @method UnzerGuiCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
  */
 class CreateUnzerCredentialsController extends AbstractController
 {
@@ -33,9 +36,9 @@ class CreateUnzerCredentialsController extends AbstractController
     protected const MESSAGE_CREDENTIALS_CREATE_SUCCESS = 'Unzer Credentials created successfully.';
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
     public function indexAction(Request $request)
     {
@@ -57,16 +60,16 @@ class CreateUnzerCredentialsController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @param FormInterface $unzerCredentialsForm
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
     protected function createUnzerCredentials(Request $request, FormInterface $unzerCredentialsForm)
     {
         $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, UnzerGuiConfig::URL_UNZER_CREDENTIALS_LIST);
 
-        /** @var UnzerCredentialsTransfer $unzerCredentialsTransfer */
+        /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();
 
         $propelConnection = Propel::getConnection();
@@ -98,9 +101,9 @@ class CreateUnzerCredentialsController extends AbstractController
     }
 
     /**
-     * @param UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      *
-     * @throws UnzerException
+     * @throws \SprykerEco\Zed\Unzer\Business\Exception\UnzerException
      */
     protected function saveUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsTransfer
     {

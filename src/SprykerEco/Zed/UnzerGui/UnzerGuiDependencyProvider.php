@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui;
 
-use Orm\Zed\Merchant\Persistence\SpyMerchantQuery;
 use Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
@@ -15,6 +14,9 @@ use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\MerchantGui\Communication\Exception\MissingStoreRelationFormTypePluginException;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeBridge;
 
+/**
+ * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
+ */
 class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
@@ -47,10 +49,8 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::provideCommunicationLayerDependencies($container);
 
         $container = $this->addUnzerFacade($container);
-        $container = $this->addMerchantFacade($container);
         $container = $this->addPropelUnzerCredentialsQuery($container);
         $container = $this->addStoreRelationFormTypePlugin($container);
-
 
         return $container;
     }
@@ -70,9 +70,9 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @param Container $container
+     * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return Container
+     * @return \Spryker\Zed\Kernel\Container
      */
     protected function addPropelUnzerCredentialsQuery(Container $container): Container
     {
@@ -112,10 +112,5 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
                 FormTypeInterface::class,
             ),
         );
-    }
-
-    protected function addMerchantFacade(Container $container)
-    {
-
     }
 }

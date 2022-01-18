@@ -38,5 +38,15 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "process-timeout": 600
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:spryker-eco/unzer.git"
+        },
+        {
+            "type": "git",
+            "url": "git@github.com:spryker-eco/unzer-api.git"
+        }
+    ]
 }

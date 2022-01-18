@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui\Communication\Form;
 
 use Generated\Shared\Transfer\UnzerKeypairTransfer;
@@ -11,6 +16,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ */
 class UnzerKeypairType extends AbstractType
 {
     /**
@@ -38,7 +47,11 @@ class UnzerKeypairType extends AbstractType
      */
     protected const LABEL_PRIVATE_KEY = 'Unzer Private Key';
 
-
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -49,6 +62,12 @@ class UnzerKeypairType extends AbstractType
         ]);
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this
@@ -57,6 +76,11 @@ class UnzerKeypairType extends AbstractType
             ->addKeypairIdField($builder);
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
     protected function addPublicKeyField(FormBuilderInterface $builder)
     {
         $builder
@@ -68,6 +92,11 @@ class UnzerKeypairType extends AbstractType
         return $this;
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
     protected function addPrivateKeyField(FormBuilderInterface $builder)
     {
         $builder
@@ -79,6 +108,11 @@ class UnzerKeypairType extends AbstractType
         return $this;
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
     protected function addKeypairIdField(FormBuilderInterface $builder)
     {
         $builder

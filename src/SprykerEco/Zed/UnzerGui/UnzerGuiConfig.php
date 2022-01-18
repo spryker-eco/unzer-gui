@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
@@ -39,12 +44,17 @@ class UnzerGuiConfig extends AbstractBundleConfig
      */
     protected const COMPANY_SUGGESTION_LIMIT = 20;
 
+    /**
+     * @var array
+     */
     protected const UNZER_CREDENTIALS_TYPES = [
         1 => 'Standard',
         2 => 'Marketplace (Main channel)',
     ];
 
     /**
+     * @api
+     *
      * @return array<string>
      */
     public function getUnzerCredentialsTypeChoices(): array
@@ -53,6 +63,8 @@ class UnzerGuiConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return int
      */
     public function getMerchantSuggestionLimit(): int

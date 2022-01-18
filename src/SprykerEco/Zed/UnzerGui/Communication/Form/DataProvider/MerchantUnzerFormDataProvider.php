@@ -32,7 +32,6 @@ class MerchantUnzerFormDataProvider
      */
     public function getData(MerchantTransfer $merchantTransfer): ?string
     {
-
         return null;
     }
 

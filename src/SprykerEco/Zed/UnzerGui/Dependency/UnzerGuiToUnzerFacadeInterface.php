@@ -22,9 +22,9 @@ interface UnzerGuiToUnzerFacadeInterface
     public function createUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer;
 
     /**
-     * @param UnzerCredentialsCriteriaTransfer $unzerCredentialsCriteriaTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer $unzerCredentialsCriteriaTransfer
      *
-     * @return UnzerCredentialsCollectionTransfer
+     * @return \Generated\Shared\Transfer\UnzerCredentialsCollectionTransfer
      */
     public function getUnzerCredentialsCollection(
         UnzerCredentialsCriteriaTransfer $unzerCredentialsCriteriaTransfer
@@ -38,4 +38,11 @@ interface UnzerGuiToUnzerFacadeInterface
      * @return void
      */
     public function setUnzerNotificationUrl(UnzerCredentialsTransfer $unzerCredentialsTransfer): void;
+
+    /**
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     *
+     * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
+     */
+    public function updateUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer;
 }

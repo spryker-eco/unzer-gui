@@ -15,9 +15,11 @@ use SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormExpander;
 use SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormExpanderInterface;
 use SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormTabExpander;
 use SprykerEco\Zed\UnzerGui\Communication\Expander\MerchantUnzerFormTabExpanderInterface;
+use SprykerEco\Zed\UnzerGui\Communication\Form\Constraint\UnzerCredentialsConstraint;
 use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\MerchantUnzerFormDataProvider;
 use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsCreateForm;
+use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsEditForm;
 use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatter;
 use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatterInterface;
 use SprykerEco\Zed\UnzerGui\Communication\Table\UnzerCredentialsTable;
@@ -65,17 +67,17 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return UnzerCredentialsTable
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Table\UnzerCredentialsTable
      */
     public function createUnzerCredentialsTable(): UnzerCredentialsTable
     {
         return new UnzerCredentialsTable(
-            $this->getUnzerCredentialsPropelQuery()
+            $this->getUnzerCredentialsPropelQuery(),
         );
     }
 
     /**
-     * @return SpyUnzerCredentialsQuery
+     * @return \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery
      */
     public function getUnzerCredentialsPropelQuery(): SpyUnzerCredentialsQuery
     {
@@ -83,7 +85,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return UnzerCredentialsFormTabs
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Tabs\UnzerCredentialsFormTabs
      */
     public function createUnzerCredentialsFormTabs(): UnzerCredentialsFormTabs
     {
@@ -91,25 +93,36 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return UnzerCredentialsFormDataProvider
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider
      */
     public function createUnzerCredentialsFormDataProvider(): UnzerCredentialsFormDataProvider
     {
         return new UnzerCredentialsFormDataProvider(
             $this->getUnzerFacade(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
     /**
-     * @param UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      * @param array $options
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function getUnzerCredentialsCreateForm(UnzerCredentialsTransfer $unzerCredentialsTransfer, array $options): FormInterface
     {
         return $this->getFormFactory()->create(UnzerCredentialsCreateForm::class, $unzerCredentialsTransfer, $options);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param array $options
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function getUnzerCredentialsEditForm(UnzerCredentialsTransfer $unzerCredentialsTransfer, array $options): FormInterface
+    {
+        return $this->getFormFactory()->create(UnzerCredentialsEditForm::class, $unzerCredentialsTransfer, $options);
     }
 
     /**
@@ -121,7 +134,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return UnzerGuiToMerchantFacadeInterface
+     * @return \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeInterface
      */
     public function getMerchantFacade(): UnzerGuiToMerchantFacadeInterface
     {
@@ -129,10 +142,18 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return UnzerGuiFormatterInterface
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatterInterface
      */
     public function createUnzerGuiFormatter(): UnzerGuiFormatterInterface
     {
         return new UnzerGuiFormatter();
+    }
+
+    public function createUnzerCredentialsConstraint(array $options = [])
+    {
+        return new UnzerCredentialsConstraint(
+            $this->getUnzerFacade(),
+            $options,
+        );
     }
 }

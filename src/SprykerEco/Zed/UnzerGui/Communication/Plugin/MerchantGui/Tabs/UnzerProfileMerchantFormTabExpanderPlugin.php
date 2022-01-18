@@ -13,6 +13,7 @@ use Spryker\Zed\MerchantGuiExtension\Dependency\Plugin\MerchantFormTabExpanderPl
 
 /**
  * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
  */
 class UnzerProfileMerchantFormTabExpanderPlugin extends AbstractPlugin implements MerchantFormTabExpanderPluginInterface
 {

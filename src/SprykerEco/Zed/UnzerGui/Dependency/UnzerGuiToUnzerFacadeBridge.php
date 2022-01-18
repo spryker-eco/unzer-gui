@@ -28,9 +28,9 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     }
 
     /**
-     * @param UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      *
-     * @return UnzerCredentialsResponseTransfer
+     * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
      */
     public function createUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer
     {
@@ -38,26 +38,33 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     }
 
     /**
-     * @param UnzerCredentialsCriteriaTransfer $unzerCredentialsCriteriaTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer $unzerCredentialsCriteriaTransfer
      *
-     * @return UnzerCredentialsCollectionTransfer
+     * @return \Generated\Shared\Transfer\UnzerCredentialsCollectionTransfer
      */
     public function getUnzerCredentialsCollection(
         UnzerCredentialsCriteriaTransfer $unzerCredentialsCriteriaTransfer
-    ): UnzerCredentialsCollectionTransfer
-    {
+    ): UnzerCredentialsCollectionTransfer {
         return $this->unzerFacade->getUnzerCredentialsCollection($unzerCredentialsCriteriaTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      *
-     * @throws \SprykerEco\Zed\Unzer\Business\Exception\UnzerException
-     *
      * @return void
      */
     public function setUnzerNotificationUrl(UnzerCredentialsTransfer $unzerCredentialsTransfer): void
     {
         $this->unzerFacade->setUnzerNotificationUrl($unzerCredentialsTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     *
+     * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
+     */
+    public function updateUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer
+    {
+        return $this->unzerFacade->updateUnzerCredentials($unzerCredentialsTransfer);
     }
 }

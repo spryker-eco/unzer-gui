@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider;
 
 use Generated\Shared\Transfer\UnzerCredentialsConditionsTransfer;
@@ -14,23 +19,22 @@ use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 class UnzerCredentialsFormDataProvider
 {
     /**
-     * @var UnzerGuiToUnzerFacadeInterface
+     * @var \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface
      */
     protected $unzerFacade;
 
     /**
-     * @var UnzerGuiConfig
+     * @var \SprykerEco\Zed\UnzerGui\UnzerGuiConfig
      */
     protected $unzerGuiConfig;
 
     /**
-     * @param UnzerGuiToUnzerFacadeInterface $unzerFacade
+     * @param \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface $unzerFacade
      */
     public function __construct(
         UnzerGuiToUnzerFacadeInterface $unzerFacade,
-        UnzerGuiConfig                 $unzerGuiConfig
-    )
-    {
+        UnzerGuiConfig $unzerGuiConfig
+    ) {
         $this->unzerFacade = $unzerFacade;
         $this->unzerGuiConfig = $unzerGuiConfig;
     }
@@ -50,17 +54,17 @@ class UnzerCredentialsFormDataProvider
 
         $unzerCredentialsCriteriaTransfer = (new UnzerCredentialsCriteriaTransfer())
             ->setUnzerCredentialsConditions(
-                (new UnzerCredentialsConditionsTransfer())->addId($idUnzerCredentials)
+                (new UnzerCredentialsConditionsTransfer())->addId($idUnzerCredentials),
             );
 
         $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerCredentialsCriteriaTransfer);
 
-        $unzerCredentialsTransfer = $unzerCredentialsCollectionTransfer[0] ?? $unzerCredentialsTransfer;
+        $unzerCredentialsTransfer = $unzerCredentialsCollectionTransfer->getUnzerCredentials()[0] ?? $unzerCredentialsTransfer;
         if ($unzerCredentialsTransfer->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
             $unzerCredentialsTransfer = $this->setChildUnzerCredentials($unzerCredentialsTransfer);
         }
 
-        return $unzerCredentialsCollectionTransfer[0] ?? $unzerCredentialsTransfer;
+        return $unzerCredentialsTransfer;
     }
 
     /**
@@ -79,19 +83,19 @@ class UnzerCredentialsFormDataProvider
     }
 
     /**
-     * @param UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      *
-     * @return UnzerCredentialsTransfer
+     * @return \Generated\Shared\Transfer\UnzerCredentialsTransfer
      */
     protected function setChildUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsTransfer
     {
         $unzerChildCredentialsCriteriaTransfer = (new UnzerCredentialsCriteriaTransfer())
             ->setUnzerCredentialsConditions(
-                (new UnzerCredentialsConditionsTransfer())->addParentId($unzerCredentialsTransfer->getIdUnzerCredentials())
+                (new UnzerCredentialsConditionsTransfer())->addParentId($unzerCredentialsTransfer->getIdUnzerCredentials()),
             );
 
         $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerChildCredentialsCriteriaTransfer);
 
-        return $unzerCredentialsTransfer->setChildUnzerCredentials($unzerCredentialsCollectionTransfer[0] ?? null);
+        return $unzerCredentialsTransfer->setChildUnzerCredentials($unzerCredentialsCollectionTransfer->getUnzerCredentials()[0] ?? null);
     }
 }
