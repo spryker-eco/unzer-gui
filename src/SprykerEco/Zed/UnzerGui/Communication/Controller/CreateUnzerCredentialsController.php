@@ -8,12 +8,8 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
 use FFI\Exception;
-use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use Propel\Runtime\Propel;
-use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
-use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Shared\Unzer\UnzerConstants;
-use SprykerEco\Zed\Unzer\Business\Exception\UnzerException;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,20 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
  */
-class CreateUnzerCredentialsController extends AbstractController
+class CreateUnzerCredentialsController extends AbstractUnzerCredentialsController
 {
-    use TransactionTrait;
-
-    /**
-     * @var string
-     */
-    protected const PARAM_REDIRECT_URL = 'redirect-url';
-
-    /**
-     * @var string
-     */
-    protected const MESSAGE_CREDENTIALS_CREATE_SUCCESS = 'Unzer Credentials created successfully.';
-
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -55,7 +39,7 @@ class CreateUnzerCredentialsController extends AbstractController
         }
 
         return $this->viewResponse([
-            'form' => $unzerCredentialsForm->createView(),
+            'unzerCredentialsForm' => $unzerCredentialsForm->createView(),
         ]);
     }
 
@@ -78,9 +62,9 @@ class CreateUnzerCredentialsController extends AbstractController
             $propelConnection->beginTransaction();
             $unzerCredentialsTransfer = $this->saveUnzerCredentials($unzerCredentialsTransfer);
             if ($unzerCredentialsTransfer->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
-                $childUnzerCredentialsTransfer = $unzerCredentialsTransfer->getChildUnzerCredentialsOrFail();
-                $childUnzerCredentialsTransfer->setParentIdUnzerCredentials($unzerCredentialsTransfer->getIdUnzerCredentials());
-                $childUnzerCredentialsTransfer->setType(UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MAIN_MERCHANT);
+                $childUnzerCredentialsTransfer = $unzerCredentialsTransfer->getChildUnzerCredentials()
+                    ->setParentIdUnzerCredentials($unzerCredentialsTransfer->getIdUnzerCredentials())
+                    ->setType(UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MAIN_MERCHANT);
 
                 $this->saveUnzerCredentials($childUnzerCredentialsTransfer);
             }
@@ -91,27 +75,12 @@ class CreateUnzerCredentialsController extends AbstractController
             $this->addErrorMessage($exception->getMessage());
 
             return $this->viewResponse([
-                'form' => $unzerCredentialsForm->createView(),
+                'unzerCredentialsForm' => $unzerCredentialsForm->createView(),
             ]);
         }
 
         $propelConnection->commit();
 
         return $this->redirectResponse($redirectUrl);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
-     *
-     * @throws \SprykerEco\Zed\Unzer\Business\Exception\UnzerException
-     */
-    protected function saveUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsTransfer
-    {
-        $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->createUnzerCredentials($unzerCredentialsTransfer);
-        if ($unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            return $unzerCredentialsResponseTransfer->getUnzerCredentials();
-        }
-
-        throw new UnzerException($unzerCredentialsResponseTransfer->getMessages()[0]);
     }
 }

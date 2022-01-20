@@ -1,6 +1,6 @@
 {% extends '@Gui/Layout/layout.twig' %}
 
-{% set widget_title = 'Create Unzer Credentials' %}
+{% set widget_title = 'Edit Unzer Credentials' %}
 
 {% block head_title widget_title | trans %}
 {% block section_title widget_title | trans %}
@@ -15,8 +15,13 @@
 
         {% block widget_content %}
             {{ form_start(unzerCredentialsForm) }}
-            {{ form_widget(unzerCredentialsForm) }}
+            {{ form_row(unzerCredentialsForm.idUnzerCredentials) }}
+            {{ form_row(unzerCredentialsForm.configName) }}
+            {{ form_row(unzerCredentialsForm.unzerKeypair) }}
+            {{ form_row(unzerCredentialsForm.type) }}
+            {{ form_row(unzerCredentialsForm.storeRelation) }}
 
+            {{ form_widget(unzerCredentialsForm) }}
             <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />
             {{ form_end(unzerCredentialsForm) }}
         {% endblock %}

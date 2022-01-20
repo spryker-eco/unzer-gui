@@ -14,9 +14,13 @@
     {% embed '@Gui/Partials/widget.twig' %}
 
         {% block widget_content %}
-            {{ form_start(form) }}
-            {{ tabs(merchantFormTabs, {'unzerCredentialsForm': form}) }}
-            {{ form_end(form) }}
+            {{ form_start(unzerCredentialsForm) }}
+            {{ tabs(unzerCredentialsFormTabs, {
+                'unzerCredentialsForm': unzerCredentialsForm,
+                'merchantUnzerCredentialsTable': merchantUnzerCredentialsTable,
+                'addMerchantActionUrl': addMerchantActionUrl
+            }) }}
+            {{ form_end(unzerCredentialsForm) }}
         {% endblock %}
 
     {% endembed %}

@@ -30,6 +30,7 @@ class UnzerCredentialsFormDataProvider
 
     /**
      * @param \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface $unzerFacade
+     * @param \SprykerEco\Zed\UnzerGui\UnzerGuiConfig $unzerGuiConfig
      */
     public function __construct(
         UnzerGuiToUnzerFacadeInterface $unzerFacade,

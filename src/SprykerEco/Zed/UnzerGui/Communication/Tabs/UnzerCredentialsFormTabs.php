@@ -22,6 +22,7 @@ class UnzerCredentialsFormTabs extends AbstractTabs
     {
         $this
             ->addGeneralTab($tabsViewTransfer)
+            ->addExternalMerchantCredentialsTab($tabsViewTransfer)
             ->setFooter($tabsViewTransfer);
 
         return $tabsViewTransfer;
@@ -38,6 +39,23 @@ class UnzerCredentialsFormTabs extends AbstractTabs
         $tabItemTransfer->setName('general')
             ->setTitle('General')
             ->setTemplate('@UnzerGui/_partials/general-tab.twig');
+
+        $tabsViewTransfer->addTab($tabItemTransfer);
+
+        return $this;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
+     *
+     * @return $this
+     */
+    protected function addExternalMerchantCredentialsTab(TabsViewTransfer $tabsViewTransfer)
+    {
+        $tabItemTransfer = new TabItemTransfer();
+        $tabItemTransfer->setName('externalMerchantCredentials')
+            ->setTitle('External Merchant Credentials')
+            ->setTemplate('@UnzerGui/_partials/external-merchant-credentials-tab.twig');
 
         $tabsViewTransfer->addTab($tabItemTransfer);
 

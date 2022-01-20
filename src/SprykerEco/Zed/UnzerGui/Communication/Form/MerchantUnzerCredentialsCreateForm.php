@@ -8,32 +8,18 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Form;
 
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
-use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
- * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
- */
-class UnzerMainMerchantCredentialsType extends AbstractType
+class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 {
     /**
      * @var string
      */
-    protected const FIELD_ID_UNZER_CREDENTIALS = 'idUnzerCredentials';
-
-    /**
-     * @var string
-     */
-    protected const LABEL_MERCHANT_REFERENCE = 'Merchant Reference';
-
-    /**
-     * @var string
-     */
-    protected const LABEL_PARTICIPANT_ID = 'Participant Id';
+    public const FIELD_PARENT_ID_UNZER_CREDENTIALS = 'parentIdUnzerCredentials';
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -44,14 +30,28 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults([
-            'data_class' => UnzerCredentialsTransfer::class,
-        ]);
+        $resolver->setRequired(static::OPTION_CURRENT_ID);
+        $resolver->setRequired(static::CREDENTIALS_TYPE_CHOICES_OPTION);
+        $resolver->setRequired(static::FIELD_PARENT_ID_UNZER_CREDENTIALS);
+
+        $resolver->setNormalizer('constraints', function (Options $options, $value) {
+            return array_merge($value, [
+                $this->getFactory()->createUnzerCredentialsConstraint(),
+            ]);
+        });
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlockPrefix(): string
+    {
+        return 'unzer-merchant-credentials';
     }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -59,32 +59,24 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     {
         $this
             ->addIdUnzerCredentialsField($builder)
+            ->addNameField($builder)
+            ->addUnzerKeypairType($builder)
             ->addMerchantReferenceField($builder)
             ->addParticipantIdField($builder)
-            ->addTypeField($builder)
-            ->addUnzerKeypairType($builder);
+            ->addIdParentUnzerCredentials($builder, $options);
     }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
      *
      * @return $this
      */
-    protected function addIdUnzerCredentialsField(FormBuilderInterface $builder)
+    protected function addIdParentUnzerCredentials(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(static::FIELD_ID_UNZER_CREDENTIALS, HiddenType::class);
-
-        return $this;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return $this
-     */
-    protected function addUnzerKeypairType(FormBuilderInterface $builder)
-    {
-        $builder->add(UnzerCredentialsTransfer::UNZER_KEYPAIR, UnzerKeypairType::class);
+        $builder->add(static::FIELD_PARENT_ID_UNZER_CREDENTIALS, HiddenType::class, [
+            'data' => $options[static::FIELD_PARENT_ID_UNZER_CREDENTIALS],
+        ]);
 
         return $this;
     }
@@ -113,18 +105,6 @@ class UnzerMainMerchantCredentialsType extends AbstractType
         $builder->add(UnzerCredentialsTransfer::PARTICIPANT_ID, TextType::class, [
             'required' => true,
         ]);
-
-        return $this;
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return $this
-     */
-    protected function addTypeField(FormBuilderInterface $builder)
-    {
-        $builder->add(UnzerCredentialsTransfer::TYPE, HiddenType::class);
 
         return $this;
     }

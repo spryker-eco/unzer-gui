@@ -19,25 +19,46 @@ class UnzerGuiConfig extends AbstractBundleConfig
     public const URL_UNZER_CREDENTIALS_LIST = '/unzer-gui/list-unzer-credentials';
 
     /**
-     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\EditUnzerCredentialsController::indexAction()
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\EditStandardUnzerCredentialsController::indexAction()
      *
      * @var string
      */
-    public const URL_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-unzer-credentials';
+    public const URL_STANDARD_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-standard-unzer-credentials';
 
     /**
-     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\EditUnzerCredentialsController::activateAction()
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\EditMarketplaceUnzerCredentialsController::indexAction()
      *
      * @var string
      */
-    public const URL_UNZER_CREDENTIALS_SYNC = '/unzer-gui/edit-unzer-credentials/sync';
+    public const URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
 
     /**
      * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\RemoveUnzerCredentialsController::indexAction()
      *
      * @var string
      */
-    public const URL_MERCHANT_REMOVE = '/unzer-gui/remove-unzer-credentials';
+    public const URL_UNZER_CREDENTIALS_REMOVE = '/unzer-gui/remove-unzer-credentials';
+
+    /**
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\EditMerchantUnzerCredentialsController::indexAction()
+     *
+     * @var string
+     */
+    public const URL_MERCHANT_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-merchant-unzer-credentials';
+
+    /**
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\CreateMerchantUnzerCredentialsController::indexAction()
+     *
+     * @var string
+     */
+    public const URL_MERCHANT_UNZER_CREDENTIALS_ADD = '/unzer-gui/create-merchant-unzer-credentials';
+
+    /**
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\EditStandardUnzerCredentialsController::activateAction()
+     *
+     * @var string
+     */
+    public const URL_UNZER_CREDENTIALS_SYNC = '/unzer-gui/edit-unzer-credentials/sync';
 
     /**
      * @var int

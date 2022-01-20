@@ -7,23 +7,25 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Table;
 
-use Orm\Zed\Store\Persistence\Map\SpyStoreTableMap;
-use Orm\Zed\Unzer\Persistence\Map\SpyUnzerCredentialsStoreTableMap;
 use Orm\Zed\Unzer\Persistence\Map\SpyUnzerCredentialsTableMap;
 use Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery;
-use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 use SprykerEco\Shared\Unzer\UnzerConstants;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 
-class UnzerCredentialsTable extends AbstractTable
+class MerchantUnzerCredentialsTable extends AbstractTable
 {
     /**
      * @var string
      */
-    protected const PARAM_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+    protected const REQUEST_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+
+    /**
+     * @var string
+     */
+    protected const REQUEST_PARENT_ID_UNZER_CREDENTIALS = 'parent-id-unzer-credentials';
 
     /**
      * @var string
@@ -46,11 +48,20 @@ class UnzerCredentialsTable extends AbstractTable
     protected $unzerCredentialsQuery;
 
     /**
-     * @param \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery $unzerCredentialsQuery
+     * @var int
      */
-    public function __construct(SpyUnzerCredentialsQuery $unzerCredentialsQuery)
-    {
+    protected int $parentIdUnzerCredentials;
+
+    /**
+     * @param \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery $unzerCredentialsQuery
+     * @param int $parentIdUnzerCredentials
+     */
+    public function __construct(
+        SpyUnzerCredentialsQuery $unzerCredentialsQuery,
+        int $parentIdUnzerCredentials
+    ) {
         $this->unzerCredentialsQuery = $unzerCredentialsQuery;
+        $this->parentIdUnzerCredentials = $parentIdUnzerCredentials;
     }
 
     /**
@@ -65,7 +76,6 @@ class UnzerCredentialsTable extends AbstractTable
         $config->setSortable([
             SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS,
             SpyUnzerCredentialsTableMap::COL_CONFIG_NAME,
-            SpyUnzerCredentialsTableMap::COL_TYPE,
         ]);
 
         $config->setSearchable([
@@ -74,10 +84,13 @@ class UnzerCredentialsTable extends AbstractTable
 
         $config->setRawColumns([
             static::COL_ACTIONS,
-            SpyUnzerCredentialsTableMap::COL_TYPE,
-            SpyUnzerCredentialsStoreTableMap::COL_FK_STORE,
         ]);
         $config->setDefaultSortField(SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS, TableConfiguration::SORT_DESC);
+
+        if ($this->getIdUnzerCredentials()) {
+            $tableUrl = Url::generate($this->defaultUrl, [static::REQUEST_ID_UNZER_CREDENTIALS => $this->getIdUnzerCredentials()]);
+            $config->setUrl($tableUrl);
+        }
 
         return $config;
     }
@@ -92,8 +105,8 @@ class UnzerCredentialsTable extends AbstractTable
         $tableConfiguration->setHeader([
             SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => 'ID',
             SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Config name',
-            SpyUnzerCredentialsTableMap::COL_TYPE => 'Credentials type',
-            SpyUnzerCredentialsStoreTableMap::COL_FK_STORE => 'Available in Stores',
+            SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => 'Participant ID',
+            SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => 'Merchant Reference',
             static::COL_ACTIONS => 'Actions',
         ]);
 
@@ -114,8 +127,8 @@ class UnzerCredentialsTable extends AbstractTable
             $rowData = [
                 SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                 SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $item[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
-                SpyUnzerCredentialsTableMap::COL_TYPE => $this->mapTypeName($item),
-                SpyUnzerCredentialsStoreTableMap::COL_FK_STORE => $this->createStoresLabel($item),
+                SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => $item[SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID],
+                SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => $item[SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE],
                 static::COL_ACTIONS => $this->buildLinks($item),
             ];
             $results[] = $rowData;
@@ -132,14 +145,8 @@ class UnzerCredentialsTable extends AbstractTable
     {
         $this->unzerCredentialsQuery
             ->groupByIdUnzerCredentials()
-            ->filterByType_In([UnzerConstants::UNZER_CONFIG_TYPE_STANDARD, UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE])
-            ->useUnzerCredentialsStoreQuery(null, Criteria::LEFT_JOIN)
-            ->leftJoinStore()
-            ->withColumn(
-                sprintf('GROUP_CONCAT(%s)', SpyStoreTableMap::COL_NAME),
-                static::COL_STORES,
-            )
-            ->endUse();
+            ->filterByType(UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MERCHANT)
+            ->filterByParentIdUnzerCredentials($this->parentIdUnzerCredentials);
 
         return $this->unzerCredentialsQuery;
     }
@@ -157,47 +164,42 @@ class UnzerCredentialsTable extends AbstractTable
     }
 
     /**
-     * @param array $unzerCredentials
-     *
-     * @return string
-     */
-    protected function createStoresLabel(array $unzerCredentials): string
-    {
-        $storeNames = explode(',', $unzerCredentials[static::COL_STORES]);
-
-        $storeLabels = [];
-        foreach ($storeNames as $storeName) {
-            $storeLabels[] = $this->generateLabel($storeName, static::STORE_CLASS_LABEL);
-        }
-
-        return implode(' ', $storeLabels);
-    }
-
-    /**
      * @param array $item
      *
      * @return string
      */
     protected function buildLinks(array $item): string
     {
-        $editUrl = ($item[SpyUnzerCredentialsTableMap::COL_TYPE] === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) ?
-            UnzerGuiConfig::URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT : UnzerGuiConfig::URL_STANDARD_UNZER_CREDENTIALS_EDIT;
-
         $buttons = [];
         $buttons[] = $this->generateEditButton(
-            Url::generate($editUrl, [static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(
+                UnzerGuiConfig::URL_MERCHANT_UNZER_CREDENTIALS_EDIT,
+                [
+                    static::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
+                    static::REQUEST_PARENT_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_PARENT_ID_UNZER_CREDENTIALS],
+                ],
+            ),
             'Edit',
         );
-        $buttons[] = $this->generateButton(
-            Url::generate($editUrl, [static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
-            'Sync payment methods',
-            [],
-        );
         $buttons[] = $this->generateRemoveButton(
-            Url::generate($editUrl, [static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(
+                UnzerGuiConfig::URL_UNZER_CREDENTIALS_REMOVE,
+                [
+                    static::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
+                    static::REQUEST_PARENT_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_PARENT_ID_UNZER_CREDENTIALS],
+                ],
+            ),
             'Remove',
         );
 
         return implode(' ', $buttons);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getIdUnzerCredentials(): int
+    {
+        return $this->request->query->getInt(static::REQUEST_ID_UNZER_CREDENTIALS, 0);
     }
 }
