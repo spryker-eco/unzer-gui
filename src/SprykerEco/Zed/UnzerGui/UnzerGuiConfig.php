@@ -33,11 +33,18 @@ class UnzerGuiConfig extends AbstractBundleConfig
     public const URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
 
     /**
-     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\RemoveUnzerCredentialsController::indexAction()
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\DeleteUnzerCredentialsController::indexAction()
      *
      * @var string
      */
-    public const URL_UNZER_CREDENTIALS_REMOVE = '/unzer-gui/remove-unzer-credentials';
+    public const URL_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-unzer-credentials';
+
+    /**
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\DeleteMerchantUnzerCredentialsController::indexAction()
+     *
+     * @var string
+     */
+    public const URL_MERCHANT_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-merchant-unzer-credentials';
 
     /**
      * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\EditMerchantUnzerCredentialsController::indexAction()

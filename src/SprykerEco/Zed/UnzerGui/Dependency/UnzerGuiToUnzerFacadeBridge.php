@@ -67,4 +67,14 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     {
         return $this->unzerFacade->updateUnzerCredentials($unzerCredentialsTransfer);
     }
+
+    /**
+     * @param UnzerCredentialsTransfer $unzerCredentialsTransfer
+     *
+     * @return UnzerCredentialsResponseTransfer
+     */
+    public function deleteUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer
+    {
+        return $this->unzerFacade->deleteUnzerCredentials($unzerCredentialsTransfer);
+    }
 }

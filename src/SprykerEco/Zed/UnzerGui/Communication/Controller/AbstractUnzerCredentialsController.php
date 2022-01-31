@@ -52,6 +52,11 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     protected const MESSAGE_CREDENTIALS_CREATE_SUCCESS = 'Unzer Credentials created successfully.';
 
     /**
+     * @var string
+     */
+    protected const MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS = 'Unzer Credentials deleted successfully.';
+
+    /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      *
      * @throws \SprykerEco\Zed\UnzerGui\Communication\Exception\UnzerGuiException

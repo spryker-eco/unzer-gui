@@ -183,13 +183,13 @@ class MerchantUnzerCredentialsTable extends AbstractTable
         );
         $buttons[] = $this->generateRemoveButton(
             Url::generate(
-                UnzerGuiConfig::URL_UNZER_CREDENTIALS_REMOVE,
+                UnzerGuiConfig::URL_MERCHANT_UNZER_CREDENTIALS_DELETE,
                 [
                     static::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                     static::REQUEST_PARENT_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_PARENT_ID_UNZER_CREDENTIALS],
                 ],
             ),
-            'Remove',
+            'Delete',
         );
 
         return implode(' ', $buttons);
