@@ -28,7 +28,7 @@ abstract class AbstractMerchantUnzerCredentialsController extends AbstractUnzerC
         return Url::generate(
             UnzerGuiConfig::URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT,
             [
-                static::PARAM_PARENT_ID_UNZER_CREDENTIALS => $parentIdUnzerCredentials,
+                static::PARAM_ID_UNZER_CREDENTIALS => $parentIdUnzerCredentials,
             ],
             [
                 Url::FRAGMENT => static::FRAGMENT_TAB_EXTERNAL_MERCHANT_CREDENTIALS,

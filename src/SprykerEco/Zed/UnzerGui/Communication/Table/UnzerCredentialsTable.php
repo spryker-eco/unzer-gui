@@ -194,8 +194,12 @@ class UnzerCredentialsTable extends AbstractTable
             [],
         );
         $buttons[] = $this->generateRemoveButton(
-            Url::generate($editUrl, [static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
-            'Delete',
+            Url::generate(UnzerGuiConfig::URL_UNZER_CREDENTIALS_DELETE,
+                [
+                    static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]
+                ]
+            ),
+            'Delete'
         );
 
         return implode(' ', $buttons);
