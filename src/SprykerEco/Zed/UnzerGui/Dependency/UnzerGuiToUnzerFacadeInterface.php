@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\UnzerCredentialsCollectionTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsResponseTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
+use Generated\Shared\Transfer\UnzerKeypairTransfer;
 
 interface UnzerGuiToUnzerFacadeInterface
 {
@@ -52,4 +53,11 @@ interface UnzerGuiToUnzerFacadeInterface
      * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
      */
     public function deleteUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\UnzerKeypairTransfer $unzerKeypairTransfer
+     *
+     * @return void
+     */
+    public function performPaymentMethodsImport(UnzerKeypairTransfer $unzerKeypairTransfer): void;
 }

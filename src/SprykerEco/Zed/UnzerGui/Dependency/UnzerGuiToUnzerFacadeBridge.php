@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\UnzerCredentialsCollectionTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsResponseTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
+use Generated\Shared\Transfer\UnzerKeypairTransfer;
 
 class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
 {
@@ -76,5 +77,13 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     public function deleteUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer
     {
         return $this->unzerFacade->deleteUnzerCredentials($unzerCredentialsTransfer);
+    }
+
+    /**
+     * @param UnzerKeypairTransfer $unzerKeypairTransfer
+     */
+    public function performPaymentMethodsImport(UnzerKeypairTransfer $unzerKeypairTransfer): void
+    {
+        $this->unzerFacade->performPaymentMethodsImport($unzerKeypairTransfer);
     }
 }

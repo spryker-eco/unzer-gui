@@ -40,6 +40,13 @@ class UnzerGuiConfig extends AbstractBundleConfig
     public const URL_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-unzer-credentials';
 
     /**
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\SyncPaymentMethodsController::indexAction()
+     *
+     * @var string
+     */
+    public const URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS = '/unzer-gui/sync-payment-methods';
+
+    /**
      * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\DeleteMerchantUnzerCredentialsController::indexAction()
      *
      * @var string

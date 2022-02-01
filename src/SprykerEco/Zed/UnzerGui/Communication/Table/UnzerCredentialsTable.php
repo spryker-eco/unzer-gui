@@ -189,7 +189,7 @@ class UnzerCredentialsTable extends AbstractTable
             'Edit',
         );
         $buttons[] = $this->generateButton(
-            Url::generate($editUrl, [static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(UnzerGuiConfig::URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Sync payment methods',
             [],
         );
