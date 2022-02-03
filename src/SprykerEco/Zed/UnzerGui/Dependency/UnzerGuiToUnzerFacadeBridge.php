@@ -70,9 +70,9 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     }
 
     /**
-     * @param UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      *
-     * @return UnzerCredentialsResponseTransfer
+     * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
      */
     public function deleteUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer
     {
@@ -80,7 +80,9 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     }
 
     /**
-     * @param UnzerKeypairTransfer $unzerKeypairTransfer
+     * @param \Generated\Shared\Transfer\UnzerKeypairTransfer $unzerKeypairTransfer
+     *
+     * @return void
      */
     public function performPaymentMethodsImport(UnzerKeypairTransfer $unzerKeypairTransfer): void
     {

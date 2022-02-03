@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -8,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCredentialsController
 {
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

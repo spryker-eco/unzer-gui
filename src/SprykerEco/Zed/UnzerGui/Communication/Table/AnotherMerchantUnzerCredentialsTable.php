@@ -15,7 +15,7 @@ use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 use SprykerEco\Shared\Unzer\UnzerConstants;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 
-class MerchantUnzerCredentialsTable extends AbstractTable
+class AnotherMerchantUnzerCredentialsTable extends AbstractTable
 {
     /**
      * @var string
@@ -48,20 +48,20 @@ class MerchantUnzerCredentialsTable extends AbstractTable
     protected $unzerCredentialsQuery;
 
     /**
-     * @var int
+     * @var string
      */
-    protected $parentIdUnzerCredentials;
+    protected $merchantReference;
 
     /**
      * @param \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery $unzerCredentialsQuery
-     * @param int $parentIdUnzerCredentials
+     * @param string $merchantReference
      */
     public function __construct(
         SpyUnzerCredentialsQuery $unzerCredentialsQuery,
-        int $parentIdUnzerCredentials
+        string $merchantReference
     ) {
         $this->unzerCredentialsQuery = $unzerCredentialsQuery;
-        $this->parentIdUnzerCredentials = $parentIdUnzerCredentials;
+        $this->merchantReference = $merchantReference;
     }
 
     /**
@@ -105,8 +105,8 @@ class MerchantUnzerCredentialsTable extends AbstractTable
         $tableConfiguration->setHeader([
             SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => 'ID',
             SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Config name',
+            SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => 'Public Key',
             SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => 'Participant ID',
-            SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => 'Merchant Reference',
             static::COL_ACTIONS => 'Actions',
         ]);
 
@@ -127,8 +127,8 @@ class MerchantUnzerCredentialsTable extends AbstractTable
             $rowData = [
                 SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                 SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $item[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
+                SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => $item[SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY],
                 SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => $item[SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID],
-                SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => $item[SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE],
                 static::COL_ACTIONS => $this->buildLinks($item),
             ];
             $results[] = $rowData;
@@ -143,10 +143,14 @@ class MerchantUnzerCredentialsTable extends AbstractTable
      */
     protected function prepareQuery(): SpyUnzerCredentialsQuery
     {
-        $this->unzerCredentialsQuery
-            ->groupByIdUnzerCredentials()
-            ->filterByType(UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MERCHANT)
-            ->filterByParentIdUnzerCredentials($this->parentIdUnzerCredentials);
+//        $this->unzerCredentialsQuery
+//            ->leftJoin(
+//                $this->unzerCredentialsQuery
+//                    ->filterByType(4)
+//                    ->filterByMerchantReference($this->merchantReference)
+//                    ->select()
+//            )->addJoinCondition()
+//            ->leftJoinUnzerCredentialsStore()
 
         return $this->unzerCredentialsQuery;
     }

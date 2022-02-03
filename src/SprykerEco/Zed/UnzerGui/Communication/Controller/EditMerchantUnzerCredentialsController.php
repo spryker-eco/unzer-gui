@@ -7,9 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use Spryker\Service\UtilText\Model\Url\Url;
 use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider;
-use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 

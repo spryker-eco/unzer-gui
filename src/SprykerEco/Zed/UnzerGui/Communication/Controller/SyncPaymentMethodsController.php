@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +17,7 @@ class SyncPaymentMethodsController extends AbstractUnzerCredentialsController
     protected const MESSAGE_PAYMENT_METHODS_SYNC_SUCCESS = 'Payment methods synced successfully.';
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

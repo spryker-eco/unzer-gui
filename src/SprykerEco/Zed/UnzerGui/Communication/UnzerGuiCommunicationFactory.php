@@ -20,6 +20,7 @@ use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsCreateForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsEditForm;
 use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatter;
 use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatterInterface;
+use SprykerEco\Zed\UnzerGui\Communication\Table\AnotherMerchantUnzerCredentialsTable;
 use SprykerEco\Zed\UnzerGui\Communication\Table\MerchantUnzerCredentialsTable;
 use SprykerEco\Zed\UnzerGui\Communication\Table\UnzerCredentialsTable;
 use SprykerEco\Zed\UnzerGui\Communication\Tabs\UnzerCredentialsFormTabs;
@@ -155,6 +156,19 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
         return new MerchantUnzerCredentialsTable(
             $this->getUnzerCredentialsPropelQuery(),
             $idUnzerCredentials,
+        );
+    }
+
+    /**
+     * @param string $merchantReference
+     *
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Table\AnotherMerchantUnzerCredentialsTable
+     */
+    public function createAnotherMerchantUnzerCredentialsTable(string $merchantReference): AnotherMerchantUnzerCredentialsTable
+    {
+        return new AnotherMerchantUnzerCredentialsTable(
+            $this->getUnzerCredentialsPropelQuery(),
+            $merchantReference,
         );
     }
 

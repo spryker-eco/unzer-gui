@@ -16,4 +16,7 @@
         <property name="parameter" type="string"/>
     </transfer>
 
+    <transfer name="UnzerCredentials">
+    </transfer>
+
 </transfers>
