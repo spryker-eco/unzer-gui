@@ -137,7 +137,6 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
                     UnzerMainMerchantCredentialsType::class,
                     [
                         'label' => static::LABEL_MAIN_MERCHANT_CREDENTIALS,
-                        'required' => true,
                     ],
                 );
             }

@@ -97,7 +97,8 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     protected function addMerchantReferenceField(FormBuilderInterface $builder)
     {
         $builder->add(UnzerCredentialsTransfer::MERCHANT_REFERENCE, TextType::class, [
-            'required' => true,
+            'help' => 'Leave empty if main seller is not a Merchant',
+            'required' => false,
         ]);
 
         return $this;

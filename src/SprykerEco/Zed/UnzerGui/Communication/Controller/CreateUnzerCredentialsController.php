@@ -69,7 +69,7 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
                 $this->saveUnzerCredentials($childUnzerCredentialsTransfer);
             }
 
-//            $this->getFactory()->getUnzerFacade()->setUnzerNotificationUrl($unzerCredentialsTransfer);
+            $this->getFactory()->getUnzerFacade()->setUnzerNotificationUrl($unzerCredentialsTransfer);
         } catch (Exception $exception) {
             $propelConnection->rollBack();
             $this->addErrorMessage($exception->getMessage());

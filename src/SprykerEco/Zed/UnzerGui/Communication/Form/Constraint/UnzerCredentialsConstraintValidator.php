@@ -24,9 +24,6 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint): void
     {
-        // @TODO Enable when validator will be ready
-        return;
-
         if (!$constraint instanceof UnzerCredentialsConstraint) {
             throw new InvalidArgumentException(sprintf(
                 'Expected constraint instance of %s, got %s instead.',
