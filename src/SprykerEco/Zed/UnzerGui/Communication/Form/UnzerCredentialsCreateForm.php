@@ -126,12 +126,12 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
      */
     protected function addUnzerMainMerchantForm(FormBuilderInterface $builder)
     {
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentials */
             $unzerCredentials = $event->getData();
             $form = $event->getForm();
 
-            if ($unzerCredentials->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE || $unzerCredentials->getIdUnzerCredentials() === null) {
+            if ($unzerCredentials->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE || $unzerCredentials->getType() === null) {
                 $form->add(
                     UnzerCredentialsTransfer::CHILD_UNZER_CREDENTIALS,
                     UnzerMainMerchantCredentialsType::class,
