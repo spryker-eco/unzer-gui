@@ -24,3 +24,8 @@
     {% endembed %}
 
 {% endblock %}
+
+{% block footer_js %}
+    {{ parent() }}
+    <script src="{{ assetsPath('js/spryker-zed-unzer-gui-main.js') }}"></script>
+{% endblock %}
