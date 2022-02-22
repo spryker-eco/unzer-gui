@@ -11,12 +11,15 @@ use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
+use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface;
+use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantReferenceFinder;
 use SprykerEco\Zed\UnzerGui\Communication\Form\Constraint\UnzerCredentialsConstraint;
 use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\MerchantUnzerFormDataProvider;
 use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider;
 use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsCreateForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsEditForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsCreateForm;
+use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsDeleteForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsEditForm;
 use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatter;
 use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatterInterface;
@@ -84,6 +87,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
         return new UnzerCredentialsFormDataProvider(
             $this->getUnzerFacade(),
             $this->getConfig(),
+            $this->createMerchantFinder(),
         );
     }
 
@@ -192,5 +196,21 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     public function getMerchantUnzerCredentialsEditForm(UnzerCredentialsTransfer $unzerCredentialsTransfer, array $options): FormInterface
     {
         return $this->getFormFactory()->create(MerchantUnzerCredentialsEditForm::class, $unzerCredentialsTransfer, $options);
+    }
+
+    /**
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function createDeleteUnzerCredentialsForm(): FormInterface
+    {
+        return $this->getFormFactory()->create(UnzerCredentialsDeleteForm::class);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface
+     */
+    public function createMerchantFinder(): MerchantFinderInterface
+    {
+        return new MerchantReferenceFinder($this->getMerchantFacade());
     }
 }

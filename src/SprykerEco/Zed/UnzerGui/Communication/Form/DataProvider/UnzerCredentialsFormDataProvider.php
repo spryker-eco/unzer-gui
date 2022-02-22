@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use Generated\Shared\Transfer\UnzerKeypairTransfer;
 use SprykerEco\Shared\Unzer\UnzerConstants;
+use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsCreateForm;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
@@ -29,15 +30,22 @@ class UnzerCredentialsFormDataProvider
     protected $unzerGuiConfig;
 
     /**
+     * @var \SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface
+     */
+    protected $merchantFinder;
+
+    /**
      * @param \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface $unzerFacade
      * @param \SprykerEco\Zed\UnzerGui\UnzerGuiConfig $unzerGuiConfig
      */
     public function __construct(
         UnzerGuiToUnzerFacadeInterface $unzerFacade,
-        UnzerGuiConfig $unzerGuiConfig
+        UnzerGuiConfig $unzerGuiConfig,
+        MerchantFinderInterface $merchantFinder
     ) {
         $this->unzerFacade = $unzerFacade;
         $this->unzerGuiConfig = $unzerGuiConfig;
+        $this->merchantFinder = $merchantFinder;
     }
 
     /**
@@ -80,6 +88,7 @@ class UnzerCredentialsFormDataProvider
             'label' => false,
             UnzerCredentialsCreateForm::OPTION_CURRENT_ID => $idUnzerCredentials,
             UnzerCredentialsCreateForm::CREDENTIALS_TYPE_CHOICES_OPTION => $this->unzerGuiConfig->getUnzerCredentialsTypeChoices(),
+            UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION => $this->merchantFinder->getMerchants(),
         ];
     }
 

@@ -7,9 +7,8 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use Generated\Shared\Transfer\UnzerCredentialsTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsResponseTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
-use SprykerEco\Zed\UnzerGui\Communication\Exception\UnzerGuiException;
 
 /**
  * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
@@ -57,24 +56,17 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     protected const MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS = 'Unzer Credentials deleted successfully.';
 
     /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer
      *
-     * @throws \SprykerEco\Zed\UnzerGui\Communication\Exception\UnzerGuiException
-     *
-     * @return \Generated\Shared\Transfer\UnzerCredentialsTransfer
+     * @return string
      */
-    protected function saveUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsTransfer
+    protected function concatErrorMessages(UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer): string
     {
-        $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->createUnzerCredentials($unzerCredentialsTransfer);
-        if ($unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            return $unzerCredentialsResponseTransfer->getUnzerCredentials();
-        }
-
         $errorString = 'Next errors occur: ';
         foreach ($unzerCredentialsResponseTransfer->getMessages() as $messageTransfer) {
             $errorString .= $messageTransfer->getMessage() . ' ';
         }
 
-        throw new UnzerGuiException(trim($errorString));
+        return $errorString;
     }
 }

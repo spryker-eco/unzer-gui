@@ -15,16 +15,43 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array
      */
-    public function indexAction(Request $request): RedirectResponse
+    public function indexAction(Request $request)
     {
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
         $parentIdUnzerCredentials = $this->castId($request->get(static::PARAM_PARENT_ID_UNZER_CREDENTIALS));
 
+        $deleteForm = $this->getFactory()->createDeleteUnzerCredentialsForm();
+
+        return $this->viewResponse([
+            'idUnzerCredentials' => $idUnzerCredentials,
+            'parentIdUnzerCredentials' => $parentIdUnzerCredentials,
+            'deleteForm' => $deleteForm->createView(),
+        ]);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function confirmAction(Request $request): RedirectResponse
+    {
+        $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
+        $parentIdUnzerCredentials = $this->castId($request->get(static::PARAM_PARENT_ID_UNZER_CREDENTIALS));
+
+        $redirectUrl = $this->buildRedirectUrl($parentIdUnzerCredentials);
+
+        $deleteForm = $this->getFactory()->createDeleteUnzerCredentialsForm()->handleRequest($request);
+        if (!$deleteForm->isSubmitted() || !$deleteForm->isValid()) {
+            $this->addErrorMessage('CSRF token is not valid');
+
+            return $this->redirectResponse($redirectUrl);
+        }
+
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $this->getFactory()->createUnzerCredentialsFormDataProvider()->getData($idUnzerCredentials);
-
         $unzerCredentialsResponseTransfer = $this->getFactory()
             ->getUnzerFacade()
             ->deleteUnzerCredentials($unzerCredentialsTransfer);

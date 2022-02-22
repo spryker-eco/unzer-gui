@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Form;
 
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
+use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -44,6 +45,8 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     {
         parent::configureOptions($resolver);
 
+        $resolver->setDefined(UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION);
+
         $resolver->setDefaults([
             'data_class' => UnzerCredentialsTransfer::class,
         ]);
@@ -59,7 +62,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     {
         $this
             ->addIdUnzerCredentialsField($builder)
-            ->addMerchantReferenceField($builder)
+            ->addMerchantReferenceField($builder, $options[UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION])
             ->addParticipantIdField($builder)
             ->addTypeField($builder)
             ->addUnzerKeypairType($builder);
@@ -91,13 +94,16 @@ class UnzerMainMerchantCredentialsType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $choices
      *
      * @return $this
      */
-    protected function addMerchantReferenceField(FormBuilderInterface $builder)
+    protected function addMerchantReferenceField(FormBuilderInterface $builder, array $choices)
     {
-        $builder->add(UnzerCredentialsTransfer::MERCHANT_REFERENCE, TextType::class, [
-            'help' => 'Leave empty if main seller is not a Merchant',
+        $builder->add(UnzerCredentialsTransfer::MERCHANT_REFERENCE, Select2ComboBoxType::class, [
+            'help' => 'Leave empty if main seller is not a merchant',
+            'choices' => array_flip($choices),
+            'multiple' => false,
             'required' => false,
         ]);
 

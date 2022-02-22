@@ -88,4 +88,14 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     {
         $this->unzerFacade->performPaymentMethodsImport($unzerKeypairTransfer);
     }
+
+    /**
+     * @param UnzerCredentialsTransfer $unzerCredentialsTransfer
+     *
+     * @return UnzerCredentialsResponseTransfer
+     */
+    public function validateUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer
+    {
+        return $this->unzerFacade->validateUnzerCredentials($unzerCredentialsTransfer);
+    }
 }

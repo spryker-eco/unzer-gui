@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider;
 use Generated\Shared\Transfer\MerchantTransfer;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface;
 
-class MerchantUnzerFormDataProvider
+class MerchantUnzerFormDataProvider1
 {
     /**
      * @var \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface

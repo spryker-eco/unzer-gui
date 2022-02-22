@@ -7,9 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use FFI\Exception;
-use Propel\Runtime\Propel;
-use SprykerEco\Shared\Unzer\UnzerConstants;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,30 +53,17 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();
 
-        $propelConnection = Propel::getConnection();
+        $unzerCredentialsResponseTransfer = $this->getFactory()
+            ->getUnzerFacade()
+            ->createUnzerCredentials($unzerCredentialsTransfer);
 
-        try {
-            $propelConnection->beginTransaction();
-            $unzerCredentialsTransfer = $this->saveUnzerCredentials($unzerCredentialsTransfer);
-            if ($unzerCredentialsTransfer->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
-                $childUnzerCredentialsTransfer = $unzerCredentialsTransfer->getChildUnzerCredentials()
-                    ->setParentIdUnzerCredentials($unzerCredentialsTransfer->getIdUnzerCredentials())
-                    ->setType(UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MAIN_MERCHANT);
-
-                $this->saveUnzerCredentials($childUnzerCredentialsTransfer);
-            }
-
-            $this->getFactory()->getUnzerFacade()->setUnzerNotificationUrl($unzerCredentialsTransfer);
-        } catch (Exception $exception) {
-            $propelConnection->rollBack();
-            $this->addErrorMessage($exception->getMessage());
+        if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
+            $this->addErrorMessage($this->concatErrorMessages($unzerCredentialsResponseTransfer));
 
             return $this->viewResponse([
                 'unzerCredentialsForm' => $unzerCredentialsForm->createView(),
             ]);
         }
-
-        $propelConnection->commit();
 
         return $this->redirectResponse($redirectUrl);
     }

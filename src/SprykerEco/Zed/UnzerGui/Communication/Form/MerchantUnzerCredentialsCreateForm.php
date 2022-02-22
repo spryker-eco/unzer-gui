@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Form;
 
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
+use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,6 +34,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
         $resolver->setRequired(static::OPTION_CURRENT_ID);
         $resolver->setRequired(static::CREDENTIALS_TYPE_CHOICES_OPTION);
         $resolver->setRequired(static::FIELD_PARENT_ID_UNZER_CREDENTIALS);
+        $resolver->setRequired(static::MERCHANT_REFERENCE_CHOICES_OPTION);
 
         $resolver->setNormalizer('constraints', function (Options $options, $value) {
             return array_merge($value, [
@@ -61,7 +63,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
             ->addIdUnzerCredentialsField($builder)
             ->addNameField($builder)
             ->addUnzerKeypairType($builder)
-            ->addMerchantReferenceField($builder)
+            ->addMerchantReferenceField($builder, $options[static::MERCHANT_REFERENCE_CHOICES_OPTION])
             ->addParticipantIdField($builder)
             ->addIdParentUnzerCredentials($builder, $options);
     }
@@ -83,12 +85,22 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $choices
      *
      * @return $this
      */
-    protected function addMerchantReferenceField(FormBuilderInterface $builder)
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $choices
+     *
+     * @return $this
+     */
+    protected function addMerchantReferenceField(FormBuilderInterface $builder, array $choices)
     {
-        $builder->add(UnzerCredentialsTransfer::MERCHANT_REFERENCE, TextType::class, [
+        $builder->add(UnzerCredentialsTransfer::MERCHANT_REFERENCE, Select2ComboBoxType::class, [
+            'choices' => array_flip($choices),
+            'multiple' => false,
             'required' => true,
         ]);
 

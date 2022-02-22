@@ -14,10 +14,35 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array
      */
     public function indexAction(Request $request)
     {
+        $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
+        $deleteForm = $this->getFactory()->createDeleteUnzerCredentialsForm();
+
+        return $this->viewResponse([
+            'idUnzerCredentials' => $idUnzerCredentials,
+            'deleteForm' => $deleteForm->createView(),
+        ]);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function confirmAction(Request $request)
+    {
+        $redirectUrl = $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
+
+        $deleteForm = $this->getFactory()->createDeleteUnzerCredentialsForm()->handleRequest($request);
+        if (!$deleteForm->isSubmitted() || !$deleteForm->isValid()) {
+            $this->addErrorMessage('CSRF token is not valid');
+
+            return $this->redirectResponse($redirectUrl);
+        }
+
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
         $dataProvider = $this->getFactory()->createUnzerCredentialsFormDataProvider();
 

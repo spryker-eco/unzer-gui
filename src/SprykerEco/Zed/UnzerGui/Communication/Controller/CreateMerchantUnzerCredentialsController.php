@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
 use SprykerEco\Shared\Unzer\UnzerConstants;
-use SprykerEco\Zed\UnzerGui\Communication\Exception\UnzerGuiException;
 use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsCreateForm;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,12 +55,15 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
 
         $redirectUrl = $this->buildRedirectUrl($unzerCredentialsTransfer->getParentIdUnzerCredentials());
 
-        try {
-            $this->saveUnzerCredentials($unzerCredentialsTransfer);
-        } catch (UnzerGuiException $exception) {
-            $this->addErrorMessage($exception->getMessage());
+        $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->createUnzerCredentials($unzerCredentialsTransfer);
 
-            return $this->prepareViewResponse($unzerCredentialsForm, $unzerCredentialsTransfer->getParentIdUnzerCredentials());
+        if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
+            $this->addErrorMessage($this->concatErrorMessages($unzerCredentialsResponseTransfer));
+
+            return $this->prepareViewResponse(
+                $unzerCredentialsForm,
+                $unzerCredentialsTransfer->getParentIdUnzerCredentials(),
+            );
         }
 
         return $this->redirectResponse($redirectUrl);

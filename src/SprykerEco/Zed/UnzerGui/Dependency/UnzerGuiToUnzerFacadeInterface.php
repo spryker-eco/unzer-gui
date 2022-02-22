@@ -60,4 +60,11 @@ interface UnzerGuiToUnzerFacadeInterface
      * @return void
      */
     public function performPaymentMethodsImport(UnzerKeypairTransfer $unzerKeypairTransfer): void;
+
+    /**
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     *
+     * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
+     */
+    public function validateUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer;
 }

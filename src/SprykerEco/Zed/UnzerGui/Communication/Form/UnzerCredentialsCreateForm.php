@@ -22,9 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 {
- /**
-  * @var string
-  */
+    /**
+     * @var string
+     */
     protected const FIELD_STORE_RELATION = 'storeRelation';
 
     /**
@@ -48,6 +48,10 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 
         $resolver->setRequired(static::OPTION_CURRENT_ID);
         $resolver->setRequired(static::CREDENTIALS_TYPE_CHOICES_OPTION);
+        $resolver->setRequired(static::MERCHANT_REFERENCE_CHOICES_OPTION);
+        $resolver->setDefaults([
+            'allow_extra_fields' => true,
+        ]);
 
         $resolver->setNormalizer('constraints', function (Options $options, $value) {
             return array_merge($value, [
@@ -94,7 +98,6 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
             'required' => true,
             'label' => static::LABEL_TYPE,
             'placeholder' => 'Select one',
-
         ]);
 
         return $this;
@@ -126,19 +129,25 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
      */
     protected function addUnzerMainMerchantForm(FormBuilderInterface $builder)
     {
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($builder) {
+            $event->getForm()->add(
+                UnzerCredentialsTransfer::CHILD_UNZER_CREDENTIALS,
+                UnzerMainMerchantCredentialsType::class,
+                [
+                    'label' => static::LABEL_MAIN_MERCHANT_CREDENTIALS,
+                    self::MERCHANT_REFERENCE_CHOICES_OPTION => $builder->getOption(self::MERCHANT_REFERENCE_CHOICES_OPTION),
+                ],
+            );
+        });
+
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($builder) {
             /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentials */
             $unzerCredentials = $event->getData();
+            $unzerType = $unzerCredentials['type'] ?? null;
             $form = $event->getForm();
 
-            if ($unzerCredentials->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE || $unzerCredentials->getType() === null) {
-                $form->add(
-                    UnzerCredentialsTransfer::CHILD_UNZER_CREDENTIALS,
-                    UnzerMainMerchantCredentialsType::class,
-                    [
-                        'label' => static::LABEL_MAIN_MERCHANT_CREDENTIALS,
-                    ],
-                );
+            if ((int)$unzerType !== UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
+                $form->remove(UnzerCredentialsTransfer::CHILD_UNZER_CREDENTIALS);
             }
         });
 

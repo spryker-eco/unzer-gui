@@ -12,6 +12,7 @@ use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\MerchantGui\Communication\Exception\MissingStoreRelationFormTypePluginException;
+use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeBridge;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeBridge;
 
 /**
@@ -49,6 +50,7 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::provideCommunicationLayerDependencies($container);
 
         $container = $this->addUnzerFacade($container);
+        $container = $this->addMerchantFacade($container);
         $container = $this->addPropelUnzerCredentialsQuery($container);
         $container = $this->addStoreRelationFormTypePlugin($container);
 
@@ -64,6 +66,20 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::FACADE_UNZER, function (Container $container) {
             return new UnzerGuiToUnzerFacadeBridge($container->getLocator()->unzer()->facade());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addMerchantFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_MERCHANT, function (Container $container) {
+            return new UnzerGuiToMerchantFacadeBridge($container->getLocator()->merchant()->facade());
         });
 
         return $container;
