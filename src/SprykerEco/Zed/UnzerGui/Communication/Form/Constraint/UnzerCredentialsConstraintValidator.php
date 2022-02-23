@@ -15,7 +15,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class UnzerCredentialsConstraintValidator extends ConstraintValidator
 {
     /**
-     * @param string|null $value
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer|string|null $value
      * @param \Symfony\Component\Validator\Constraint|\Spryker\Zed\ContentBannerGui\Communication\Form\Constraints\ContentBannerConstraint $constraint
      *
      * @throws \InvalidArgumentException
@@ -31,7 +31,7 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
                 get_class($constraint),
             ));
         }
-        /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $value */
+
         $unzerValidationResponseTransfer = $constraint->getUnzerFacade()->validateUnzerCredentials($value);
 
         if (!$unzerValidationResponseTransfer->getIsSuccessful()) {
@@ -49,9 +49,8 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
     protected function addViolations(UnzerCredentialsParameterMessageTransfer $unzerCredentialsParameterMessageTransfer): void
     {
         foreach ($unzerCredentialsParameterMessageTransfer->getMessages() as $messageTransfer) {
-            $text = strtr((string)$messageTransfer->getValue(), $messageTransfer->getParameters());
             $this->context
-                ->buildViolation($text)
+                ->buildViolation($messageTransfer->getValue(), $messageTransfer->getParameters())
                 ->atPath(sprintf('[%s]', $unzerCredentialsParameterMessageTransfer->getParameter()))
                 ->addViolation();
         }

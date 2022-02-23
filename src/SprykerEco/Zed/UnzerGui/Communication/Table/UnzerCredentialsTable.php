@@ -120,7 +120,6 @@ class UnzerCredentialsTable extends AbstractTable
             ];
             $results[] = $rowData;
         }
-        unset($queryResults);
 
         return $results;
     }

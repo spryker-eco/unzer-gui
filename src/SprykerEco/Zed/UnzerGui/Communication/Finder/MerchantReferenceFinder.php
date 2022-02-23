@@ -21,9 +21,8 @@ class MerchantReferenceFinder implements MerchantFinderInterface
     /**
      * @param \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeInterface $merchantFacade
      */
-    public function __construct(
-        UnzerGuiToMerchantFacadeInterface $merchantFacade
-    ) {
+    public function __construct(UnzerGuiToMerchantFacadeInterface $merchantFacade)
+    {
         $this->merchantFacade = $merchantFacade;
     }
 

@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
 use Spryker\Service\UtilText\Model\Url\Url;
-use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -43,10 +42,15 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
             return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
 
-        $form = $this->getForm($dataProvider, $idUnzerCredentials)->handleRequest($request);
+        $form = $this->getFactory()
+            ->getUnzerCredentialsEditForm(
+                $dataProvider->getData($idUnzerCredentials),
+                $dataProvider->getOptions($idUnzerCredentials),
+            )
+            ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->updateUnzerCredentials($request, $form);
+            return $this->handleUnzerCredentialsForm($request, $form);
         }
 
         return $this->prepareViewResponse($form, $idUnzerCredentials);
@@ -71,9 +75,9 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
-    protected function updateUnzerCredentials(Request $request, FormInterface $unzerCredentialsForm)
+    protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
         $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::REDIRECT_URL_DEFAULT);
 
@@ -99,7 +103,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
      * @param \Symfony\Component\Form\FormInterface $form
      * @param int $idUnzerCredentials
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function prepareViewResponse(FormInterface $form, int $idUnzerCredentials): array
     {
@@ -110,20 +114,5 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
             'merchantUnzerCredentialsTable' => $this->getFactory()->createMerchantUnzerCredentialsTable($idUnzerCredentials)->render(),
             'addMerchantActionUrl' => Url::generate(UnzerGuiConfig::URL_MERCHANT_UNZER_CREDENTIALS_ADD, [static::REQUEST_ID_PARENT_UNZER_CREDENTIALS => $idUnzerCredentials]),
         ]);
-    }
-
-    /**
-     * @param \SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider $unzerCredentialsFormDataProvider
-     * @param int $idUnzerCredentials
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    protected function getForm(UnzerCredentialsFormDataProvider $unzerCredentialsFormDataProvider, int $idUnzerCredentials): FormInterface
-    {
-        return $this->getFactory()
-            ->getUnzerCredentialsEditForm(
-                $unzerCredentialsFormDataProvider->getData($idUnzerCredentials),
-                $unzerCredentialsFormDataProvider->getOptions($idUnzerCredentials),
-            );
     }
 }

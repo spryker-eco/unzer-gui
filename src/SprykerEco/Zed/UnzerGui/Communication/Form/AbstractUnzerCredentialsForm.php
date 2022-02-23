@@ -44,9 +44,9 @@ abstract class AbstractUnzerCredentialsForm extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return static
+     * @return $this
      */
-    protected function addIdUnzerCredentialsField(FormBuilderInterface $builder): self
+    protected function addIdUnzerCredentialsField(FormBuilderInterface $builder)
     {
         $builder->add(UnzerCredentialsTransfer::ID_UNZER_CREDENTIALS, HiddenType::class);
 
@@ -56,7 +56,7 @@ abstract class AbstractUnzerCredentialsForm extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return static
+     * @return $this
      */
     protected function addNameField(FormBuilderInterface $builder)
     {

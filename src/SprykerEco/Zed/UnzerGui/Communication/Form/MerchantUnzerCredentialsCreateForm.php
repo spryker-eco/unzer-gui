@@ -70,7 +70,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return $this
      */
@@ -85,14 +85,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $choices
-     *
-     * @return $this
-     */
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $choices
+     * @param array<string, string> $choices
      *
      * @return $this
      */

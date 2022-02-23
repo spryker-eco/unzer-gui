@@ -45,7 +45,7 @@ abstract class AbstractMerchantUnzerCredentialsController extends AbstractUnzerC
      * @param \Symfony\Component\Form\FormInterface $form
      * @param int $idUnzerCredentials
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function prepareViewResponse(FormInterface $form, int $idUnzerCredentials): array
     {

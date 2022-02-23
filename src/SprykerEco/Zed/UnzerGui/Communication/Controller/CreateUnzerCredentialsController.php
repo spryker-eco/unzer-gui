@@ -32,7 +32,7 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             ->handleRequest($request);
 
         if ($unzerCredentialsForm->isSubmitted() && $unzerCredentialsForm->isValid()) {
-            return $this->createUnzerCredentials($request, $unzerCredentialsForm);
+            return $this->handleUnzerCredentialsForm($request, $unzerCredentialsForm);
         }
 
         return $this->viewResponse([
@@ -44,9 +44,9 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
-    protected function createUnzerCredentials(Request $request, FormInterface $unzerCredentialsForm)
+    protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
         $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, UnzerGuiConfig::URL_UNZER_CREDENTIALS_LIST);
 

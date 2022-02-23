@@ -87,7 +87,7 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $choices
+     * @param array<string, int> $choices
      *
      * @return $this
      */
@@ -135,7 +135,7 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
                 UnzerMainMerchantCredentialsType::class,
                 [
                     'label' => static::LABEL_MAIN_MERCHANT_CREDENTIALS,
-                    self::MERCHANT_REFERENCE_CHOICES_OPTION => $builder->getOption(self::MERCHANT_REFERENCE_CHOICES_OPTION),
+                    static::MERCHANT_REFERENCE_CHOICES_OPTION => $builder->getOption(static::MERCHANT_REFERENCE_CHOICES_OPTION),
                 ],
             );
         });

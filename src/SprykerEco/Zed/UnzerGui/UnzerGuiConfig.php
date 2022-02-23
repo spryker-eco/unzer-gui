@@ -80,7 +80,7 @@ class UnzerGuiConfig extends AbstractBundleConfig
     protected const COMPANY_SUGGESTION_LIMIT = 20;
 
     /**
-     * @var array
+     * @var array<int, string>
      */
     protected const UNZER_CREDENTIALS_TYPES = [
         1 => 'Standard',

@@ -17,7 +17,7 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function indexAction(Request $request)
     {
@@ -35,7 +35,7 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
             ->handleRequest($request);
 
         if ($unzerCredentialsForm->isSubmitted() && $unzerCredentialsForm->isValid()) {
-            return $this->createUnzerCredentials($request, $unzerCredentialsForm);
+            return $this->handleUnzerCredentialsForm($request, $unzerCredentialsForm);
         }
 
         return $this->prepareViewResponse($unzerCredentialsForm, $parentIdUnzerCredentials);
@@ -45,9 +45,9 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
-    protected function createUnzerCredentials(Request $request, FormInterface $unzerCredentialsForm)
+    protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();

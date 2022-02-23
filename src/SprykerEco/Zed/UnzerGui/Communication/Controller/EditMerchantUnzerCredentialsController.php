@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,7 +15,7 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     public function indexAction(Request $request)
     {
@@ -32,10 +31,15 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
             return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
 
-        $form = $this->getForm($dataProvider, $idUnzerCredentials)->handleRequest($request);
+        $form = $this->getFactory()
+            ->getMerchantUnzerCredentialsEditForm(
+                $dataProvider->getData($idUnzerCredentials),
+                $dataProvider->getOptions($idUnzerCredentials),
+            )
+            ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->updateUnzerCredentials($request, $form);
+            return $this->handleUnzerCredentialsForm($request, $form);
         }
 
         return $this->prepareViewResponse($form, $unzerCredentialsTransfer->getParentIdUnzerCredentials());
@@ -45,9 +49,9 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
-    protected function updateUnzerCredentials(Request $request, FormInterface $unzerCredentialsForm)
+    protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();
@@ -61,20 +65,5 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
         $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);
 
         return $this->redirectResponse($this->buildRedirectUrl($unzerCredentialsTransfer->getParentIdUnzerCredentials()));
-    }
-
-    /**
-     * @param \SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider $unzerCredentialsFormDataProvider
-     * @param int $idUnzerCredentials
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    protected function getForm(UnzerCredentialsFormDataProvider $unzerCredentialsFormDataProvider, int $idUnzerCredentials): FormInterface
-    {
-        return $this->getFactory()
-            ->getMerchantUnzerCredentialsEditForm(
-                $unzerCredentialsFormDataProvider->getData($idUnzerCredentials),
-                $unzerCredentialsFormDataProvider->getOptions($idUnzerCredentials),
-            );
     }
 }

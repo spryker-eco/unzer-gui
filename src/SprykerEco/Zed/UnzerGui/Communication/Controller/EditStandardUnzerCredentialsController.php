@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,11 +15,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsController
 {
- /**
-  * @param \Symfony\Component\HttpFoundation\Request $request
-  *
-  * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
-  */
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     */
     public function indexAction(Request $request)
     {
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
@@ -35,7 +34,12 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
             return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
 
-        $form = $this->getForm($dataProvider, $idUnzerCredentials)->handleRequest($request);
+        $form = $this->getFactory()
+            ->getUnzerCredentialsEditForm(
+                $dataProvider->getData($idUnzerCredentials),
+                $dataProvider->getOptions($idUnzerCredentials),
+            )
+            ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->updateUnzerCredentials($request, $form);
@@ -48,7 +52,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
     protected function updateUnzerCredentials(Request $request, FormInterface $unzerCredentialsForm)
     {
@@ -73,7 +77,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
      * @param \Symfony\Component\Form\FormInterface $form
      * @param int $idUnzerCredentials
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function prepareViewResponse(FormInterface $form, int $idUnzerCredentials): array
     {
@@ -81,20 +85,5 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
             'unzerCredentialsForm' => $form->createView(),
             'idUnzerCredentials' => $idUnzerCredentials,
         ]);
-    }
-
-    /**
-     * @param \SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider $unzerCredentialsFormDataProvider
-     * @param int $idUnzerCredentials
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    protected function getForm(UnzerCredentialsFormDataProvider $unzerCredentialsFormDataProvider, int $idUnzerCredentials): FormInterface
-    {
-        return $this->getFactory()
-            ->getUnzerCredentialsEditForm(
-                $unzerCredentialsFormDataProvider->getData($idUnzerCredentials),
-                $unzerCredentialsFormDataProvider->getOptions($idUnzerCredentials),
-            );
     }
 }

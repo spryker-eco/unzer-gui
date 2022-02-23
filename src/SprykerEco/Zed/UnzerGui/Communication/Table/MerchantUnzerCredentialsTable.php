@@ -133,7 +133,6 @@ class MerchantUnzerCredentialsTable extends AbstractTable
             ];
             $results[] = $rowData;
         }
-        unset($queryResults);
 
         return $results;
     }

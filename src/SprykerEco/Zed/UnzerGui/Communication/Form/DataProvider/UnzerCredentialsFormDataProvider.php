@@ -37,6 +37,7 @@ class UnzerCredentialsFormDataProvider
     /**
      * @param \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface $unzerFacade
      * @param \SprykerEco\Zed\UnzerGui\UnzerGuiConfig $unzerGuiConfig
+     * @param \SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface $merchantFinder
      */
     public function __construct(
         UnzerGuiToUnzerFacadeInterface $unzerFacade,
@@ -79,7 +80,7 @@ class UnzerCredentialsFormDataProvider
     /**
      * @param int|null $idUnzerCredentials
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getOptions(?int $idUnzerCredentials = null): array
     {

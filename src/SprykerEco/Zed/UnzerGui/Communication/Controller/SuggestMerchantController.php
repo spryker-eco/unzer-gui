@@ -43,7 +43,7 @@ class SuggestMerchantController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     protected function executeIndexAction(Request $request): array
     {

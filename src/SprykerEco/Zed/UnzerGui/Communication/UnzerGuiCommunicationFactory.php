@@ -9,12 +9,12 @@ namespace SprykerEco\Zed\UnzerGui\Communication;
 
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery;
+use Spryker\Zed\Gui\Communication\Tabs\TabsInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
 use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface;
 use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantReferenceFinder;
 use SprykerEco\Zed\UnzerGui\Communication\Form\Constraint\UnzerCredentialsConstraint;
-use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\MerchantUnzerFormDataProvider;
 use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider;
 use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsCreateForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsEditForm;
@@ -23,7 +23,6 @@ use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsDeleteForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsEditForm;
 use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatter;
 use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatterInterface;
-use SprykerEco\Zed\UnzerGui\Communication\Table\AnotherMerchantUnzerCredentialsTable;
 use SprykerEco\Zed\UnzerGui\Communication\Table\MerchantUnzerCredentialsTable;
 use SprykerEco\Zed\UnzerGui\Communication\Table\UnzerCredentialsTable;
 use SprykerEco\Zed\UnzerGui\Communication\Tabs\UnzerCredentialsFormTabs;
@@ -37,14 +36,6 @@ use Symfony\Component\Form\FormInterface;
  */
 class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
 {
-    /**
-     * @return \SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\MerchantUnzerFormDataProvider
-     */
-    public function createMerchantUnzerFormDataProvider(): MerchantUnzerFormDataProvider
-    {
-        return new MerchantUnzerFormDataProvider($this->getUnzerFacade());
-    }
-
     /**
      * @return \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface
      */
@@ -72,9 +63,9 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\UnzerGui\Communication\Tabs\UnzerCredentialsFormTabs
+     * @return \Spryker\Zed\Gui\Communication\Tabs\TabsInterface
      */
-    public function createUnzerCredentialsFormTabs(): UnzerCredentialsFormTabs
+    public function createUnzerCredentialsFormTabs(): TabsInterface
     {
         return new UnzerCredentialsFormTabs();
     }
@@ -93,7 +84,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
 
     /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \Symfony\Component\Form\FormInterface
      */
@@ -104,7 +95,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
 
     /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \Symfony\Component\Form\FormInterface
      */
@@ -138,7 +129,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \SprykerEco\Zed\UnzerGui\Communication\Form\Constraint\UnzerCredentialsConstraint
      */
@@ -164,21 +155,8 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @param string $merchantReference
-     *
-     * @return \SprykerEco\Zed\UnzerGui\Communication\Table\AnotherMerchantUnzerCredentialsTable
-     */
-    public function createAnotherMerchantUnzerCredentialsTable(string $merchantReference): AnotherMerchantUnzerCredentialsTable
-    {
-        return new AnotherMerchantUnzerCredentialsTable(
-            $this->getUnzerCredentialsPropelQuery(),
-            $merchantReference,
-        );
-    }
-
-    /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \Symfony\Component\Form\FormInterface
      */
@@ -189,7 +167,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
 
     /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \Symfony\Component\Form\FormInterface
      */
