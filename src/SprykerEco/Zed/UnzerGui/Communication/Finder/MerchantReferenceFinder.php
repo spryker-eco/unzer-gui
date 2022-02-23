@@ -50,12 +50,11 @@ class MerchantReferenceFinder implements MerchantFinderInterface
      */
     protected function transformMerchantCollectionList(MerchantCollectionTransfer $merchantCollectionTransfer): array
     {
-        $labelTemplate = '%s (%s)';
         $result = [];
         foreach ($merchantCollectionTransfer->getMerchants() as $merchantTransfer) {
             $merchantReference = $merchantTransfer->getMerchantReferenceOrFail();
             $merchantName = $merchantTransfer->getNameOrFail();
-            $label = sprintf($labelTemplate, $merchantName, $merchantReference);
+            $label = sprintf('%s (%s)', $merchantName, $merchantReference);
             $result[$merchantReference] = $label;
         }
 

@@ -42,7 +42,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->updateUnzerCredentials($request, $form);
+            return $this->handleUnzerCredentialsForm($request, $form);
         }
 
         return $this->prepareViewResponse($form, $idUnzerCredentials);
@@ -54,7 +54,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
      */
-    protected function updateUnzerCredentials(Request $request, FormInterface $unzerCredentialsForm)
+    protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
         $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::REDIRECT_URL_DEFAULT);
 
