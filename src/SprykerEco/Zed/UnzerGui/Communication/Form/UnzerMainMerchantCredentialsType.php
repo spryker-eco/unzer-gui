@@ -94,7 +94,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array<string,string> $choices
+     * @param array<string, string> $choices
      *
      * @return $this
      */
