@@ -179,7 +179,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function createDeleteUnzerCredentialsForm(): FormInterface
+    public function getUnzerCredentialsDeleteForm(): FormInterface
     {
         return $this->getFormFactory()->create(UnzerCredentialsDeleteForm::class);
     }

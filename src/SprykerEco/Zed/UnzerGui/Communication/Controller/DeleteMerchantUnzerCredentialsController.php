@@ -22,7 +22,7 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
         $parentIdUnzerCredentials = $this->castId($request->get(static::PARAM_PARENT_ID_UNZER_CREDENTIALS));
 
-        $deleteForm = $this->getFactory()->createDeleteUnzerCredentialsForm();
+        $deleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm();
 
         return $this->viewResponse([
             'idUnzerCredentials' => $idUnzerCredentials,
@@ -43,7 +43,7 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
 
         $redirectUrl = $this->buildRedirectUrl($parentIdUnzerCredentials);
 
-        $deleteForm = $this->getFactory()->createDeleteUnzerCredentialsForm()->handleRequest($request);
+        $deleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm()->handleRequest($request);
         if (!$deleteForm->isSubmitted() || !$deleteForm->isValid()) {
             $this->addErrorMessage('CSRF token is not valid');
 
