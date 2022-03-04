@@ -1,0 +1,30 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Create Merchant Unzer Credentials' %}
+
+{% block head_title widget_title | trans %}
+{% block section_title widget_title | trans %}
+
+{% block action %}
+    {{ backActionButton(redirectUrl, 'Back' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+            {{ form_start(unzerCredentialsForm) }}
+            {{ form_row(unzerCredentialsForm.configName) }}
+            {{ form_row(unzerCredentialsForm.unzerKeypair) }}
+            {{ form_row(unzerCredentialsForm.merchantReference) }}
+            {{ form_row(unzerCredentialsForm.participantId) }}
+            {{ form_widget(unzerCredentialsForm) }}
+
+            <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />
+            {{ form_end(unzerCredentialsForm) }}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

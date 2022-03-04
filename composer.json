@@ -5,10 +5,15 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
-        "spryker-eco/unzer": "dev-feature/cc-14610/dev-unzer-psp as 1.0",
+        "spryker-eco/unzer": "dev-feature/cc-14610/cc-15652-unzer-credentials-gui as 1.0",
+        "spryker/gui": "^3.33.0",
         "spryker/kernel": "^3.30.0",
-        "spryker/merchant-gui-extension": "^1.1.0",
-        "spryker/symfony": "^3.7.0"
+        "spryker/merchant": "^3.0.0",
+        "spryker/merchant-gui": "^3.8.0",
+        "spryker/propel-orm": "^1.6.0",
+        "spryker/store": "^1.4.0",
+        "spryker/symfony": "^3.7.0",
+        "spryker/util-text": "^1.2.3"
     },
     "require-dev": {
         "phpstan/phpstan": "*",
@@ -29,6 +34,16 @@
         "stan": "phpstan analyse -c phpstan.neon -l 8 src/",
         "stan-setup": "cp composer.json composer.backup && COMPOSER_MEMORY_LIMIT=-1 composer require --dev phpstan/phpstan:^0.12 && mv composer.backup composer.json"
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:spryker-eco/unzer.git"
+        },
+        {
+            "type": "git",
+            "url": "git@github.com:spryker-eco/unzer-api.git"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
@@ -37,6 +52,9 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "process-timeout": 600
+        "process-timeout": 600,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

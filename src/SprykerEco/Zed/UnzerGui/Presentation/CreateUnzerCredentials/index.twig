@@ -1,0 +1,31 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Create Unzer Credentials' %}
+
+{% block head_title widget_title | trans %}
+{% block section_title widget_title | trans %}
+
+{% block action %}
+    {{ backActionButton(url('/unzer-gui/list-unzer-credentials'), 'Back to Unzer Credentials' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+            {{ form_start(unzerCredentialsForm) }}
+            {{ form_widget(unzerCredentialsForm) }}
+
+            <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />
+            {{ form_end(unzerCredentialsForm) }}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}
+
+{% block footer_js %}
+    {{ parent() }}
+    <script src="{{ assetsPath('js/spryker-zed-unzer-gui-main.js') }}"></script>
+{% endblock %}

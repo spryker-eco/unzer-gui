@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="Message">
+        <property name="parameters" type="array" singular="parameters"/>
+        <property name="value" type="string"/>
+        <property name="message" type="string"/>
+    </transfer>
+
+    <transfer name="UnzerValidationResponse">
+        <property name="isSuccessful" type="bool"/>
+        <property name="parameterMessages" type="UnzerCredentialsParameterMessage[]" singular="unzerCredentialsParameterMessage"/>
+    </transfer>
+
+    <transfer name="UnzerCredentialsParameterMessage">
+        <property name="messages" type="Message[]" singular="message"/>
+        <property name="parameter" type="string"/>
+    </transfer>
+
+    <transfer name="UnzerCredentials">
+        <property name="type" type="int"/>
+        <property name="parentIdUnzerCredentials" type="int"/>
+        <property name="idUnzerCredentials" type="int"/>
+        <property name="configName" type="string"/>
+        <property name="unzerKeypair" type="UnzerKeypair"/>
+        <property name="merchantReference" type="string"/>
+        <property name="participantId" type="string"/>
+        <property name="childUnzerCredentials" type="UnzerCredentials"/>
+    </transfer>
+
+
+    <transfer name="UnzerCredentialsResponse">
+        <property name="isSuccessful" type="bool"/>
+        <property name="messages" type="Message[]" singular="message"/>
+    </transfer>
+
+    <transfer name="MerchantCriteria">
+        <property name="merchantReferences" type="string[]" singular="merchantReference"/>
+        <property name="pagination" type="Pagination"/>
+    </transfer>
+
+    <transfer name="Merchant">
+        <property name="name" type="string"/>
+        <property name="merchantReference" type="string"/>
+    </transfer>
+
+    <transfer name="TabItem">
+        <property name="name" type="string"/>
+        <property name="title" type="string"/>
+        <property name="template" type="string"/>
+    </transfer>
+
+    <transfer name="Pagination">
+        <property name="limit" type="int"/>
+    </transfer>
+
+    <transfer name="TabsView">
+        <property name="tabs" type="TabItem[]" singular="tab"/>
+        <property name="footerTemplate" type="string"/>
+        <property name="isNavigable" type="bool"/>
+    </transfer>
+
+    <transfer name="MerchantCollection">
+        <property name="merchants" type="Merchant[]" singular="merchants"/>
+    </transfer>
+
+    <transfer name="UnzerCredentialsCriteria">
+        <property name="unzerCredentialsConditions" type="UnzerCredentialsConditions"/>
+    </transfer>
+
+    <transfer name="UnzerCredentialsConditions">
+        <property name="ids" type="int[]" singular="id"/>
+        <property name="parentIds" type="int[]" singular="parentId"/>
+    </transfer>
+
+    <transfer name="UnzerCredentialsCollection">
+        <property name="unzerCredentials" type="UnzerCredentials[]" singular="unzerCredentials"/>
+        <property name="pagination" type="Pagination"/>
+    </transfer>
+
+    <transfer name="UnzerKeypair">
+    </transfer>
+</transfers>

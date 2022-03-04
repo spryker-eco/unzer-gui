@@ -1,0 +1,42 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Unzer Credentials removal confirmation' | trans %}
+
+{% block head_title widget_title %}
+{% block section_title widget_title %}
+
+{% block action %}
+    {{ parent() }}
+    {{ backActionButton(app.request.headers.get('referer'), 'Back' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <span>{{ 'Are you sure you want to remove this Unzer Credentials?' }}  </span> <br>
+                    <span>{{ 'Removing this will also remove all associated functionalities. Remove is restricted if any chind credentials are linked'}}</span>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="{{ app.request.headers.get('referer') }}" class="btn btn-back">{{ 'Back' | trans }}</a>
+                    {{ form_start(deleteForm, {
+                        'action': url('/unzer-gui/delete-unzer-credentials/confirm', {'id-unzer-credentials': idUnzerCredentials})
+                    }) }}
+                    <input type="submit"
+                           class="btn btn-danger safe-submit"
+                           value="{{ 'Remove Unzer Credentials' | trans }}"/>
+                    {{ form_end(deleteForm) }}
+                </div>
+            </div>
+
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Edit Unzer Credentials' %}
+
+{% block head_title widget_title | trans %}
+{% block section_title widget_title | trans %}
+
+{% block action %}
+    {{ backActionButton(url('/unzer-gui/list-unzer-credentials'), 'Back to Unzer Credentials' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' %}
+
+        {% block widget_content %}
+            {{ form_start(unzerCredentialsForm) }}
+            {{ tabs(unzerCredentialsFormTabs, {
+                'unzerCredentialsForm': unzerCredentialsForm,
+                'merchantUnzerCredentialsTable': merchantUnzerCredentialsTable,
+                'addMerchantActionUrl': addMerchantActionUrl
+            }) }}
+            {{ form_end(unzerCredentialsForm) }}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

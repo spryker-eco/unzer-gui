@@ -15,17 +15,17 @@ class MerchantUnzerFormTabExpander implements MerchantUnzerFormTabExpanderInterf
     /**
      * @var string
      */
-    protected const UNZER_TAB_ITEM_TEMPLATE = '@UnzerGui/_partials/unzer-tab.twig';
+    protected const UNZER_TAB_ITEM_TEMPLATE = '@UnzerGui/_partials/merchant-unzer-tab.twig';
 
     /**
      * @var string
      */
-    protected const UNZER_TAB_ITEM_NAME = 'unzer';
+    protected const UNZER_TAB_ITEM_NAME = 'unzer-credential';
 
     /**
      * @var string
      */
-    protected const UNZER_TAB_ITEM_TITLE = 'Unzer';
+    protected const UNZER_TAB_ITEM_TITLE = 'Unzer Credentials';
 
     /**
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
