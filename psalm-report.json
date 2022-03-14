@@ -1,5 +1,18 @@
 {
     "error": [],
-    "warning": [],
+    "warning": [
+        {
+            "severity": "info",
+            "line_from": 35,
+            "line_to": 35,
+            "type": "PossiblyInvalidArgument",
+            "message": "Argument 1 of SprykerEco\\Zed\\UnzerGui\\Dependency\\UnzerGuiToUnzerFacadeInterface::validateUnzerCredentials expects Generated\\Shared\\Transfer\\UnzerCredentialsTransfer, possibly different type Generated\\Shared\\Transfer\\UnzerCredentialsTransfer|null|string provided",
+            "file_name": "vendor/spryker-eco/unzer-gui/src/SprykerEco/Zed/UnzerGui/Communication/Form/Constraint/UnzerCredentialsConstraintValidator.php",
+            "snippet": "        $unzerValidationResponseTransfer = $constraint->getUnzerFacade()->validateUnzerCredentials($value);",
+            "selected_text": "$value",
+            "error_level": 3,
+            "shortcode": 92
+        }
+    ],
     "deprecation": []
 }
