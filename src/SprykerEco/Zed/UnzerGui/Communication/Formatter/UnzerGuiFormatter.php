@@ -24,7 +24,7 @@ class UnzerGuiFormatter implements UnzerGuiFormatterInterface
     /**
      * @param \Generated\Shared\Transfer\MerchantCollectionTransfer $merchantCollectionTransfer
      *
-     * @return array<string, string>
+     * @return array<int, array<string, string|null>>
      */
     public function formatMerchantCollectionTransferToSuggestionsArray(MerchantCollectionTransfer $merchantCollectionTransfer): array
     {
@@ -35,8 +35,8 @@ class UnzerGuiFormatter implements UnzerGuiFormatterInterface
                 static::KEY_MERCHANT_REFERENCE => $merchantTransfer->getMerchantReference(),
                 static::KEY_TEXT => sprintf(
                     '%s (Reference: %s)',
-                    $merchantTransfer->getName(),
-                    $merchantTransfer->getMerchantReference(),
+                    $merchantTransfer->getNameOrFail(),
+                    $merchantTransfer->getMerchantReferenceOrFail(),
                 ),
             ];
         }

@@ -49,7 +49,7 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
     protected function addViolation(MessageTransfer $messageTransfer): void
     {
         $this->context
-            ->buildViolation($messageTransfer->getMessage(), $messageTransfer->getParameters())
+            ->buildViolation($messageTransfer->getMessageOrFail(), $messageTransfer->getParameters())
             ->addViolation();
     }
 }
