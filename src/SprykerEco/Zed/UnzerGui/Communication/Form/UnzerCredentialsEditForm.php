@@ -17,9 +17,9 @@ class UnzerCredentialsEditForm extends UnzerCredentialsCreateForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, string> $choices
      *
-     * @return \SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsCreateForm
+     * @return $this
      */
-    protected function addTypeField(FormBuilderInterface $builder, array $choices = []): UnzerCredentialsCreateForm
+    protected function addTypeField(FormBuilderInterface $builder, array $choices = [])
     {
         $builder->add(UnzerCredentialsTransfer::TYPE, ChoiceType::class, [
             'choices' => array_flip($choices),
