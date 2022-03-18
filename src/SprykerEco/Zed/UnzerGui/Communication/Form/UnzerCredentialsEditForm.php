@@ -19,10 +19,7 @@ class UnzerCredentialsEditForm extends UnzerCredentialsCreateForm
      *
      * @return $this
      */
-    protected function addTypeField(
-        FormBuilderInterface $builder,
-        array $choices = []
-    ): UnzerCredentialsEditForm
+    protected function addTypeField(FormBuilderInterface $builder, array $choices = [])
     {
         $builder->add(UnzerCredentialsTransfer::TYPE, ChoiceType::class, [
             'choices' => array_flip($choices),
