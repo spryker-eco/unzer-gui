@@ -91,7 +91,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
             $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR);
 
-            return $this->prepareViewResponse($unzerCredentialsForm, $unzerCredentialsTransfer->getIdUnzerCredentials());
+            return $this->prepareViewResponse($unzerCredentialsForm, $unzerCredentialsTransfer->getIdUnzerCredentialsOrFail());
         }
 
         $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);

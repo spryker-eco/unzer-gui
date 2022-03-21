@@ -42,7 +42,7 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
             return $this->handleUnzerCredentialsForm($request, $form);
         }
 
-        return $this->prepareViewResponse($form, $unzerCredentialsTransfer->getParentIdUnzerCredentials());
+        return $this->prepareViewResponse($form, $unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail());
     }
 
     /**
@@ -60,10 +60,10 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
             $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR);
 
-            return $this->prepareViewResponse($unzerCredentialsForm, $unzerCredentialsTransfer->getParentIdUnzerCredentials());
+            return $this->prepareViewResponse($unzerCredentialsForm, $unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail());
         }
         $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);
 
-        return $this->redirectResponse($this->buildRedirectUrl($unzerCredentialsTransfer->getParentIdUnzerCredentials()));
+        return $this->redirectResponse($this->buildRedirectUrl($unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail()));
     }
 }

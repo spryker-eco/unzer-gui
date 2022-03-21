@@ -58,7 +58,7 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
             foreach ($unzerCredentialsResponseTransfer->getMessages() as $message) {
-                $this->addErrorMessage($message->getMessage());
+                $this->addErrorMessage($message->getMessageOrFail());
             }
         } else {
             $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS);
