@@ -43,11 +43,11 @@ class SuggestMerchantController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array<string, array<string, string>>
+     * @return array<array<int, array<string, string|null>>>
      */
     protected function executeIndexAction(Request $request): array
     {
-        $suggestionName = $request->query->get(static::PARAM_TERM);
+        $suggestionName = (string)$request->query->get(static::PARAM_TERM);
 
         $merchantCriteriaTransfer = $this->createMerchantCriteriaTransfer($suggestionName);
 

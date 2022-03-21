@@ -14,7 +14,7 @@ interface UnzerGuiFormatterInterface
     /**
      * @param \Generated\Shared\Transfer\MerchantCollectionTransfer $merchantCollectionTransfer
      *
-     * @return array<string, string>
+     * @return array<int, array<string, string|null>>
      */
     public function formatMerchantCollectionTransferToSuggestionsArray(MerchantCollectionTransfer $merchantCollectionTransfer): array;
 }

@@ -102,7 +102,7 @@ class UnzerCredentialsFormDataProvider
     {
         $unzerChildCredentialsCriteriaTransfer = (new UnzerCredentialsCriteriaTransfer())
             ->setUnzerCredentialsConditions(
-                (new UnzerCredentialsConditionsTransfer())->addParentId($unzerCredentialsTransfer->getIdUnzerCredentials()),
+                (new UnzerCredentialsConditionsTransfer())->addParentId($unzerCredentialsTransfer->getIdUnzerCredentialsOrFail()),
             );
 
         $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerChildCredentialsCriteriaTransfer);

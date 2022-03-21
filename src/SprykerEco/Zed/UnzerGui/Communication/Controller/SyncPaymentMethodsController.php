@@ -30,7 +30,7 @@ class SyncPaymentMethodsController extends AbstractUnzerCredentialsController
 
         $this->getFactory()
             ->getUnzerFacade()
-            ->performPaymentMethodsImport($unzerCredentialsTransfer->getUnzerKeypair());
+            ->performPaymentMethodsImport($unzerCredentialsTransfer->getUnzerKeypairOrFail());
 
         $this->addSuccessMessage(static::MESSAGE_PAYMENT_METHODS_SYNC_SUCCESS);
 
