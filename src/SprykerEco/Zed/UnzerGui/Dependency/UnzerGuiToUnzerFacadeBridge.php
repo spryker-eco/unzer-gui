@@ -90,12 +90,12 @@ class UnzerGuiToUnzerFacadeBridge implements UnzerGuiToUnzerFacadeInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer
      *
      * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
      */
-    public function validateUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer
+    public function validateUnzerCredentials(UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer): UnzerCredentialsResponseTransfer
     {
-        return $this->unzerFacade->validateUnzerCredentials($unzerCredentialsTransfer);
+        return $this->unzerFacade->validateUnzerCredentials($unzerCredentialsResponseTransfer);
     }
 }

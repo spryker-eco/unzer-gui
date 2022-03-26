@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Form\Constraint;
 
 use Generated\Shared\Transfer\MessageTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsResponseTransfer;
 use InvalidArgumentException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -32,10 +33,11 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
             ));
         }
 
-        $unzerValidationResponseTransfer = $constraint->getUnzerFacade()->validateUnzerCredentials($value);
+        $unzerCredentialsResponseTransfer = (new UnzerCredentialsResponseTransfer())->setUnzerCredentials($value)->setIsSuccessful(true);
+        $unzerCredentialsResponseTransfer = $constraint->getUnzerFacade()->validateUnzerCredentials($unzerCredentialsResponseTransfer);
 
-        if (!$unzerValidationResponseTransfer->getIsSuccessful()) {
-            foreach ($unzerValidationResponseTransfer->getMessages() as $messageTransfer) {
+        if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
+            foreach ($unzerCredentialsResponseTransfer->getMessages() as $messageTransfer) {
                 $this->addViolation($messageTransfer);
             }
         }
