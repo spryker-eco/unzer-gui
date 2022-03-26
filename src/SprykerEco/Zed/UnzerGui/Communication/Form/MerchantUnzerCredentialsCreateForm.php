@@ -118,7 +118,6 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array<string, int> $choices
      *
      * @return $this
      */

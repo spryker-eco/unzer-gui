@@ -42,7 +42,7 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ContentParameterMessageTransfer $unzerCredentialsParameterMessageTransfer
+     * @param \Generated\Shared\Transfer\MessageTransfer $messageTransfer
      *
      * @return void
      */
