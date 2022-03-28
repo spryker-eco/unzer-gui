@@ -15,7 +15,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class UnzerCredentialsConstraintValidator extends ConstraintValidator
 {
     /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer|string|null $value
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $value
      * @param \Symfony\Component\Validator\Constraint|\Spryker\Zed\ContentBannerGui\Communication\Form\Constraints\ContentBannerConstraint $constraint
      *
      * @throws \InvalidArgumentException
