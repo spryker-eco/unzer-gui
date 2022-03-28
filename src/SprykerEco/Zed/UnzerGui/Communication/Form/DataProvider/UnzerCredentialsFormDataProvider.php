@@ -65,7 +65,7 @@ class UnzerCredentialsFormDataProvider
                     (new UnzerCredentialsConditionsTransfer())->addId($idUnzerCredentials),
                 );
             $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerCredentialsCriteriaTransfer);
-            $unzerCredentialsTransfer = $unzerCredentialsCollectionTransfer->getUnzerCredentials()[0] ?? $unzerCredentialsTransfer;
+            $unzerCredentialsTransfer = $unzerCredentialsCollectionTransfer->getUnzerCredentials()->getIterator()->current() ?? $unzerCredentialsTransfer;
         }
 
         if ($unzerCredentialsTransfer->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
