@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider;
 
+use Generated\Shared\Transfer\StoreRelationTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsConditionsTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
@@ -58,20 +59,21 @@ class UnzerCredentialsFormDataProvider
     {
         $unzerCredentialsTransfer = (new UnzerCredentialsTransfer())->setUnzerKeypair(new UnzerKeypairTransfer());
 
-        if (!$idUnzerCredentials) {
-            return $unzerCredentialsTransfer;
+        if ($idUnzerCredentials) {
+            $unzerCredentialsCriteriaTransfer = (new UnzerCredentialsCriteriaTransfer())
+                ->setUnzerCredentialsConditions(
+                    (new UnzerCredentialsConditionsTransfer())->addId($idUnzerCredentials),
+                );
+            $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerCredentialsCriteriaTransfer);
+            $unzerCredentialsTransfer = $unzerCredentialsCollectionTransfer->getUnzerCredentials()->getIterator()->current() ?? $unzerCredentialsTransfer;
         }
 
-        $unzerCredentialsCriteriaTransfer = (new UnzerCredentialsCriteriaTransfer())
-            ->setUnzerCredentialsConditions(
-                (new UnzerCredentialsConditionsTransfer())->addId($idUnzerCredentials),
-            );
-
-        $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerCredentialsCriteriaTransfer);
-
-        $unzerCredentialsTransfer = $unzerCredentialsCollectionTransfer->getUnzerCredentials()[0] ?? $unzerCredentialsTransfer;
         if ($unzerCredentialsTransfer->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
             $unzerCredentialsTransfer = $this->setChildUnzerCredentials($unzerCredentialsTransfer);
+        }
+
+        if (!$unzerCredentialsTransfer->getStoreRelation()) {
+            $unzerCredentialsTransfer->setStoreRelation(new StoreRelationTransfer());
         }
 
         return $unzerCredentialsTransfer;

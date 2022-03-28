@@ -15,7 +15,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class UnzerCredentialsConstraintValidator extends ConstraintValidator
 {
     /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer|string|null $value
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $value
      * @param \Symfony\Component\Validator\Constraint|\Spryker\Zed\ContentBannerGui\Communication\Form\Constraints\ContentBannerConstraint $constraint
      *
      * @throws \InvalidArgumentException
@@ -32,17 +32,17 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
             ));
         }
 
-        $unzerValidationResponseTransfer = $constraint->getUnzerFacade()->validateUnzerCredentials($value);
+        $unzerCredentialsResponseTransfer = $constraint->getUnzerFacade()->validateUnzerCredentials($value);
 
-        if (!$unzerValidationResponseTransfer->getIsSuccessful()) {
-            foreach ($unzerValidationResponseTransfer->getMessages() as $messageTransfer) {
+        if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
+            foreach ($unzerCredentialsResponseTransfer->getMessages() as $messageTransfer) {
                 $this->addViolation($messageTransfer);
             }
         }
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ContentParameterMessageTransfer $unzerCredentialsParameterMessageTransfer
+     * @param \Generated\Shared\Transfer\MessageTransfer $messageTransfer
      *
      * @return void
      */

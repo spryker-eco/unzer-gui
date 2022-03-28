@@ -26,6 +26,7 @@
         <property name="merchantReference" type="string"/>
         <property name="participantId" type="string"/>
         <property name="childUnzerCredentials" type="UnzerCredentials"/>
+        <property name="storeRelation" type="StoreRelation"/>
     </transfer>
 
 
@@ -79,5 +80,13 @@
     </transfer>
 
     <transfer name="UnzerKeypair">
+    </transfer>
+
+    <transfer name="StoreRelation">
+        <property name="stores" type="Store[]" singular="stores"/>
+    </transfer>
+
+    <transfer name="Store">
+        <property name="name" type="string"/>
     </transfer>
 </transfers>

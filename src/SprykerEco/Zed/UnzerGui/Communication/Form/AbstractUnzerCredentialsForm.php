@@ -39,7 +39,7 @@ abstract class AbstractUnzerCredentialsForm extends AbstractType
     /**
      * @var string
      */
-    protected const LABEL_NAME = 'Config name';
+    protected const LABEL_NAME = 'Name';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
