@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
-        "spryker-eco/unzer": "feature/cc-14610/dev-unzer-psp",
+        "spryker-eco/unzer": "dev-feature/cc-14610/dev-unzer-psp",
         "spryker/gui": "^3.33.0",
         "spryker/kernel": "^3.30.0",
         "spryker/merchant": "^3.0.0",
