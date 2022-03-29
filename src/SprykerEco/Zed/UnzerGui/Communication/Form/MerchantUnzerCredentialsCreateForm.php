@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\UnzerGui\Communication\Form;
 
 use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
+use SprykerEco\Shared\Unzer\UnzerConstants;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -65,7 +66,8 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
             ->addUnzerKeypairType($builder)
             ->addMerchantReferenceField($builder, $options[static::MERCHANT_REFERENCE_CHOICES_OPTION])
             ->addParticipantIdField($builder)
-            ->addIdParentUnzerCredentials($builder, $options);
+            ->addIdParentUnzerCredentials($builder, $options)
+            ->addTypeField($builder);
     }
 
     /**
@@ -108,6 +110,21 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
     protected function addParticipantIdField(FormBuilderInterface $builder)
     {
         $builder->add(UnzerCredentialsTransfer::PARTICIPANT_ID, TextType::class, [
+            'required' => true,
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addTypeField(FormBuilderInterface $builder)
+    {
+        $builder->add(UnzerCredentialsTransfer::TYPE, HiddenType::class, [
+            'data' => UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MERCHANT,
             'required' => true,
         ]);
 

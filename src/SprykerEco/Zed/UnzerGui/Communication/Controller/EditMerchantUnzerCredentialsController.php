@@ -33,7 +33,7 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
 
         $form = $this->getFactory()
             ->getMerchantUnzerCredentialsEditForm(
-                $dataProvider->getData($idUnzerCredentials),
+                $unzerCredentialsTransfer,
                 $dataProvider->getOptions($idUnzerCredentials),
             )
             ->handleRequest($request);

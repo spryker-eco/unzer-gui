@@ -39,8 +39,10 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
     public function confirmAction(Request $request): RedirectResponse
     {
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
-        $parentIdUnzerCredentials = $this->castId($request->get(static::PARAM_PARENT_ID_UNZER_CREDENTIALS));
 
+        /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
+        $unzerCredentialsTransfer = $this->getFactory()->createUnzerCredentialsFormDataProvider()->getData($idUnzerCredentials);
+        $parentIdUnzerCredentials = $unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail();
         $redirectUrl = $this->buildRedirectUrl($parentIdUnzerCredentials);
 
         $deleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm()->handleRequest($request);
@@ -50,8 +52,6 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
             return $this->redirectResponse($redirectUrl);
         }
 
-        /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
-        $unzerCredentialsTransfer = $this->getFactory()->createUnzerCredentialsFormDataProvider()->getData($idUnzerCredentials);
         $unzerCredentialsResponseTransfer = $this->getFactory()
             ->getUnzerFacade()
             ->deleteUnzerCredentials($unzerCredentialsTransfer);
@@ -64,6 +64,6 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
             $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS);
         }
 
-        return $this->redirectResponse($this->buildRedirectUrl($parentIdUnzerCredentials));
+        return $this->redirectResponse($redirectUrl);
     }
 }

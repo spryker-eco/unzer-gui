@@ -17,8 +17,8 @@
         {% block widget_content %}
             <div class="row">
                 <div class="col-sm-12">
-                    <span>{{ 'Are you sure you want to remove this Merchant Unzer Credentials?' }}  </span> <br>
-                    <span>{{ 'Removing this will also remove all associated functionalities.'}}</span>
+                    <span>{{ 'Are you sure you want to remove this Merchant Unzer Credentials?' | trans }}  </span> <br>
+                    <span>{{ 'Removing this will also remove all associated functionalities.' | trans}}</span>
                 </div>
             </div>
             <hr/>
@@ -28,8 +28,7 @@
                     {{ form_start(deleteForm, {
                         'action': url('/unzer-gui/delete-merchant-unzer-credentials/confirm',
                             {
-                                'id-unzer-credentials': idUnzerCredentials,
-                                'parent-id-unzer-credentials': parentIdUnzerCredentials
+                                'id-unzer-credentials': idUnzerCredentials
                             }
                         )
                     }) }}

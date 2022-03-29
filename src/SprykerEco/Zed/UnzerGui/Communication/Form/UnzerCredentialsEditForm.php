@@ -23,7 +23,7 @@ class UnzerCredentialsEditForm extends UnzerCredentialsCreateForm
     {
         $builder->add(UnzerCredentialsTransfer::TYPE, ChoiceType::class, [
             'choices' => array_flip($choices),
-            'disabled' => true,
+            'attr' => ['readonly' => true],
             'label' => static::LABEL_TYPE,
             'placeholder' => 'Select one',
         ]);
