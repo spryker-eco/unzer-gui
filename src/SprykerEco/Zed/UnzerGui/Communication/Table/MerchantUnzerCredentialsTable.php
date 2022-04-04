@@ -103,10 +103,11 @@ class MerchantUnzerCredentialsTable extends AbstractTable
     protected function setHeader(TableConfiguration $tableConfiguration): TableConfiguration
     {
         $tableConfiguration->setHeader([
-            SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => 'Id',
-            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Name',
-            SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => 'Participant Id',
+            SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => 'Credential List Id',
             SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => 'Merchant Reference',
+            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Name',
+            SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => 'Public Key',
+            SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => 'Participant Id',
             static::COL_ACTIONS => 'Actions',
         ]);
 
@@ -126,9 +127,10 @@ class MerchantUnzerCredentialsTable extends AbstractTable
         foreach ($queryResults as $item) {
             $rowData = [
                 SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
-                SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $item[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
-                SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => $item[SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID],
                 SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => $item[SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE],
+                SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $item[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
+                SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => $item[SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY],
+                SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => $item[SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID],
                 static::COL_ACTIONS => $this->buildLinks($item),
             ];
             $results[] = $rowData;
