@@ -1,4 +1,4 @@
-Id,Id
+"Credential List Id","Referenzen Liste Id"
 Name,Name
 "Participant Id","Teilnehmer Id"
 "Merchant Reference","Verkäufer Referenz"
@@ -6,7 +6,7 @@ Actions,Aktionen
 Edit,Bearbeiten
 Delete,Löschen
 "Sync payment methods","Zahlungsmethoden synchronisieren"
-"Credentials type","Art der Anmeldeinformationen"
+"Credentials type","Referenzen Art"
 "Available in Stores","Erhältlich in den Geschäften"
 "External Merchant Credentials","Referenzen für externe Verkäufer"
 Save,Speichern
