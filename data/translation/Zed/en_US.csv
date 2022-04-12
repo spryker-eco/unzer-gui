@@ -1,4 +1,4 @@
-Id,Id
+"Credential List Id","Credential List Id"
 Name,Name
 "Participant Id","Participant Id"
 "Merchant Reference","Merchant Reference"
@@ -20,7 +20,7 @@ Back,Back
 "Remove Unzer Credentials","Remove Unzer Credentials"
 "Unzer Credentials removal confirmation","Unzer Credentials removal confirmation"
 "Are you sure you want to remove this Unzer Credentials?","Are you sure you want to remove this Unzer Credentials?"
-"Removing this will also remove all associated functionalities. Remove is restricted if any chind credentials are linked.","Removing this will also remove all associated functionalities. Remove is restricted if any chind credentials are linked."
 "Edit Unzer Credentials","Edit Unzer Credentials"
 "Edit Merchant Unzer Credentials","Edit Merchant Unzer Credentials"
 "Overview of Unzer Credentials","Overview of Unzer Credentials"
+"Public Key","Public Key"

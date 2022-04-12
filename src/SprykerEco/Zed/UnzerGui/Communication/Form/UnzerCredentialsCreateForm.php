@@ -140,7 +140,7 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
             );
         });
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($builder) {
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentials */
             $unzerCredentials = $event->getData();
             $unzerType = $unzerCredentials['type'] ?? null;

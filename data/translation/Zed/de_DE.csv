@@ -1,4 +1,4 @@
-Id,Id
+"Credential List Id","Referenzen Liste Id"
 Name,Name
 "Participant Id","Teilnehmer Id"
 "Merchant Reference","Verkäufer Referenz"
@@ -6,7 +6,7 @@ Actions,Aktionen
 Edit,Bearbeiten
 Delete,Löschen
 "Sync payment methods","Zahlungsmethoden synchronisieren"
-"Credentials type","Art der Anmeldeinformationen"
+"Credentials type","Referenzen Art"
 "Available in Stores","Erhältlich in den Geschäften"
 "External Merchant Credentials","Referenzen für externe Verkäufer"
 Save,Speichern
@@ -20,7 +20,7 @@ Back,Zurück
 "Remove Unzer Credentials","Unzer Referenzen löschen"
 "Unzer Credentials removal confirmation","Unzer Credentials removal confirmation"
 "Are you sure you want to remove this Unzer Credentials?","Möchten Sie die Unzer Referenzen wirklich entfernen?"
-"Removing this will also remove all associated functionalities. Remove is restricted if any chind credentials are linked.","Wenn Sie dies entfernen, werden auch alle zugehörigen Funktionen entfernt. Das Entfernen ist eingeschränkt, wenn Chind-Anmeldeinformationen verknüpft sind."
 "Edit Unzer Credentials","Unzer Referenzen bearbeiten"
 "Edit Merchant Unzer Credentials","Unzer Verkäufer Referenzen bearbeiten"
 "Overview of Unzer Credentials","Unzer Referenzen Überblick"
+"Public Key","Öffentlicher Schlüssel"
