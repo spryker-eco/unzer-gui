@@ -103,9 +103,9 @@ class MerchantUnzerCredentialsTable extends AbstractTable
     protected function setHeader(TableConfiguration $tableConfiguration): TableConfiguration
     {
         $tableConfiguration->setHeader([
-            SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => 'Credential List Id',
+            SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => 'Id',
             SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => 'Merchant Reference',
-            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Name',
+            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Credential List Id',
             SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => 'Public Key',
             SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => 'Participant Id',
             static::COL_ACTIONS => 'Actions',
