@@ -38,7 +38,7 @@ class MerchantUnzerCredentialsEditForm extends MerchantUnzerCredentialsCreateFor
      *
      * @return $this
      */
-    protected function addIdParentUnzerCredentials(FormBuilderInterface $builder, array $options)
+    protected function addIdParentUnzerCredentialsField(FormBuilderInterface $builder, array $options)
     {
         $builder->add(static::FIELD_PARENT_ID_UNZER_CREDENTIALS, HiddenType::class);
 

@@ -15,19 +15,19 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): array
     {
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
         $parentIdUnzerCredentials = $this->castId($request->get(static::PARAM_PARENT_ID_UNZER_CREDENTIALS));
 
-        $deleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm();
+        $unzerCredentialsDeleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm();
 
         return $this->viewResponse([
             'idUnzerCredentials' => $idUnzerCredentials,
             'parentIdUnzerCredentials' => $parentIdUnzerCredentials,
-            'deleteForm' => $deleteForm->createView(),
+            'deleteForm' => $unzerCredentialsDeleteForm->createView(),
         ]);
     }
 
@@ -45,8 +45,8 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
         $parentIdUnzerCredentials = $unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail();
         $redirectUrl = $this->buildRedirectUrl($parentIdUnzerCredentials);
 
-        $deleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm()->handleRequest($request);
-        if (!$deleteForm->isSubmitted() || !$deleteForm->isValid()) {
+        $unzerCredentialsDeleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm()->handleRequest($request);
+        if (!$unzerCredentialsDeleteForm->isSubmitted() || !$unzerCredentialsDeleteForm->isValid()) {
             $this->addErrorMessage('CSRF token is not valid');
 
             return $this->redirectResponse($redirectUrl);

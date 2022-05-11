@@ -66,7 +66,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
             ->addUnzerKeypairType($builder)
             ->addMerchantReferenceField($builder, $options[static::MERCHANT_REFERENCE_CHOICES_OPTION])
             ->addParticipantIdField($builder)
-            ->addIdParentUnzerCredentials($builder, $options)
+            ->addIdParentUnzerCredentialsField($builder, $options)
             ->addTypeField($builder);
     }
 
@@ -76,7 +76,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
      *
      * @return $this
      */
-    protected function addIdParentUnzerCredentials(FormBuilderInterface $builder, array $options)
+    protected function addIdParentUnzerCredentialsField(FormBuilderInterface $builder, array $options)
     {
         $builder->add(static::FIELD_PARENT_ID_UNZER_CREDENTIALS, HiddenType::class, [
             'data' => $options[static::FIELD_PARENT_ID_UNZER_CREDENTIALS],

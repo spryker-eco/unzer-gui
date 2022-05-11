@@ -31,10 +31,10 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
     public function indexAction(Request $request)
     {
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
-        $dataProvider = $this->getFactory()->createUnzerCredentialsFormDataProvider();
+        $unzerCredentialsFormDataProvider = $this->getFactory()->createUnzerCredentialsFormDataProvider();
 
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
-        $unzerCredentialsTransfer = $dataProvider->getData($idUnzerCredentials);
+        $unzerCredentialsTransfer = $unzerCredentialsFormDataProvider->getData($idUnzerCredentials);
 
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
             $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND);
@@ -42,18 +42,18 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
             return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
 
-        $form = $this->getFactory()
+        $unzerCredentialsEditForm = $this->getFactory()
             ->getUnzerCredentialsEditForm(
-                $dataProvider->getData($idUnzerCredentials),
-                $dataProvider->getOptions($idUnzerCredentials),
+                $unzerCredentialsFormDataProvider->getData($idUnzerCredentials),
+                $unzerCredentialsFormDataProvider->getOptions($idUnzerCredentials),
             )
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->handleUnzerCredentialsForm($request, $form);
+        if ($unzerCredentialsEditForm->isSubmitted() && $unzerCredentialsEditForm->isValid()) {
+            return $this->handleUnzerCredentialsForm($request, $unzerCredentialsEditForm);
         }
 
-        return $this->prepareViewResponse($form, $idUnzerCredentials);
+        return $this->prepareViewResponse($unzerCredentialsEditForm, $idUnzerCredentials);
     }
 
     /**
@@ -65,10 +65,10 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
     {
         $parentIdUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
 
-        $table = $this->getFactory()
+        $merchantUnzerCredentialsTable = $this->getFactory()
             ->createMerchantUnzerCredentialsTable($parentIdUnzerCredentials);
 
-        return $this->jsonResponse($table->fetchData());
+        return $this->jsonResponse($merchantUnzerCredentialsTable->fetchData());
     }
 
     /**
@@ -101,15 +101,15 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
     }
 
     /**
-     * @param \Symfony\Component\Form\FormInterface $form
+     * @param \Symfony\Component\Form\FormInterface $unzerCredentialsEditForm
      * @param int $idUnzerCredentials
      *
      * @return array<string, mixed>
      */
-    protected function prepareViewResponse(FormInterface $form, int $idUnzerCredentials): array
+    protected function prepareViewResponse(FormInterface $unzerCredentialsEditForm, int $idUnzerCredentials): array
     {
         return $this->viewResponse([
-            'unzerCredentialsForm' => $form->createView(),
+            'unzerCredentialsForm' => $unzerCredentialsEditForm->createView(),
             'idUnzerCredentials' => $idUnzerCredentials,
             'unzerCredentialsFormTabs' => $this->getFactory()->createUnzerCredentialsFormTabs()->createView(),
             'merchantUnzerCredentialsTable' => $this->getFactory()->createMerchantUnzerCredentialsTable($idUnzerCredentials)->render(),

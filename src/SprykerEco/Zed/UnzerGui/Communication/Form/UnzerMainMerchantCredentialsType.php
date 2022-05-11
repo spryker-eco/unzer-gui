@@ -65,7 +65,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
             ->addMerchantReferenceField($builder, $options[UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION])
             ->addParticipantIdField($builder)
             ->addTypeField($builder)
-            ->addUnzerKeypairType($builder);
+            ->addUnzerKeypairTypeField($builder);
     }
 
     /**
@@ -85,7 +85,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
      *
      * @return $this
      */
-    protected function addUnzerKeypairType(FormBuilderInterface $builder)
+    protected function addUnzerKeypairTypeField(FormBuilderInterface $builder)
     {
         $builder->add(UnzerCredentialsTransfer::UNZER_KEYPAIR, UnzerKeypairType::class);
 

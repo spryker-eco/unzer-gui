@@ -33,7 +33,7 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
     /**
      * @var string
      */
-    public const PROPEL_UNZER_CREDENTIALS_QUERY = 'PROPEL_UNZER_CREDENTIALS_QUERY';
+    public const PROPEL_QUERY_UNZER_CREDENTIALS = 'PROPEL_QUERY_UNZER_CREDENTIALS';
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
 
         $container = $this->addUnzerFacade($container);
         $container = $this->addMerchantFacade($container);
-        $container = $this->addPropelUnzerCredentialsQuery($container);
+        $container = $this->addUnzerCredentialsPropelQuery($container);
         $container = $this->addStoreRelationFormTypePlugin($container);
 
         return $container;
@@ -90,9 +90,9 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addPropelUnzerCredentialsQuery(Container $container): Container
+    protected function addUnzerCredentialsPropelQuery(Container $container): Container
     {
-        $container->set(static::PROPEL_UNZER_CREDENTIALS_QUERY, $container->factory(function () {
+        $container->set(static::PROPEL_QUERY_UNZER_CREDENTIALS, $container->factory(function () {
             return SpyUnzerCredentialsQuery::create();
         }));
 

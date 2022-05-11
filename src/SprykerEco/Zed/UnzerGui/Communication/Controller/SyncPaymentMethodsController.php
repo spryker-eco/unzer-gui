@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class SyncPaymentMethodsController extends AbstractUnzerCredentialsController
@@ -21,7 +22,7 @@ class SyncPaymentMethodsController extends AbstractUnzerCredentialsController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): RedirectResponse
     {
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
 

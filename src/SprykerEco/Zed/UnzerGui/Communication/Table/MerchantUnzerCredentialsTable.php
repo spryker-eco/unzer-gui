@@ -20,22 +20,22 @@ class MerchantUnzerCredentialsTable extends AbstractTable
     /**
      * @var string
      */
-    protected const REQUEST_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
-
-    /**
-     * @var string
-     */
-    protected const REQUEST_PARENT_ID_UNZER_CREDENTIALS = 'parent-id-unzer-credentials';
-
-    /**
-     * @var string
-     */
     public const COL_ACTIONS = 'actions';
 
     /**
      * @var string
      */
     public const COL_STORES = 'stores';
+
+    /**
+     * @var string
+     */
+    protected const REQUEST_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+
+    /**
+     * @var string
+     */
+    protected const REQUEST_PARENT_ID_UNZER_CREDENTIALS = 'parent-id-unzer-credentials';
 
     /**
      * @var string
@@ -119,24 +119,24 @@ class MerchantUnzerCredentialsTable extends AbstractTable
      *
      * @return array
      */
-    protected function prepareData(TableConfiguration $config)
+    protected function prepareData(TableConfiguration $config): array
     {
         $queryResults = $this->runQuery($this->prepareQuery(), $config);
-        $results = [];
+        $merchantUnzerCredentials = [];
 
-        foreach ($queryResults as $item) {
-            $rowData = [
-                SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
-                SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => $item[SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE],
-                SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $item[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
-                SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => $item[SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY],
-                SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => $item[SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID],
-                static::COL_ACTIONS => $this->buildLinks($item),
+        foreach ($queryResults as $queryResultItem) {
+            $merchantUnzerCredentialItem = [
+                SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $queryResultItem[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
+                SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => $queryResultItem[SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE],
+                SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $queryResultItem[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
+                SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => $queryResultItem[SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY],
+                SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => $queryResultItem[SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID],
+                static::COL_ACTIONS => $this->buildLinks($queryResultItem),
             ];
-            $results[] = $rowData;
+            $merchantUnzerCredentials[] = $merchantUnzerCredentialItem;
         }
 
-        return $results;
+        return $merchantUnzerCredentials;
     }
 
     /**

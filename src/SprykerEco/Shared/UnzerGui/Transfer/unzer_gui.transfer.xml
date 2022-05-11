@@ -9,7 +9,7 @@
 
     <transfer name="UnzerValidationResponse">
         <property name="isSuccessful" type="bool"/>
-        <property name="parameterMessages" type="UnzerCredentialsParameterMessage[]" singular="unzerCredentialsParameterMessage"/>
+        <property name="parameterMessages" type="UnzerCredentialsParameterMessage[]" singular="parameterMessage"/>
     </transfer>
 
     <transfer name="UnzerCredentialsParameterMessage">

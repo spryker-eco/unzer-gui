@@ -28,12 +28,12 @@ class UnzerCredentialsTable extends AbstractTable
     /**
      * @var string
      */
-    public const COL_ACTIONS = 'actions';
+    protected const COL_ACTIONS = 'actions';
 
     /**
      * @var string
      */
-    public const COL_STORES = 'stores';
+    protected const COL_STORES = 'stores';
 
     /**
      * @var string
@@ -105,23 +105,23 @@ class UnzerCredentialsTable extends AbstractTable
      *
      * @return array
      */
-    protected function prepareData(TableConfiguration $config)
+    protected function prepareData(TableConfiguration $config): array
     {
         $queryResults = $this->runQuery($this->prepareQuery(), $config);
-        $results = [];
+        $unzerCredentials = [];
 
-        foreach ($queryResults as $item) {
-            $rowData = [
-                SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
-                SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $item[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
-                SpyUnzerCredentialsTableMap::COL_TYPE => $this->mapTypeName($item),
-                SpyUnzerCredentialsStoreTableMap::COL_FK_STORE => $this->createStoresLabel($item),
-                static::COL_ACTIONS => $this->buildLinks($item),
+        foreach ($queryResults as $queryResultItem) {
+            $unzerCredentialsItem = [
+                SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $queryResultItem[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
+                SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $queryResultItem[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
+                SpyUnzerCredentialsTableMap::COL_TYPE => $this->mapTypeName($queryResultItem),
+                SpyUnzerCredentialsStoreTableMap::COL_FK_STORE => $this->createStoresLabel($queryResultItem),
+                static::COL_ACTIONS => $this->buildLinks($queryResultItem),
             ];
-            $results[] = $rowData;
+            $unzerCredentials[] = $unzerCredentialsItem;
         }
 
-        return $results;
+        return $unzerCredentials;
     }
 
     /**
@@ -133,11 +133,11 @@ class UnzerCredentialsTable extends AbstractTable
             ->groupByIdUnzerCredentials()
             ->filterByType_In([UnzerConstants::UNZER_CONFIG_TYPE_STANDARD, UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE])
             ->useUnzerCredentialsStoreQuery(null, Criteria::LEFT_JOIN)
-            ->leftJoinStore()
-            ->withColumn(
-                sprintf('GROUP_CONCAT(%s)', SpyStoreTableMap::COL_NAME),
-                static::COL_STORES,
-            )
+                ->leftJoinStore()
+                ->withColumn(
+                    sprintf('GROUP_CONCAT(%s)', SpyStoreTableMap::COL_NAME),
+                    static::COL_STORES,
+                )
             ->endUse();
 
         return $this->unzerCredentialsQuery;

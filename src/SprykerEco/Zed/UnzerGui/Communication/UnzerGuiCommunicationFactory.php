@@ -13,7 +13,7 @@ use Spryker\Zed\Gui\Communication\Tabs\TabsInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
 use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface;
-use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantReferenceFinder;
+use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinder;
 use SprykerEco\Zed\UnzerGui\Communication\Form\Constraint\UnzerCredentialsConstraint;
 use SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider\UnzerCredentialsFormDataProvider;
 use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsCreateForm;
@@ -37,14 +37,6 @@ use Symfony\Component\Form\FormInterface;
 class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
 {
     /**
-     * @return \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface
-     */
-    public function getUnzerFacade(): UnzerGuiToUnzerFacadeInterface
-    {
-        return $this->getProvidedDependency(UnzerGuiDependencyProvider::FACADE_UNZER);
-    }
-
-    /**
      * @return \SprykerEco\Zed\UnzerGui\Communication\Table\UnzerCredentialsTable
      */
     public function createUnzerCredentialsTable(): UnzerCredentialsTable
@@ -52,14 +44,6 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
         return new UnzerCredentialsTable(
             $this->getUnzerCredentialsPropelQuery(),
         );
-    }
-
-    /**
-     * @return \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery
-     */
-    public function getUnzerCredentialsPropelQuery(): SpyUnzerCredentialsQuery
-    {
-        return $this->getProvidedDependency(UnzerGuiDependencyProvider::PROPEL_UNZER_CREDENTIALS_QUERY);
     }
 
     /**
@@ -80,44 +64,6 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
             $this->getConfig(),
             $this->createMerchantFinder(),
         );
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
-     * @param array<string, mixed> $options
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function getUnzerCredentialsCreateForm(UnzerCredentialsTransfer $unzerCredentialsTransfer, array $options): FormInterface
-    {
-        return $this->getFormFactory()->create(UnzerCredentialsCreateForm::class, $unzerCredentialsTransfer, $options);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
-     * @param array<string, mixed> $options
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function getUnzerCredentialsEditForm(UnzerCredentialsTransfer $unzerCredentialsTransfer, array $options): FormInterface
-    {
-        return $this->getFormFactory()->create(UnzerCredentialsEditForm::class, $unzerCredentialsTransfer, $options);
-    }
-
-    /**
-     * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
-     */
-    public function getStoreRelationFormTypePlugin(): FormTypeInterface
-    {
-        return $this->getProvidedDependency(UnzerGuiDependencyProvider::PLUGIN_STORE_RELATION_FORM_TYPE);
-    }
-
-    /**
-     * @return \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeInterface
-     */
-    public function getMerchantFacade(): UnzerGuiToMerchantFacadeInterface
-    {
-        return $this->getProvidedDependency(UnzerGuiDependencyProvider::FACADE_MERCHANT);
     }
 
     /**
@@ -155,6 +101,14 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface
+     */
+    public function createMerchantFinder(): MerchantFinderInterface
+    {
+        return new MerchantFinder($this->getMerchantFacade());
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      * @param array<string, mixed> $options
      *
@@ -177,6 +131,28 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param array<string, mixed> $options
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function getUnzerCredentialsCreateForm(UnzerCredentialsTransfer $unzerCredentialsTransfer, array $options): FormInterface
+    {
+        return $this->getFormFactory()->create(UnzerCredentialsCreateForm::class, $unzerCredentialsTransfer, $options);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
+     * @param array<string, mixed> $options
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function getUnzerCredentialsEditForm(UnzerCredentialsTransfer $unzerCredentialsTransfer, array $options): FormInterface
+    {
+        return $this->getFormFactory()->create(UnzerCredentialsEditForm::class, $unzerCredentialsTransfer, $options);
+    }
+
+    /**
      * @return \Symfony\Component\Form\FormInterface
      */
     public function getUnzerCredentialsDeleteForm(): FormInterface
@@ -185,10 +161,34 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface
+     * @return \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeInterface
      */
-    public function createMerchantFinder(): MerchantFinderInterface
+    public function getMerchantFacade(): UnzerGuiToMerchantFacadeInterface
     {
-        return new MerchantReferenceFinder($this->getMerchantFacade());
+        return $this->getProvidedDependency(UnzerGuiDependencyProvider::FACADE_MERCHANT);
+    }
+
+    /**
+     * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
+     */
+    public function getStoreRelationFormTypePlugin(): FormTypeInterface
+    {
+        return $this->getProvidedDependency(UnzerGuiDependencyProvider::PLUGIN_STORE_RELATION_FORM_TYPE);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface
+     */
+    public function getUnzerFacade(): UnzerGuiToUnzerFacadeInterface
+    {
+        return $this->getProvidedDependency(UnzerGuiDependencyProvider::FACADE_UNZER);
+    }
+
+    /**
+     * @return \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery
+     */
+    public function getUnzerCredentialsPropelQuery(): SpyUnzerCredentialsQuery
+    {
+        return $this->getProvidedDependency(UnzerGuiDependencyProvider::PROPEL_QUERY_UNZER_CREDENTIALS);
     }
 }

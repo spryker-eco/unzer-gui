@@ -142,8 +142,8 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentials */
-            $unzerCredentials = $event->getData();
-            $unzerType = $unzerCredentials['type'] ?? null;
+            $unzerCredentialsTransfer = $event->getData();
+            $unzerType = $unzerCredentialsTransfer['type'] ?? null;
             $form = $event->getForm();
 
             if ((int)$unzerType !== UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {

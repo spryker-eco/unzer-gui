@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\MerchantCollectionTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeInterface;
 
-class MerchantReferenceFinder implements MerchantFinderInterface
+class MerchantFinder implements MerchantFinderInterface
 {
     /**
      * @var \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeInterface
@@ -50,14 +50,14 @@ class MerchantReferenceFinder implements MerchantFinderInterface
      */
     protected function transformMerchantCollectionList(MerchantCollectionTransfer $merchantCollectionTransfer): array
     {
-        $result = [];
+        $merchantCollectionList = [];
         foreach ($merchantCollectionTransfer->getMerchants() as $merchantTransfer) {
             $merchantReference = $merchantTransfer->getMerchantReferenceOrFail();
             $merchantName = $merchantTransfer->getNameOrFail();
             $label = sprintf('%s (%s)', $merchantName, $merchantReference);
-            $result[$merchantReference] = $label;
+            $merchantCollectionList[$merchantReference] = $label;
         }
 
-        return $result;
+        return $merchantCollectionList;
     }
 }

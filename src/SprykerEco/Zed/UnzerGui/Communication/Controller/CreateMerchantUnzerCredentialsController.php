@@ -53,8 +53,6 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();
         $unzerCredentialsTransfer->setType(UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MERCHANT);
 
-        $redirectUrl = $this->buildRedirectUrl($unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail());
-
         $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->createUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
@@ -65,6 +63,8 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
                 $unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail(),
             );
         }
+
+        $redirectUrl = $this->buildRedirectUrl($unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail());
 
         return $this->redirectResponse($redirectUrl);
     }
