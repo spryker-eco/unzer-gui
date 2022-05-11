@@ -32,5 +32,5 @@ Back,Zurück
 "Unzer Credentials have not been created successfully.","Unzer Berechtigungsnachweise nicht erstellt."
 "Unzer Credentials deleted successfully.","Unzer Berechtigungsnachweise wurden erfolgreich gelöscht."
 "Unzer Credentials have not been deleted successfully.","Unzer Berechtigungsnachweise wurden nicht gelöscht."
-"CSRF token is not valid","CSRF Token ungültig"
+"CSRF token is not valid.","CSRF Token ungültig."
 
