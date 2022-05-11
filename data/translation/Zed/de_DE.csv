@@ -6,6 +6,7 @@ Actions,Aktionen
 Edit,Bearbeiten
 Delete,Löschen
 "Sync payment methods","Zahlungsmethoden synchronisieren"
+"Payment methods synced successfully.","Zahlungsmethoden erolgreich sychronisiert."
 "Credentials type","Referenzen Art"
 "Available in Stores","Erhältlich in den Geschäften"
 "External Merchant Credentials","Referenzen für externe Verkäufer"

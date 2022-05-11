@@ -6,6 +6,7 @@ Actions,Actions
 Edit,Edit
 Delete,Delete
 "Sync payment methods","Sync payment methods"
+"Payment methods synced successfully.","Payment methods synced successfully."
 "Credentials type","Credentials type"
 "Available in Stores","Available in Stores"
 "External Merchant Credentials","External Merchant Credentials"
