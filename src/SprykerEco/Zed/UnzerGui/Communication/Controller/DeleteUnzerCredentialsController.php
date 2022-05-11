@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
+use Generated\Shared\Transfer\MessageTransfer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -35,13 +36,11 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
      */
     public function confirmAction(Request $request): RedirectResponse
     {
-        $redirectUrl = $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
-
         $unzerCredentialsDeleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm()->handleRequest($request);
         if (!$unzerCredentialsDeleteForm->isSubmitted() || !$unzerCredentialsDeleteForm->isValid()) {
-            $this->addErrorMessage('CSRF token is not valid');
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_CSRF_TOKEN_INVALID_ERROR));
 
-            return $this->redirectResponse($redirectUrl);
+            return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
 
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
@@ -55,12 +54,13 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             ->deleteUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            foreach ($unzerCredentialsResponseTransfer->getMessages() as $message) {
-                $this->addErrorMessage($message->getMessageOrFail());
-            }
-        } else {
-            $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS);
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_ERROR));
+            $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
+
+            return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
+
+        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS));
 
         return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
     }

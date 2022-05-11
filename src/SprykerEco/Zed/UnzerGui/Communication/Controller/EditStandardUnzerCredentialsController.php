@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
+use Generated\Shared\Transfer\MessageTransfer;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -29,7 +30,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
         $unzerCredentialsTransfer = $dataProvider->getData($idUnzerCredentials);
 
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
-            $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND);
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND));
 
             return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
@@ -56,19 +57,21 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
      */
     protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
-        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::REDIRECT_URL_DEFAULT);
-
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();
 
         $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->updateUnzerCredentials($unzerCredentialsTransfer);
+
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR);
+
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR));
+            $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
             return $this->prepareViewResponse($unzerCredentialsForm, $unzerCredentialsTransfer->getIdUnzerCredentialsOrFail());
         }
 
-        $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);
+        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS));
+        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::REDIRECT_URL_DEFAULT);
 
         return $this->redirectResponse($redirectUrl);
     }

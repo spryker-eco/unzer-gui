@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
+use Generated\Shared\Transfer\MessageTransfer;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,12 +59,16 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             ->createUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            $this->addErrorMessage($this->concatErrorMessages($unzerCredentialsResponseTransfer));
+
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_ERROR));
+            $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
             return $this->viewResponse([
                 'unzerCredentialsForm' => $unzerCredentialsForm->createView(),
             ]);
         }
+
+        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_SUCCESS));
 
         return $this->redirectResponse($redirectUrl);
     }

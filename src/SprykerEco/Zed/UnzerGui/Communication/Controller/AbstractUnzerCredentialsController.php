@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
+use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsResponseTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
@@ -33,6 +34,11 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     /**
      * @var string
      */
+    protected const MESSAGE_CSRF_TOKEN_INVALID_ERROR = 'CSRF token is not valid.';
+
+    /**
+     * @var string
+     */
     protected const MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS = 'Unzer Credentials have been updated.';
 
     /**
@@ -48,7 +54,12 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     /**
      * @var string
      */
-    protected const MESSAGE_CREDENTIALS_CREATE_SUCCESS = 'Unzer Credentials created successfully.';
+    protected const MESSAGE_UNZER_CREDENTIALS_CREATE_SUCCESS = 'Unzer Credentials created successfully.';
+
+    /**
+     * @var string
+     */
+    protected const MESSAGE_UNZER_CREDENTIALS_CREATE_ERROR = 'Unzer Credentials have not been created successfully.';
 
     /**
      * @var string
@@ -56,17 +67,17 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     protected const MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS = 'Unzer Credentials deleted successfully.';
 
     /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer
-     *
-     * @return string
+     * @var string
      */
-    protected function concatErrorMessages(UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer): string
-    {
-        $errorString = 'Next errors occur: ';
-        foreach ($unzerCredentialsResponseTransfer->getMessages() as $messageTransfer) {
-            $errorString .= $messageTransfer->getMessage() . ' ';
-        }
+    protected const MESSAGE_UNZER_CREDENTIALS_DELETE_ERROR = 'Unzer Credentials have not been deleted successfully.';
 
-        return $errorString;
+    /**
+     * @param \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer
+     */
+    protected function addExternalApiErrorMessages(UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer)
+    {
+        foreach ($unzerCredentialsResponseTransfer->getMessages() as $messageTransfer) {
+            $this->addErrorMessage($messageTransfer->getMessageOrFail());
+        }
     }
 }

@@ -24,3 +24,13 @@ Back,Back
 "Edit Merchant Unzer Credentials","Edit Merchant Unzer Credentials"
 "Overview of Unzer Credentials","Overview of Unzer Credentials"
 "Public Key","Public Key"
+"Payment methods synced successfully.","Payment methods synced successfully."
+"Unzer Credentials have been updated.","Unzer Credentials have been updated."
+"Unzer Credentials have not been updated.","Unzer Credentials have not been updated."
+"Unzer Credentials not found.","Unzer Credentials not found."
+"Unzer Credentials created successfully.","Unzer Credentials created successfully."
+"Unzer Credentials have not been created successfully.","Unzer Credentials have not been created."
+"Unzer Credentials deleted successfully.","Unzer Credentials deleted successfully."
+"Unzer Credentials have not been deleted successfully.","Unzer Credentials have not been deleted."
+"CSRF token is not valid","CSRF token is not valid"
+

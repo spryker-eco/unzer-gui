@@ -24,3 +24,13 @@ Back,Zurück
 "Edit Merchant Unzer Credentials","Unzer Verkäufer Referenzen bearbeiten"
 "Overview of Unzer Credentials","Unzer Referenzen Überblick"
 "Public Key","Öffentlicher Schlüssel"
+"Payment methods synced successfully.","Zahlungsmethoden erfolgreich synchronisiert."
+"Unzer Credentials have been updated.","Die Unzer Berechtigungsnachweise wurden aktualisiert."
+"Unzer Credentials have not been updated.","Die Unzer Berechtigungsnachweise wurden nicht aktualisiert."
+"Unzer Credentials not found.","Unzer Berechtigungsnachweise nicht gefunden."
+"Unzer Credentials created successfully.","Unzer Berechtigungsnachweise erfolgreich erstellt."
+"Unzer Credentials have not been created successfully.","Unzer Berechtigungsnachweise nicht erstellt."
+"Unzer Credentials deleted successfully.","Unzer Berechtigungsnachweise wurden erfolgreich gelöscht."
+"Unzer Credentials have not been deleted successfully.","Unzer Berechtigungsnachweise wurden nicht gelöscht."
+"CSRF token is not valid","CSRF Token ungültig"
+
