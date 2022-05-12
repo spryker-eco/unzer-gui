@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Form\Constraint;
 
 use Generated\Shared\Transfer\MessageTransfer;
+use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use InvalidArgumentException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -24,6 +25,14 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint): void
     {
+        if (!$value instanceof UnzerCredentialsTransfer) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected constraint instance of %s, got %s instead.',
+                UnzerCredentialsTransfer::class,
+                get_class($value),
+            ));
+        }
+
         if (!$constraint instanceof UnzerCredentialsConstraint) {
             throw new InvalidArgumentException(sprintf(
                 'Expected constraint instance of %s, got %s instead.',
