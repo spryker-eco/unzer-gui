@@ -78,7 +78,7 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     protected function addExternalApiErrorMessages(UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer): void
     {
         foreach ($unzerCredentialsResponseTransfer->getMessages() as $messageTransfer) {
-            $this->addErrorMessage($messageTransfer->getMessageOrFail());
+            $this->addErrorMessage($messageTransfer->getMessageOrFail(), $messageTransfer->getParameters());
         }
     }
 }
