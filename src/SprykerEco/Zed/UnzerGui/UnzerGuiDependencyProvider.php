@@ -86,6 +86,8 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
+     * @module Unzer
+     *
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
