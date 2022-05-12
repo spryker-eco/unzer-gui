@@ -7,12 +7,14 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Finder;
 
+use Generated\Shared\Transfer\MerchantCriteriaTransfer;
+
 interface MerchantFinderInterface
 {
     /**
-     * @param string|null $merchantReference
+     * @param \Generated\Shared\Transfer\MerchantCriteriaTransfer $merchantCriteriaTransfer
      *
      * @return array<string, string>
      */
-    public function getMerchants(?string $merchantReference = null): array;
+    public function getMerchants(MerchantCriteriaTransfer $merchantCriteriaTransfer): array;
 }

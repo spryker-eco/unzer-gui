@@ -27,17 +27,12 @@ class MerchantFinder implements MerchantFinderInterface
     }
 
     /**
-     * @param string|null $merchantReference
+     * @param \Generated\Shared\Transfer\MerchantCriteriaTransfer $merchantCriteriaTransfer
      *
      * @return array<string, string>
      */
-    public function getMerchants(?string $merchantReference = null): array
+    public function getMerchants(MerchantCriteriaTransfer $merchantCriteriaTransfer): array
     {
-        $merchantCriteriaTransfer = new MerchantCriteriaTransfer();
-        if ($merchantReference !== null) {
-            $merchantCriteriaTransfer->addMerchantReference($merchantReference);
-        }
-
         $merchantCollectionTransfer = $this->merchantFacade->get($merchantCriteriaTransfer);
 
         return $this->transformMerchantCollectionList($merchantCollectionTransfer);

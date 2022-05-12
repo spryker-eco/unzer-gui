@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Form\DataProvider;
 
+use Generated\Shared\Transfer\MerchantCriteriaTransfer;
 use Generated\Shared\Transfer\StoreRelationTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsConditionsTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsCriteriaTransfer;
@@ -91,7 +92,7 @@ class UnzerCredentialsFormDataProvider
             'label' => false,
             UnzerCredentialsCreateForm::OPTION_CURRENT_ID => $idUnzerCredentials,
             UnzerCredentialsCreateForm::CREDENTIALS_TYPE_CHOICES_OPTION => $this->unzerGuiConfig->getUnzerCredentialTypeChoices(),
-            UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION => $this->merchantFinder->getMerchants(),
+            UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION => $this->merchantFinder->getMerchants(new MerchantCriteriaTransfer()),
         ];
     }
 
