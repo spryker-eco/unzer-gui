@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Expander;
 
+use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\TabItemTransfer;
 use Generated\Shared\Transfer\TabsViewTransfer;
 
@@ -35,7 +36,7 @@ class MerchantUnzerFormTabExpander implements MerchantUnzerFormTabExpanderInterf
     public function expand(TabsViewTransfer $tabsViewTransfer): TabsViewTransfer
     {
         $tabItemTransfer = (new TabItemTransfer())->setName(static::UNZER_TAB_ITEM_NAME)
-            ->setTitle(static::UNZER_TAB_ITEM_TITLE)
+            ->setTitle((new MessageTransfer())->setMessage(static::UNZER_TAB_ITEM_TITLE)->getMessage())
             ->setTemplate(static::UNZER_TAB_ITEM_TEMPLATE);
 
         $tabsViewTransfer->addTab($tabItemTransfer);
