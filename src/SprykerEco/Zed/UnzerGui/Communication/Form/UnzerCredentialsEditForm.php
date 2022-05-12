@@ -11,6 +11,10 @@ use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ */
 class UnzerCredentialsEditForm extends UnzerCredentialsCreateForm
 {
     /**

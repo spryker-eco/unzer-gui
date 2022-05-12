@@ -11,6 +11,9 @@ use Generated\Shared\Transfer\MessageTransfer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ */
 class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsController
 {
     /**

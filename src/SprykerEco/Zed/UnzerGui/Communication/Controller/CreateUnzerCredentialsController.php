@@ -59,7 +59,6 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             ->createUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_ERROR));
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 

@@ -12,6 +12,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ */
 class MerchantUnzerCredentialsEditForm extends MerchantUnzerCredentialsCreateForm
 {
     /**

@@ -13,8 +13,8 @@ use Spryker\Zed\Kernel\Communication\Form\AbstractType;
  * This class is empty because this form needs to implement CSRF protection and all options and form content
  * will be defined in Twig templates.
  *
- * @method \Spryker\Zed\ProductListGui\ProductListGuiConfig getConfig()
- * @method \Spryker\Zed\ProductListGui\Communication\ProductListGuiCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\UnzerGui\UnzerGuiConfig getConfig()
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
  */
 class UnzerCredentialsDeleteForm extends AbstractType
 {

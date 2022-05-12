@@ -11,6 +11,9 @@ use Generated\Shared\Transfer\MessageTransfer;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ */
 class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCredentialsController
 {
     /**
@@ -60,7 +63,6 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
         $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->updateUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR));
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 

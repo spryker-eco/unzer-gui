@@ -63,7 +63,6 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
         $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->updateUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR));
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 

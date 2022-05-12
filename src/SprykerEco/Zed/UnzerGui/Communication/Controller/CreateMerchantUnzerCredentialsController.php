@@ -13,6 +13,9 @@ use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsCreateFor
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @method \SprykerEco\Zed\UnzerGui\Communication\UnzerGuiCommunicationFactory getFactory()
+ */
 class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCredentialsController
 {
     /**
@@ -57,7 +60,6 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
         $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->createUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_ERROR));
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 

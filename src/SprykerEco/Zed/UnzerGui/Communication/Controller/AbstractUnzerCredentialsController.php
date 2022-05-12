@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\UnzerCredentialsResponseTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
@@ -73,8 +72,10 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
 
     /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer
+     *
+     * @return void
      */
-    protected function addExternalApiErrorMessages(UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer)
+    protected function addExternalApiErrorMessages(UnzerCredentialsResponseTransfer $unzerCredentialsResponseTransfer): void
     {
         foreach ($unzerCredentialsResponseTransfer->getMessages() as $messageTransfer) {
             $this->addErrorMessage($messageTransfer->getMessageOrFail());

@@ -89,7 +89,6 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         $this->getFactory()->getUnzerFacade()->updateUnzerCredentials($childUnzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR));
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
