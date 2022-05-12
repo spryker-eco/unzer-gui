@@ -59,7 +59,7 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             ->createUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_ERROR));
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_ERROR)->getMessage());
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
             return $this->viewResponse([
@@ -67,7 +67,7 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             ]);
         }
 
-        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_SUCCESS));
+        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_SUCCESS)->getMessage());
 
         return $this->redirectResponse($redirectUrl);
     }

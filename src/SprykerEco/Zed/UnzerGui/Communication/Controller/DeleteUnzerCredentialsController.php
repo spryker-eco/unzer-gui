@@ -41,7 +41,7 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
     {
         $unzerCredentialsDeleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm()->handleRequest($request);
         if (!$unzerCredentialsDeleteForm->isSubmitted() || !$unzerCredentialsDeleteForm->isValid()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_CSRF_TOKEN_INVALID_ERROR));
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_CSRF_TOKEN_INVALID_ERROR)->getMessage());
 
             return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
@@ -57,13 +57,13 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             ->deleteUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_ERROR));
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_ERROR)->getMessage());
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
             return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
 
-        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS));
+        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS)->getMessage());
 
         return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
     }

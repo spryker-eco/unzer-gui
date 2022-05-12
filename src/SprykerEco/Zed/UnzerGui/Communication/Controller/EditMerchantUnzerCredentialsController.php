@@ -30,7 +30,7 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
         $unzerCredentialsTransfer = $dataProvider->getData($idUnzerCredentials);
 
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND));
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND)->getMessage());
 
             return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
         }
@@ -63,13 +63,13 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
         $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->updateUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR));
+            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR)->getMessage());
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
             return $this->prepareViewResponse($unzerCredentialsForm, $unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail());
         }
 
-        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS));
+        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS)->getMessage());
 
         return $this->redirectResponse($this->buildRedirectUrl($unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail()));
     }
