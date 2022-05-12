@@ -19,11 +19,11 @@ class UnzerCredentialsConstraint extends SymfonyConstraint
 
     /**
      * @param \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface $unzerFacade
-     * @param array|null $options
+     * @param array $options
      */
     public function __construct(
         UnzerGuiToUnzerFacadeInterface $unzerFacade,
-        ?array $options = null
+        array $options = []
     ) {
         $this->unzerFacade = $unzerFacade;
 
