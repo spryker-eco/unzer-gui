@@ -25,9 +25,11 @@ class MerchantUnzerCredentialsEditForm extends MerchantUnzerCredentialsCreateFor
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setRequired(static::OPTION_CURRENT_ID);
-        $resolver->setRequired(static::CREDENTIALS_TYPE_CHOICES_OPTION);
-        $resolver->setRequired(static::MERCHANT_REFERENCE_CHOICES_OPTION);
+        $resolver->setRequired([
+            static::OPTION_CURRENT_ID,
+            static::CREDENTIALS_TYPE_CHOICES_OPTION,
+            static::MERCHANT_REFERENCE_CHOICES_OPTION
+        ]);
 
         $resolver->setNormalizer('constraints', function (Options $options, $value) {
             return array_merge($value, [

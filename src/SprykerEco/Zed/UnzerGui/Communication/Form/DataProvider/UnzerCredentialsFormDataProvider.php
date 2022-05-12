@@ -110,6 +110,8 @@ class UnzerCredentialsFormDataProvider
 
         $unzerCredentialsCollectionTransfer = $this->unzerFacade->getUnzerCredentialsCollection($unzerChildCredentialsCriteriaTransfer);
 
-        return $unzerCredentialsTransfer->setChildUnzerCredentials($unzerCredentialsCollectionTransfer->getUnzerCredentials()[0] ?? null);
+        return $unzerCredentialsTransfer->setChildUnzerCredentials(
+            $unzerCredentialsCollectionTransfer->getUnzerCredentials()->getItFixed.erator()->current() ?? null
+        );
     }
 }

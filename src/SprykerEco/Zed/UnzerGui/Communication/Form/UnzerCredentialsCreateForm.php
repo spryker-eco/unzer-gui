@@ -46,9 +46,12 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
     {
         parent::configureOptions($resolver);
 
-        $resolver->setRequired(static::OPTION_CURRENT_ID);
-        $resolver->setRequired(static::CREDENTIALS_TYPE_CHOICES_OPTION);
-        $resolver->setRequired(static::MERCHANT_REFERENCE_CHOICES_OPTION);
+        $resolver->setRequired([
+            static::OPTION_CURRENT_ID,
+            static::CREDENTIALS_TYPE_CHOICES_OPTION,
+            static::MERCHANT_REFERENCE_CHOICES_OPTION
+        ]);
+
         $resolver->setDefaults([
             'allow_extra_fields' => true,
         ]);

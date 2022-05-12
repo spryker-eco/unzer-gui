@@ -8,9 +8,9 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Form\Constraint;
 
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
-class UnzerCredentialsConstraint extends SymfonyConstraint
+class UnzerCredentialsConstraint extends Constraint
 {
     /**
      * @var \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface
