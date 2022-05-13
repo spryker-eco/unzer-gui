@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCredentialsController
 {
     /**
+     * @var string
+     */
+    public const URL_MERCHANT_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-merchant-unzer-credentials';
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return array<string, mixed>

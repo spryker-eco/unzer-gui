@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsController
 {
     /**
+     * @var string
+     */
+    public const URL_STANDARD_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-standard-unzer-credentials';
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
@@ -32,7 +37,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND));
 
-            return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
+            return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
         }
 
         $form = $this->getFactory()
@@ -70,7 +75,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
         }
 
         $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS));
-        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::REDIRECT_URL_DEFAULT);
+        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
 
         return $this->redirectResponse($redirectUrl);
     }

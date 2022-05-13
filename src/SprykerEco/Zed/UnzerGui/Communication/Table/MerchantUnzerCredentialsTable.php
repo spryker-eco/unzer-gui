@@ -13,7 +13,8 @@ use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 use SprykerEco\Shared\Unzer\UnzerConstants;
-use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
+use SprykerEco\Zed\UnzerGui\Communication\Controller\DeleteMerchantUnzerCredentialsController;
+use SprykerEco\Zed\UnzerGui\Communication\Controller\EditMerchantUnzerCredentialsController;
 
 class MerchantUnzerCredentialsTable extends AbstractTable
 {
@@ -174,7 +175,7 @@ class MerchantUnzerCredentialsTable extends AbstractTable
         $buttons = [];
         $buttons[] = $this->generateEditButton(
             Url::generate(
-                UnzerGuiConfig::URL_MERCHANT_UNZER_CREDENTIALS_EDIT,
+                EditMerchantUnzerCredentialsController::URL_MERCHANT_UNZER_CREDENTIALS_EDIT,
                 [
                     static::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                     static::REQUEST_PARENT_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_PARENT_ID_UNZER_CREDENTIALS],
@@ -184,7 +185,7 @@ class MerchantUnzerCredentialsTable extends AbstractTable
         );
         $buttons[] = $this->generateRemoveButton(
             Url::generate(
-                UnzerGuiConfig::URL_MERCHANT_UNZER_CREDENTIALS_DELETE,
+                DeleteMerchantUnzerCredentialsController::URL_MERCHANT_UNZER_CREDENTIALS_DELETE,
                 [
                     static::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                     static::REQUEST_PARENT_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_PARENT_ID_UNZER_CREDENTIALS],

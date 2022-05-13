@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
 use Spryker\Service\UtilText\Model\Url\Url;
-use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 use Symfony\Component\Form\FormInterface;
 
 abstract class AbstractMerchantUnzerCredentialsController extends AbstractUnzerCredentialsController
@@ -31,7 +30,7 @@ abstract class AbstractMerchantUnzerCredentialsController extends AbstractUnzerC
     protected function buildRedirectUrl(int $parentIdUnzerCredentials): string
     {
         return Url::generate(
-            UnzerGuiConfig::URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT,
+            EditMarketplaceUnzerCredentialsController::URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT,
             [
                 static::PARAM_ID_UNZER_CREDENTIALS => $parentIdUnzerCredentials,
             ],

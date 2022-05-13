@@ -16,14 +16,17 @@ use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 use SprykerEco\Shared\Unzer\UnzerConstants;
-use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
+use SprykerEco\Zed\UnzerGui\Communication\Controller\AbstractUnzerCredentialsController;
+use SprykerEco\Zed\UnzerGui\Communication\Controller\DeleteUnzerCredentialsController;
+use SprykerEco\Zed\UnzerGui\Communication\Controller\EditMarketplaceUnzerCredentialsController;
+use SprykerEco\Zed\UnzerGui\Communication\Controller\EditStandardUnzerCredentialsController;
 
 class UnzerCredentialsTable extends AbstractTable
 {
     /**
      * @var string
      */
-    protected const PARAM_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+    protected const URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS = '/unzer-gui/sync-payment-methods';
 
     /**
      * @var string
@@ -180,23 +183,23 @@ class UnzerCredentialsTable extends AbstractTable
     protected function buildLinks(array $item): string
     {
         $editUrl = ($item[SpyUnzerCredentialsTableMap::COL_TYPE] === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) ?
-            UnzerGuiConfig::URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT : UnzerGuiConfig::URL_STANDARD_UNZER_CREDENTIALS_EDIT;
+            EditMarketplaceUnzerCredentialsController::URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT : EditStandardUnzerCredentialsController::URL_STANDARD_UNZER_CREDENTIALS_EDIT;
 
         $buttons = [];
         $buttons[] = $this->generateEditButton(
-            Url::generate($editUrl, [static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate($editUrl, [AbstractUnzerCredentialsController::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Edit',
         );
         $buttons[] = $this->generateButton(
-            Url::generate(UnzerGuiConfig::URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(static::URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [AbstractUnzerCredentialsController::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Sync payment methods',
             [],
         );
         $buttons[] = $this->generateRemoveButton(
             Url::generate(
-                UnzerGuiConfig::URL_UNZER_CREDENTIALS_DELETE,
+                DeleteUnzerCredentialsController::URL_UNZER_CREDENTIALS_DELETE,
                 [
-                    static::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
+                    AbstractUnzerCredentialsController::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                 ],
             ),
             'Delete',

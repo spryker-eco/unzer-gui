@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCredentialsController
 {
     /**
+     * @var string
+     */
+    public const URL_MERCHANT_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-merchant-unzer-credentials';
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
@@ -32,7 +37,7 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND)->getMessage());
 
-            return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
+            return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
         }
 
         $form = $this->getFactory()

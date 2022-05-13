@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
 use Generated\Shared\Transfer\MessageTransfer;
 use Spryker\Service\UtilText\Model\Url\Url;
-use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +18,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentialsController
 {
+    /**
+     * @var string
+     */
+    public const URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
+
     /**
      * @var string
      */
@@ -40,7 +44,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND)->getMessage());
 
-            return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
+            return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
         }
 
         $unzerCredentialsEditForm = $this->getFactory()
@@ -96,7 +100,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         }
 
         $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS)->getMessage());
-        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::REDIRECT_URL_DEFAULT);
+        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
 
         return $this->redirectResponse($redirectUrl);
     }
@@ -114,7 +118,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
             'idUnzerCredentials' => $idUnzerCredentials,
             'unzerCredentialsFormTabs' => $this->getFactory()->createUnzerCredentialsFormTabs()->createView(),
             'merchantUnzerCredentialsTable' => $this->getFactory()->createMerchantUnzerCredentialsTable($idUnzerCredentials)->render(),
-            'addMerchantActionUrl' => Url::generate(UnzerGuiConfig::URL_MERCHANT_UNZER_CREDENTIALS_ADD, [static::REQUEST_ID_PARENT_UNZER_CREDENTIALS => $idUnzerCredentials]),
+            'addMerchantActionUrl' => Url::generate(CreateMerchantUnzerCredentialsController::URL_MERCHANT_UNZER_CREDENTIALS_ADD, [static::REQUEST_ID_PARENT_UNZER_CREDENTIALS => $idUnzerCredentials]),
         ]);
     }
 }

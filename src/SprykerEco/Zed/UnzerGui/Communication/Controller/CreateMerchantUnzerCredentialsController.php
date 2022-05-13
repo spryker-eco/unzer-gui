@@ -19,6 +19,11 @@ use Symfony\Component\HttpFoundation\Request;
 class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCredentialsController
 {
     /**
+     * @var string
+     */
+    public const URL_MERCHANT_UNZER_CREDENTIALS_ADD = '/unzer-gui/create-merchant-unzer-credentials';
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>

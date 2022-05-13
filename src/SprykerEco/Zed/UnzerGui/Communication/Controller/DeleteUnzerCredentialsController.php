@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsController
 {
     /**
+     * @var string
+     */
+    public const URL_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-unzer-credentials';
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return array<string, mixed>
@@ -43,7 +48,7 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
         if (!$unzerCredentialsDeleteForm->isSubmitted() || !$unzerCredentialsDeleteForm->isValid()) {
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_CSRF_TOKEN_INVALID_ERROR)->getMessage());
 
-            return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
+            return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
         }
 
         $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
@@ -60,11 +65,11 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_ERROR)->getMessage());
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
-            return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
+            return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
         }
 
         $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS)->getMessage());
 
-        return $this->redirectResponse(static::REDIRECT_URL_DEFAULT);
+        return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
     }
 }

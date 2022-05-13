@@ -18,7 +18,7 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     /**
      * @var string
      */
-    protected const REDIRECT_URL_DEFAULT = '/unzer-gui/list-unzer-credentials';
+    public const URL_UNZER_CREDENTIALS_LIST = '/unzer-gui/list-unzer-credentials';
 
     /**
      * @var string
