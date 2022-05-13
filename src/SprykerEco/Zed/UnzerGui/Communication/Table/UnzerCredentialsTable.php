@@ -114,7 +114,7 @@ class UnzerCredentialsTable extends AbstractTable
             $unzerCredentialsItem = [
                 SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $queryResultItem[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                 SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $queryResultItem[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
-                SpyUnzerCredentialsTableMap::COL_TYPE => $this->mapTypeName($queryResultItem),
+                SpyUnzerCredentialsTableMap::COL_TYPE => $this->createTypeName($queryResultItem),
                 SpyUnzerCredentialsStoreTableMap::COL_FK_STORE => $this->createStoresLabel($queryResultItem),
                 static::COL_ACTIONS => $this->buildLinks($queryResultItem),
             ];
@@ -148,7 +148,7 @@ class UnzerCredentialsTable extends AbstractTable
      *
      * @return string
      */
-    protected function mapTypeName(array $unzerCredentials): string
+    protected function createTypeName(array $unzerCredentials): string
     {
         $currentType = $unzerCredentials[SpyUnzerCredentialsTableMap::COL_TYPE];
 

@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Tabs;
 
+use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\TabItemTransfer;
 use Generated\Shared\Transfer\TabsViewTransfer;
 use Spryker\Zed\Gui\Communication\Tabs\AbstractTabs;
@@ -37,7 +38,7 @@ class UnzerCredentialsFormTabs extends AbstractTabs
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer->setName('general')
-            ->setTitle('General')
+            ->setTitle((new MessageTransfer())->setMessage('General')->getMessage())
             ->setTemplate('@UnzerGui/_partials/general-tab.twig');
 
         $tabsViewTransfer->addTab($tabItemTransfer);

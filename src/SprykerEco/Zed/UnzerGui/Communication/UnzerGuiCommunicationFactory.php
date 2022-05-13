@@ -21,8 +21,8 @@ use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsEditForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsCreateForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsDeleteForm;
 use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsEditForm;
-use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatter;
-use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatterInterface;
+use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiMerchantFormatter;
+use SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiMerchantFormatterInterface;
 use SprykerEco\Zed\UnzerGui\Communication\Table\MerchantUnzerCredentialsTable;
 use SprykerEco\Zed\UnzerGui\Communication\Table\UnzerCredentialsTable;
 use SprykerEco\Zed\UnzerGui\Communication\Tabs\UnzerCredentialsFormTabs;
@@ -67,11 +67,11 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiFormatterInterface
+     * @return \SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiMerchantFormatterInterface
      */
-    public function createUnzerGuiFormatter(): UnzerGuiFormatterInterface
+    public function createMerchantUnzerGuiFormatter(): UnzerGuiMerchantFormatterInterface
     {
-        return new UnzerGuiFormatter();
+        return new UnzerGuiMerchantFormatter();
     }
 
     /**

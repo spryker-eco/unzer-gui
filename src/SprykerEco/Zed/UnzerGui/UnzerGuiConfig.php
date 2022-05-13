@@ -77,7 +77,7 @@ class UnzerGuiConfig extends AbstractBundleConfig
     /**
      * @var int
      */
-    protected const COMPANY_SUGGESTION_LIMIT = 20;
+    protected const UNZER_MERCHANT_SUGGESTION_LIMIT = 20;
 
     /**
      * @var array<int, string>
@@ -104,6 +104,6 @@ class UnzerGuiConfig extends AbstractBundleConfig
      */
     public function getMerchantSuggestionLimit(): int
     {
-        return static::COMPANY_SUGGESTION_LIMIT;
+        return static::UNZER_MERCHANT_SUGGESTION_LIMIT;
     }
 }

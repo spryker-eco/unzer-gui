@@ -56,7 +56,7 @@ class SuggestMerchantController extends AbstractController
             ->get($merchantCriteriaTransfer);
 
         $formattedMerchantList = $this->getFactory()
-            ->createUnzerGuiFormatter()
+            ->createUnzerGuiMerchantFormatter()
             ->formatMerchantCollectionTransferToSuggestionsArray($merchantCollectionTransfer);
 
         return [

@@ -6,12 +6,14 @@ Name,Name
 Actions,Aktionen
 Edit,Bearbeiten
 Delete,Löschen
+General,Allgemein
 "Sync payment methods","Zahlungsmethoden synchronisieren"
 "Payment methods synced successfully.","Zahlungsmethoden erolgreich sychronisiert."
 "Credentials type","Referenzen Art"
 "Available in Stores","Erhältlich in den Geschäften"
 "External Merchant Credentials","Referenzen für externe Verkäufer"
 Save,Speichern
+"Add Unzer Credentials","Unzer Berechtigungsnachweis hinzufügen."
 "Add Merchant Unzer Credentials","Verkäufer Unzer Referenzen addieren"
 "List of Unzer Credentials","Unzer Referenzen Liste"
 Back,Zurück

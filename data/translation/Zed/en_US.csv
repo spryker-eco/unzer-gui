@@ -6,10 +6,12 @@ Name,Name
 Actions,Actions
 Edit,Edit
 Delete,Delete
+General,General
 "Sync payment methods","Sync payment methods"
 "Payment methods synced successfully.","Payment methods synced successfully."
 "Credentials type","Credentials type"
 "Available in Stores","Available in Stores"
+"Add Unzer Credentials","Add Unzer Credentials"
 "External Merchant Credentials","External Merchant Credentials"
 Save,Save
 "Add Merchant Unzer Credentials","Add Merchant Unzer Credentials"

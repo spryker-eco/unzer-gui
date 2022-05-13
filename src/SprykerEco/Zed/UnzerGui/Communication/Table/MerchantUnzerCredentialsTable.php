@@ -157,7 +157,7 @@ class MerchantUnzerCredentialsTable extends AbstractTable
      *
      * @return string
      */
-    protected function mapTypeName(array $unzerCredentials): string
+    protected function createTypeName(array $unzerCredentials): string
     {
         $currentType = $unzerCredentials[SpyUnzerCredentialsTableMap::COL_TYPE];
 

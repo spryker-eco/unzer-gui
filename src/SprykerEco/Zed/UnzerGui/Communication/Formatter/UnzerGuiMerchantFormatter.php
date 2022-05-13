@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\UnzerGui\Communication\Formatter;
 
 use Generated\Shared\Transfer\MerchantCollectionTransfer;
 
-class UnzerGuiFormatter implements UnzerGuiFormatterInterface
+class UnzerGuiMerchantFormatter implements UnzerGuiMerchantFormatterInterface
 {
     /**
      * @var string
