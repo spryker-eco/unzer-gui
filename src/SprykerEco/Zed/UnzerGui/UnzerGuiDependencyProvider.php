@@ -11,7 +11,7 @@ use Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
 use Spryker\Zed\Kernel\Container;
-use Spryker\Zed\MerchantGui\Communication\Exception\MissingStoreRelationFormTypePluginException;
+use SprykerEco\Zed\UnzerGui\Communication\Exception\UnzerGuiException;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeBridge;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeBridge;
 
@@ -116,13 +116,13 @@ class UnzerGuiDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @throws \Spryker\Zed\MerchantGui\Communication\Exception\MissingStoreRelationFormTypePluginException
+     * @throws \SprykerEco\Zed\UnzerGui\Communication\Exception\UnzerGuiException
      *
      * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
      */
     protected function getStoreRelationFormTypePlugin(): FormTypeInterface
     {
-        throw new MissingStoreRelationFormTypePluginException(
+        throw new UnzerGuiException(
             sprintf(
                 'Missing instance of %s! You need to configure StoreRelationFormType ' .
                 'in your own UnzerGuiDependencyProvider::getStoreRelationFormTypePlugin() ' .
