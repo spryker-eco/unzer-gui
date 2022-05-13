@@ -40,7 +40,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
             static::OPTION_CURRENT_ID,
             static::CREDENTIALS_TYPE_CHOICES_OPTION,
             static::FIELD_PARENT_ID_UNZER_CREDENTIALS,
-            static::MERCHANT_REFERENCE_CHOICES_OPTION
+            static::MERCHANT_REFERENCE_CHOICES_OPTION,
         ]);
 
         $resolver->setNormalizer('constraints', function (Options $options, $value) {
