@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use Generated\Shared\Transfer\MessageTransfer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,7 +36,7 @@ class SyncPaymentMethodsController extends AbstractUnzerCredentialsController
             ->getUnzerFacade()
             ->performPaymentMethodsImport($unzerCredentialsTransfer->getUnzerKeypairOrFail());
 
-        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_PAYMENT_METHODS_SYNC_SUCCESS)->getMessage());
+        $this->addSuccessMessage(static::MESSAGE_PAYMENT_METHODS_SYNC_SUCCESS);
 
         return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
     }

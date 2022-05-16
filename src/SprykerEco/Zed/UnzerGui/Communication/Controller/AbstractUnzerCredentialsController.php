@@ -23,7 +23,7 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     /**
      * @var string
      */
-    protected const PARAM_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+    public const PARAM_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
 
     /**
      * @var string

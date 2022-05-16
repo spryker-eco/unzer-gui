@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use Generated\Shared\Transfer\MessageTransfer;
 use SprykerEco\Shared\Unzer\UnzerConstants;
 use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsCreateForm;
 use Symfony\Component\Form\FormInterface;
@@ -65,7 +64,7 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
         $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->createUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_ERROR)->getMessage());
+            $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_ERROR);
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
             return $this->prepareViewResponse(
@@ -74,7 +73,7 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
             );
         }
 
-        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_SUCCESS)->getMessage());
+        $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_CREATE_SUCCESS);
         $redirectUrl = $this->buildRedirectUrl($unzerCredentialsTransfer->getParentIdUnzerCredentialsOrFail());
 
         return $this->redirectResponse($redirectUrl);

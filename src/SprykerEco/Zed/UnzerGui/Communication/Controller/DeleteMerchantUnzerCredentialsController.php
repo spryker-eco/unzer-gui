@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use Generated\Shared\Transfer\MessageTransfer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -56,7 +55,7 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
 
         $unzerCredentialsDeleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm()->handleRequest($request);
         if (!$unzerCredentialsDeleteForm->isSubmitted() || !$unzerCredentialsDeleteForm->isValid()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_CSRF_TOKEN_INVALID_ERROR)->getMessage());
+            $this->addErrorMessage(static::MESSAGE_CSRF_TOKEN_INVALID_ERROR);
 
             return $this->redirectResponse($redirectUrl);
         }
@@ -66,13 +65,13 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
             ->deleteUnzerCredentials($unzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_ERROR)->getMessage());
+            $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_ERROR);
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
             return $this->redirectResponse($redirectUrl);
         }
 
-        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS)->getMessage());
+        $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_DELETE_SUCCESS);
 
         return $this->redirectResponse($redirectUrl);
     }

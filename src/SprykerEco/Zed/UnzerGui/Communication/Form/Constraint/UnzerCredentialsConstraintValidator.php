@@ -17,7 +17,7 @@ class UnzerCredentialsConstraintValidator extends ConstraintValidator
 {
     /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer|mixed $value
-     * @param \Symfony\Component\Validator\Constraint|\Spryker\Zed\ContentBannerGui\Communication\Form\Constraints\ContentBannerConstraint $constraint
+     * @param \Symfony\Component\Validator\Constraint $constraint
      *
      * @throws \InvalidArgumentException
      *

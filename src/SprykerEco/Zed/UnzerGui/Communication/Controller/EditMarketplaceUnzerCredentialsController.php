@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
-use Generated\Shared\Transfer\MessageTransfer;
 use Spryker\Service\UtilText\Model\Url\Url;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -42,7 +41,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         $unzerCredentialsTransfer = $unzerCredentialsFormDataProvider->getData($idUnzerCredentials);
 
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND)->getMessage());
+            $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND);
 
             return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
         }
@@ -93,13 +92,13 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         $this->getFactory()->getUnzerFacade()->updateUnzerCredentials($childUnzerCredentialsTransfer);
 
         if (!$unzerCredentialsResponseTransfer->getIsSuccessful()) {
-            $this->addErrorMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR)->getMessage());
+            $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_ERROR);
             $this->addExternalApiErrorMessages($unzerCredentialsResponseTransfer);
 
             return $this->prepareViewResponse($unzerCredentialsForm, $unzerCredentialsTransfer->getIdUnzerCredentialsOrFail());
         }
 
-        $this->addSuccessMessage((new MessageTransfer())->setMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS)->getMessage());
+        $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);
         $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
 
         return $this->redirectResponse($redirectUrl);

@@ -69,7 +69,7 @@ class UnzerGuiCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @return \SprykerEco\Zed\UnzerGui\Communication\Formatter\UnzerGuiMerchantFormatterInterface
      */
-    public function createMerchantUnzerGuiFormatter(): UnzerGuiMerchantFormatterInterface
+    public function createUnzerGuiMerchantFormatter(): UnzerGuiMerchantFormatterInterface
     {
         return new UnzerGuiMerchantFormatter();
     }
