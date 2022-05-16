@@ -11,15 +11,15 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 
 class UnzerGuiConfig extends AbstractBundleConfig
 {
- /**
-  * @var int
-  */
+    /**
+     * @var int
+     */
     protected const UNZER_MERCHANT_SUGGESTION_LIMIT = 20;
 
     /**
      * @var array<int, string>
      */
-    protected const UNZER_CREDENTIALS_TYPES = [
+    protected const UNZER_CREDENTIALS_TYPE = [
         1 => 'Standard',
         2 => 'Marketplace (Main channel)',
     ];
@@ -31,7 +31,7 @@ class UnzerGuiConfig extends AbstractBundleConfig
      */
     public function getUnzerCredentialTypeChoices(): array
     {
-        return static::UNZER_CREDENTIALS_TYPES;
+        return static::UNZER_CREDENTIALS_TYPE;
     }
 
     /**

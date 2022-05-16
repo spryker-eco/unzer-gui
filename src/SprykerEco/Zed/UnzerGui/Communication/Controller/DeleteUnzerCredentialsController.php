@@ -27,7 +27,7 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
      */
     public function indexAction(Request $request): array
     {
-        $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
+        $idUnzerCredentials = $this->castId($request->get(static::PARAMETER_ID_UNZER_CREDENTIALS));
         $unzerCredentialsDeleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm();
 
         return $this->viewResponse([
@@ -50,7 +50,7 @@ class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsControlle
             return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
         }
 
-        $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
+        $idUnzerCredentials = $this->castId($request->get(static::PARAMETER_ID_UNZER_CREDENTIALS));
         $dataProvider = $this->getFactory()->createUnzerCredentialsFormDataProvider();
 
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */

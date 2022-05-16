@@ -25,6 +25,8 @@ class UnzerCredentialsTable extends AbstractTable
 {
     /**
      * @var string
+     *
+     * @uses SyncPaymentMethodsController::indexAction()
      */
     protected const URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS = '/unzer-gui/sync-payment-methods';
 
@@ -187,11 +189,11 @@ class UnzerCredentialsTable extends AbstractTable
 
         $buttons = [];
         $buttons[] = $this->generateEditButton(
-            Url::generate($editUrl, [AbstractUnzerCredentialsController::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate($editUrl, [AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Edit',
         );
         $buttons[] = $this->generateButton(
-            Url::generate(static::URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [AbstractUnzerCredentialsController::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(static::URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Sync payment methods',
             [],
         );
@@ -199,7 +201,7 @@ class UnzerCredentialsTable extends AbstractTable
             Url::generate(
                 DeleteUnzerCredentialsController::URL_UNZER_CREDENTIALS_DELETE,
                 [
-                    AbstractUnzerCredentialsController::PARAM_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
+                    AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                 ],
             ),
             'Delete',

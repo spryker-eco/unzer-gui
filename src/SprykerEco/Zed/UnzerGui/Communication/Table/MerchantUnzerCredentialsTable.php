@@ -21,12 +21,7 @@ class MerchantUnzerCredentialsTable extends AbstractTable
     /**
      * @var string
      */
-    public const COL_ACTIONS = 'actions';
-
-    /**
-     * @var string
-     */
-    public const COL_STORES = 'stores';
+    protected const COL_ACTIONS = 'actions';
 
     /**
      * @var string

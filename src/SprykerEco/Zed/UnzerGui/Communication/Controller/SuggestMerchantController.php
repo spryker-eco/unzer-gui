@@ -21,7 +21,7 @@ class SuggestMerchantController extends AbstractController
     /**
      * @var string
      */
-    protected const PARAM_TERM = 'term';
+    protected const PARAMETER_TERM = 'term';
 
     /**
      * @var string
@@ -47,7 +47,7 @@ class SuggestMerchantController extends AbstractController
      */
     protected function executeIndexAction(Request $request): array
     {
-        $suggestionName = (string)$request->query->get(static::PARAM_TERM);
+        $suggestionName = (string)$request->query->get(static::PARAMETER_TERM);
 
         $merchantCriteriaTransfer = $this->createMerchantCriteriaTransfer($suggestionName);
 

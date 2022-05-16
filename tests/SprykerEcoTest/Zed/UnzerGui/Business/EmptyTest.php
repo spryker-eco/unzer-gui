@@ -11,4 +11,5 @@ use Codeception\TestCase\Test;
 
 class EmptyTest extends Test
 {
+    //Empty test was created for successful build and run codeception and php-stan inside Github Actions.
 }

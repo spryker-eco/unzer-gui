@@ -23,12 +23,12 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     /**
      * @var string
      */
-    public const PARAM_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+    public const PARAMETER_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
 
     /**
      * @var string
      */
-    protected const PARAM_REDIRECT_URL = 'redirect-url';
+    protected const PARAMETER_REDIRECT_URL = 'redirect-url';
 
     /**
      * @var string

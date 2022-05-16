@@ -18,18 +18,13 @@ use Symfony\Component\HttpFoundation\Request;
 class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCredentialsController
 {
     /**
-     * @var string
-     */
-    public const URL_MERCHANT_UNZER_CREDENTIALS_ADD = '/unzer-gui/create-merchant-unzer-credentials';
-
-    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request)
     {
-        $parentIdUnzerCredentials = (int)$request->get(static::PARAM_PARENT_ID_UNZER_CREDENTIALS);
+        $parentIdUnzerCredentials = (int)$request->get(static::PARAMETER_PARENT_ID_UNZER_CREDENTIALS);
 
         $unzerCredentialsFormDataProvider = $this->getFactory()->createUnzerCredentialsFormDataProvider();
         $unzerCredentialsForm = $this->getFactory()

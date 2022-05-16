@@ -28,8 +28,4 @@ use Codeception\Actor;
 class UnzerGuiBusinessTester extends Actor
 {
     use _generated\UnzerGuiBusinessTesterActions;
-
-    /**
-     * Define custom actions here
-     */
 }

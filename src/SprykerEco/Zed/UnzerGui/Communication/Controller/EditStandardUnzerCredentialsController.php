@@ -23,11 +23,11 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request)
     {
-        $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
+        $idUnzerCredentials = $this->castId($request->get(static::PARAMETER_ID_UNZER_CREDENTIALS));
         $dataProvider = $this->getFactory()->createUnzerCredentialsFormDataProvider();
 
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
@@ -57,7 +57,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
@@ -74,7 +74,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
         }
 
         $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);
-        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
+        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
 
         return $this->redirectResponse($redirectUrl);
     }

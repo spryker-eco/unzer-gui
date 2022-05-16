@@ -27,8 +27,8 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
      */
     public function indexAction(Request $request): array
     {
-        $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
-        $parentIdUnzerCredentials = $this->castId($request->get(static::PARAM_PARENT_ID_UNZER_CREDENTIALS));
+        $idUnzerCredentials = $this->castId($request->get(static::PARAMETER_ID_UNZER_CREDENTIALS));
+        $parentIdUnzerCredentials = $this->castId($request->get(static::PARAMETER_PARENT_ID_UNZER_CREDENTIALS));
 
         $unzerCredentialsDeleteForm = $this->getFactory()->getUnzerCredentialsDeleteForm();
 
@@ -46,7 +46,7 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
      */
     public function confirmAction(Request $request): RedirectResponse
     {
-        $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
+        $idUnzerCredentials = $this->castId($request->get(static::PARAMETER_ID_UNZER_CREDENTIALS));
 
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $this->getFactory()->createUnzerCredentialsFormDataProvider()->getData($idUnzerCredentials);

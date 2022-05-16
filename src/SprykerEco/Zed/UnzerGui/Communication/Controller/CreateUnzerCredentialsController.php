@@ -18,7 +18,7 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request)
     {
@@ -43,11 +43,11 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
-        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
+        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
 
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();

@@ -25,16 +25,21 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
     /**
      * @var string
      */
+    protected const URL_MERCHANT_UNZER_CREDENTIALS_ADD = '/unzer-gui/create-merchant-unzer-credentials';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_ID_PARENT_UNZER_CREDENTIALS = 'parent-id-unzer-credentials';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request)
     {
-        $idUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
+        $idUnzerCredentials = $this->castId($request->get(static::PARAMETER_ID_UNZER_CREDENTIALS));
         $unzerCredentialsFormDataProvider = $this->getFactory()->createUnzerCredentialsFormDataProvider();
 
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
@@ -67,7 +72,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
      */
     public function tableAction(Request $request): JsonResponse
     {
-        $parentIdUnzerCredentials = $this->castId($request->get(static::PARAM_ID_UNZER_CREDENTIALS));
+        $parentIdUnzerCredentials = $this->castId($request->get(static::PARAMETER_ID_UNZER_CREDENTIALS));
 
         $merchantUnzerCredentialsTable = $this->getFactory()
             ->createMerchantUnzerCredentialsTable($parentIdUnzerCredentials);
@@ -79,7 +84,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Form\FormInterface $unzerCredentialsForm
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string,mixed>
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
@@ -99,7 +104,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         }
 
         $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);
-        $redirectUrl = $request->get(static::PARAM_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
+        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
 
         return $this->redirectResponse($redirectUrl);
     }
@@ -117,7 +122,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
             'idUnzerCredentials' => $idUnzerCredentials,
             'unzerCredentialsFormTabs' => $this->getFactory()->createUnzerCredentialsFormTabs()->createView(),
             'merchantUnzerCredentialsTable' => $this->getFactory()->createMerchantUnzerCredentialsTable($idUnzerCredentials)->render(),
-            'addMerchantActionUrl' => Url::generate(CreateMerchantUnzerCredentialsController::URL_MERCHANT_UNZER_CREDENTIALS_ADD, [static::REQUEST_ID_PARENT_UNZER_CREDENTIALS => $idUnzerCredentials]),
+            'addMerchantActionUrl' => Url::generate(static::URL_MERCHANT_UNZER_CREDENTIALS_ADD, [static::REQUEST_ID_PARENT_UNZER_CREDENTIALS => $idUnzerCredentials]),
         ]);
     }
 }

@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\UnzerGui\Communication\Finder;
 
 use Generated\Shared\Transfer\MerchantCollectionTransfer;
 use Generated\Shared\Transfer\MerchantCriteriaTransfer;
+use Generated\Shared\Transfer\MerchantTransfer;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToMerchantFacadeInterface;
 
 class MerchantFinder implements MerchantFinderInterface
@@ -35,7 +36,7 @@ class MerchantFinder implements MerchantFinderInterface
     {
         $merchantCollectionTransfer = $this->merchantFacade->get($merchantCriteriaTransfer);
 
-        return $this->transformMerchantCollectionList($merchantCollectionTransfer);
+        return $this->getMerchantLabelsIndexedByMerchantReference($merchantCollectionTransfer);
     }
 
     /**
@@ -43,16 +44,27 @@ class MerchantFinder implements MerchantFinderInterface
      *
      * @return array<string, string>
      */
-    protected function transformMerchantCollectionList(MerchantCollectionTransfer $merchantCollectionTransfer): array
+    protected function getMerchantLabelsIndexedByMerchantReference(MerchantCollectionTransfer $merchantCollectionTransfer): array
     {
-        $merchantCollectionList = [];
+        $merchantLabelsIndexedByMerchantReference = [];
         foreach ($merchantCollectionTransfer->getMerchants() as $merchantTransfer) {
             $merchantReference = $merchantTransfer->getMerchantReferenceOrFail();
-            $merchantName = $merchantTransfer->getNameOrFail();
-            $label = sprintf('%s (%s)', $merchantName, $merchantReference);
-            $merchantCollectionList[$merchantReference] = $label;
+            $merchantLabelsIndexedByMerchantReference[$merchantReference] = $this->createMerchantLabel($merchantTransfer);
         }
 
-        return $merchantCollectionList;
+        return $merchantLabelsIndexedByMerchantReference;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\MerchantTransfer $merchantTransfer
+     *
+     * @return string
+     */
+    protected function createMerchantLabel(MerchantTransfer $merchantTransfer): string
+    {
+        $merchantName = $merchantTransfer->getNameOrFail();
+        $merchantReference = $merchantTransfer->getMerchantReferenceOrFail();
+
+        return sprintf('%s (%s)', $merchantName, $merchantReference);
     }
 }
