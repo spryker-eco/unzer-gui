@@ -47,7 +47,7 @@ class CreateUnzerCredentialsController extends AbstractUnzerCredentialsControlle
      */
     protected function handleUnzerCredentialsForm(Request $request, FormInterface $unzerCredentialsForm)
     {
-        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
+        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::ROUTE_UNZER_CREDENTIALS_LIST);
 
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();

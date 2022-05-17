@@ -15,7 +15,7 @@ abstract class AbstractMerchantUnzerCredentialsController extends AbstractUnzerC
     /**
      * @var string
      */
-    protected const URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
+    protected const ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
 
     /**
      * @var string
@@ -35,7 +35,7 @@ abstract class AbstractMerchantUnzerCredentialsController extends AbstractUnzerC
     protected function buildRedirectUrl(int $parentIdUnzerCredentials): string
     {
         return Url::generate(
-            static::URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT,
+            static::ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT,
             [
                 static::PARAMETER_ID_UNZER_CREDENTIALS => $parentIdUnzerCredentials,
             ],

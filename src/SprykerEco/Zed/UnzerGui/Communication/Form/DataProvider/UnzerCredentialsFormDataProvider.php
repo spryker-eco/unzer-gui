@@ -91,7 +91,7 @@ class UnzerCredentialsFormDataProvider
             'data_class' => UnzerCredentialsTransfer::class,
             'label' => false,
             UnzerCredentialsCreateForm::OPTION_CURRENT_ID => $idUnzerCredentials,
-            UnzerCredentialsCreateForm::CREDENTIALS_TYPE_CHOICES_OPTION => $this->unzerGuiConfig->getUnzerCredentialTypeChoices(),
+            UnzerCredentialsCreateForm::CREDENTIALS_TYPE_CHOICES_OPTION => $this->unzerGuiConfig->getUnzerCredentialsTypeChoices(),
             UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION => $this->merchantFinder->getMerchants(new MerchantCriteriaTransfer()),
         ];
     }

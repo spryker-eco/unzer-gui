@@ -38,6 +38,6 @@ class SyncPaymentMethodsController extends AbstractUnzerCredentialsController
 
         $this->addSuccessMessage(static::MESSAGE_PAYMENT_METHODS_SYNC_SUCCESS);
 
-        return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
+        return $this->redirectResponse(static::ROUTE_UNZER_CREDENTIALS_LIST);
     }
 }

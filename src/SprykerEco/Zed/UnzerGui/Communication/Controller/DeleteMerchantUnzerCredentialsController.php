@@ -18,7 +18,7 @@ class DeleteMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
     /**
      * @var string
      */
-    public const URL_MERCHANT_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-merchant-unzer-credentials';
+    public const ROUTE_MERCHANT_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-merchant-unzer-credentials';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request

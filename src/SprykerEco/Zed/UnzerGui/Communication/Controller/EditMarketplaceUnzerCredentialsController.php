@@ -20,12 +20,12 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
     /**
      * @var string
      */
-    public const URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
+    public const ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
 
     /**
      * @var string
      */
-    protected const URL_MERCHANT_UNZER_CREDENTIALS_ADD = '/unzer-gui/create-merchant-unzer-credentials';
+    protected const ROUTE_MERCHANT_UNZER_CREDENTIALS_ADD = '/unzer-gui/create-merchant-unzer-credentials';
 
     /**
      * @var string
@@ -48,7 +48,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
             $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND);
 
-            return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
+            return $this->redirectResponse(static::ROUTE_UNZER_CREDENTIALS_LIST);
         }
 
         $unzerCredentialsEditForm = $this->getFactory()
@@ -104,7 +104,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
         }
 
         $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);
-        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
+        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::ROUTE_UNZER_CREDENTIALS_LIST);
 
         return $this->redirectResponse($redirectUrl);
     }
@@ -122,7 +122,7 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
             'idUnzerCredentials' => $idUnzerCredentials,
             'unzerCredentialsFormTabs' => $this->getFactory()->createUnzerCredentialsFormTabs()->createView(),
             'merchantUnzerCredentialsTable' => $this->getFactory()->createMerchantUnzerCredentialsTable($idUnzerCredentials)->render(),
-            'addMerchantActionUrl' => Url::generate(static::URL_MERCHANT_UNZER_CREDENTIALS_ADD, [static::REQUEST_ID_PARENT_UNZER_CREDENTIALS => $idUnzerCredentials]),
+            'addMerchantActionUrl' => Url::generate(static::ROUTE_MERCHANT_UNZER_CREDENTIALS_ADD, [static::REQUEST_ID_PARENT_UNZER_CREDENTIALS => $idUnzerCredentials]),
         ]);
     }
 }

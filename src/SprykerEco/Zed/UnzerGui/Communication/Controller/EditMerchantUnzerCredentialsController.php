@@ -18,7 +18,7 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
     /**
      * @var string
      */
-    public const URL_MERCHANT_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-merchant-unzer-credentials';
+    public const ROUTE_MERCHANT_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-merchant-unzer-credentials';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -36,7 +36,7 @@ class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCreden
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
             $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND);
 
-            return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
+            return $this->redirectResponse(static::ROUTE_UNZER_CREDENTIALS_LIST);
         }
 
         $form = $this->getFactory()

@@ -18,7 +18,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
     /**
      * @var string
      */
-    public const URL_STANDARD_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-standard-unzer-credentials';
+    public const ROUTE_STANDARD_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-standard-unzer-credentials';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -36,7 +36,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
         if (!$unzerCredentialsTransfer->getIdUnzerCredentials()) {
             $this->addErrorMessage(static::MESSAGE_UNZER_CREDENTIALS_NOT_FOUND);
 
-            return $this->redirectResponse(static::URL_UNZER_CREDENTIALS_LIST);
+            return $this->redirectResponse(static::ROUTE_UNZER_CREDENTIALS_LIST);
         }
 
         $form = $this->getFactory()
@@ -74,7 +74,7 @@ class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsCon
         }
 
         $this->addSuccessMessage(static::MESSAGE_UNZER_CREDENTIALS_UPDATE_SUCCESS);
-        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::URL_UNZER_CREDENTIALS_LIST);
+        $redirectUrl = $request->get(static::PARAMETER_REDIRECT_URL, static::ROUTE_UNZER_CREDENTIALS_LIST);
 
         return $this->redirectResponse($redirectUrl);
     }

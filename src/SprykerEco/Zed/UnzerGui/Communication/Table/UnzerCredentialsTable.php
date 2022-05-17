@@ -26,9 +26,9 @@ class UnzerCredentialsTable extends AbstractTable
     /**
      * @var string
      *
-     * @uses SyncPaymentMethodsController::indexAction()
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\SyncPaymentMethodsController::indexAction()
      */
-    protected const URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS = '/unzer-gui/sync-payment-methods';
+    protected const ROUTE_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS = '/unzer-gui/sync-payment-methods';
 
     /**
      * @var string
@@ -185,7 +185,7 @@ class UnzerCredentialsTable extends AbstractTable
     protected function buildLinks(array $item): string
     {
         $editUrl = ($item[SpyUnzerCredentialsTableMap::COL_TYPE] === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) ?
-            EditMarketplaceUnzerCredentialsController::URL_MARKETPLACE_UNZER_CREDENTIALS_EDIT : EditStandardUnzerCredentialsController::URL_STANDARD_UNZER_CREDENTIALS_EDIT;
+            EditMarketplaceUnzerCredentialsController::ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT : EditStandardUnzerCredentialsController::ROUTE_STANDARD_UNZER_CREDENTIALS_EDIT;
 
         $buttons = [];
         $buttons[] = $this->generateEditButton(
@@ -193,13 +193,13 @@ class UnzerCredentialsTable extends AbstractTable
             'Edit',
         );
         $buttons[] = $this->generateButton(
-            Url::generate(static::URL_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(static::ROUTE_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Sync payment methods',
             [],
         );
         $buttons[] = $this->generateRemoveButton(
             Url::generate(
-                DeleteUnzerCredentialsController::URL_UNZER_CREDENTIALS_DELETE,
+                DeleteUnzerCredentialsController::ROUTE_UNZER_CREDENTIALS_DELETE,
                 [
                     AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                 ],

@@ -29,7 +29,7 @@ class UnzerGuiConfig extends AbstractBundleConfig
      *
      * @return array<string>
      */
-    public function getUnzerCredentialTypeChoices(): array
+    public function getUnzerCredentialsTypeChoices(): array
     {
         return static::UNZER_CREDENTIALS_TYPE;
     }

@@ -170,7 +170,7 @@ class MerchantUnzerCredentialsTable extends AbstractTable
         $buttons = [];
         $buttons[] = $this->generateEditButton(
             Url::generate(
-                EditMerchantUnzerCredentialsController::URL_MERCHANT_UNZER_CREDENTIALS_EDIT,
+                EditMerchantUnzerCredentialsController::ROUTE_MERCHANT_UNZER_CREDENTIALS_EDIT,
                 [
                     static::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                     static::REQUEST_PARENT_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_PARENT_ID_UNZER_CREDENTIALS],
@@ -180,7 +180,7 @@ class MerchantUnzerCredentialsTable extends AbstractTable
         );
         $buttons[] = $this->generateRemoveButton(
             Url::generate(
-                DeleteMerchantUnzerCredentialsController::URL_MERCHANT_UNZER_CREDENTIALS_DELETE,
+                DeleteMerchantUnzerCredentialsController::ROUTE_MERCHANT_UNZER_CREDENTIALS_DELETE,
                 [
                     static::REQUEST_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                     static::REQUEST_PARENT_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_PARENT_ID_UNZER_CREDENTIALS],
