@@ -130,6 +130,8 @@ class UnzerCredentialsTable extends AbstractTable
     }
 
     /**
+     * @module Store
+     *
      * @return \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery
      */
     protected function prepareQuery(): SpyUnzerCredentialsQuery
