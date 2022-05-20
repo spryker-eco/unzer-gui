@@ -23,11 +23,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
 {
     /**
-     * @var string
-     */
-    public const FIELD_PARENT_ID_UNZER_CREDENTIALS = 'parentIdUnzerCredentials';
-
-    /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void
@@ -39,7 +34,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
         $resolver->setRequired([
             static::OPTION_CURRENT_ID,
             static::CREDENTIALS_TYPE_CHOICES_OPTION,
-            static::FIELD_PARENT_ID_UNZER_CREDENTIALS,
+            UnzerCredentialsTransfer::PARENT_ID_UNZER_CREDENTIALS,
             static::MERCHANT_REFERENCE_CHOICES_OPTION,
         ]);
 
@@ -84,8 +79,8 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
      */
     protected function addIdParentUnzerCredentialsField(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(static::FIELD_PARENT_ID_UNZER_CREDENTIALS, HiddenType::class, [
-            'data' => $options[static::FIELD_PARENT_ID_UNZER_CREDENTIALS],
+        $builder->add(UnzerCredentialsTransfer::PARENT_ID_UNZER_CREDENTIALS, HiddenType::class, [
+            'data' => $options[UnzerCredentialsTransfer::PARENT_ID_UNZER_CREDENTIALS],
         ]);
 
         return $this;

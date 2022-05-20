@@ -24,17 +24,17 @@ abstract class AbstractUnzerCredentialsForm extends AbstractType
     /**
      * @var string
      */
-    public const CREDENTIALS_TYPE_CHOICES_OPTION = 'type_choices';
+    protected const CREDENTIALS_TYPE_CHOICES_OPTION = 'type_choices';
 
     /**
      * @var string
      */
-    public const MERCHANT_REFERENCE_CHOICES_OPTION = 'merchant_reference_choices';
+    protected const MERCHANT_REFERENCE_CHOICES_OPTION = 'merchant_reference_choices';
 
     /**
      * @var string
      */
-    public const OPTION_CURRENT_ID = 'current_id';
+    protected const OPTION_CURRENT_ID = 'current_id';
 
     /**
      * @var string

@@ -16,10 +16,6 @@ use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 use SprykerEco\Shared\Unzer\UnzerConstants;
-use SprykerEco\Zed\UnzerGui\Communication\Controller\AbstractUnzerCredentialsController;
-use SprykerEco\Zed\UnzerGui\Communication\Controller\DeleteUnzerCredentialsController;
-use SprykerEco\Zed\UnzerGui\Communication\Controller\EditMarketplaceUnzerCredentialsController;
-use SprykerEco\Zed\UnzerGui\Communication\Controller\EditStandardUnzerCredentialsController;
 
 class UnzerCredentialsTable extends AbstractTable
 {
@@ -44,6 +40,28 @@ class UnzerCredentialsTable extends AbstractTable
      * @var string
      */
     protected const STORE_CLASS_LABEL = 'label-info';
+
+    /**
+     * @var string
+     *
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS
+     */
+    public const PARAMETER_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+
+    /**
+     * @var string
+     */
+    protected const ROUTE_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-unzer-credentials';
+
+    /**
+     * @var string
+     */
+    protected const ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
+
+    /**
+     * @var string
+     */
+    protected const ROUTE_STANDARD_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-standard-unzer-credentials';
 
     /**
      * @var \Orm\Zed\Unzer\Persistence\SpyUnzerCredentialsQuery
@@ -187,23 +205,23 @@ class UnzerCredentialsTable extends AbstractTable
     protected function buildLinks(array $item): string
     {
         $editUrl = ($item[SpyUnzerCredentialsTableMap::COL_TYPE] === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) ?
-            EditMarketplaceUnzerCredentialsController::ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT : EditStandardUnzerCredentialsController::ROUTE_STANDARD_UNZER_CREDENTIALS_EDIT;
+            static::ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT : static::ROUTE_STANDARD_UNZER_CREDENTIALS_EDIT;
 
         $buttons = [];
         $buttons[] = $this->generateEditButton(
-            Url::generate($editUrl, [AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate($editUrl, [static::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Edit',
         );
         $buttons[] = $this->generateButton(
-            Url::generate(static::ROUTE_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
+            Url::generate(static::ROUTE_UNZER_CREDENTIALS_SYNC_PAYMENT_METHODS, [static::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS]]),
             'Sync payment methods',
             [],
         );
         $buttons[] = $this->generateRemoveButton(
             Url::generate(
-                DeleteUnzerCredentialsController::ROUTE_UNZER_CREDENTIALS_DELETE,
+                static::ROUTE_UNZER_CREDENTIALS_DELETE,
                 [
-                    AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
+                    static::PARAMETER_ID_UNZER_CREDENTIALS => $item[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                 ],
             ),
             'Delete',

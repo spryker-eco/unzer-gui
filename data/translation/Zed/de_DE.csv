@@ -10,6 +10,7 @@ General,Allgemein
 "Sync payment methods","Zahlungsmethoden synchronisieren"
 "Payment methods synced successfully.","Zahlungsmethoden erolgreich sychronisiert."
 "Credentials type","Referenzen Art"
+"Main merchant Credentials","Wichtigster Händler Referenzen"
 "Available in Stores","Erhältlich in den Geschäften"
 "External Merchant Credentials","Referenzen für externe Verkäufer"
 Save,Speichern
@@ -37,4 +38,3 @@ Back,Zurück
 "Unzer Credentials deleted successfully.","Unzer Berechtigungsnachweise wurden erfolgreich gelöscht."
 "Unzer Credentials have not been deleted successfully.","Unzer Berechtigungsnachweise wurden nicht gelöscht."
 "CSRF token is not valid.","CSRF Token ungültig."
-

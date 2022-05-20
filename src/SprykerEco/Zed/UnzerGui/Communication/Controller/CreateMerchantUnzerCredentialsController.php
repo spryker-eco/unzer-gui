@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Controller;
 
+use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use SprykerEco\Shared\Unzer\UnzerConstants;
-use SprykerEco\Zed\UnzerGui\Communication\Form\MerchantUnzerCredentialsCreateForm;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,7 +31,7 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
             ->getMerchantUnzerCredentialsCreateForm(
                 $unzerCredentialsFormDataProvider->getData(),
                 array_merge(
-                    [MerchantUnzerCredentialsCreateForm::FIELD_PARENT_ID_UNZER_CREDENTIALS => $parentIdUnzerCredentials],
+                    [UnzerCredentialsTransfer::PARENT_ID_UNZER_CREDENTIALS => $parentIdUnzerCredentials],
                     $unzerCredentialsFormDataProvider->getOptions(),
                 ),
             )

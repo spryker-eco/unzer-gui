@@ -34,15 +34,6 @@ interface UnzerGuiToUnzerFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
      *
-     * @throws \SprykerEco\Zed\Unzer\Business\Exception\UnzerException
-     *
-     * @return void
-     */
-    public function setUnzerNotificationUrl(UnzerCredentialsTransfer $unzerCredentialsTransfer): void;
-
-    /**
-     * @param \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer
-     *
      * @return \Generated\Shared\Transfer\UnzerCredentialsResponseTransfer
      */
     public function updateUnzerCredentials(UnzerCredentialsTransfer $unzerCredentialsTransfer): UnzerCredentialsResponseTransfer;

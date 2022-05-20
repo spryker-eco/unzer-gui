@@ -25,6 +25,9 @@ class UnzerGuiConfig extends AbstractBundleConfig
     ];
 
     /**
+     * Specification:
+     * - Returns Unzer Credentials Type choices for dropdown list.
+     *
      * @api
      *
      * @return array<string>
@@ -35,6 +38,9 @@ class UnzerGuiConfig extends AbstractBundleConfig
     }
 
     /**
+     * Specification:
+     * - Returns Merchant suggestion limit for dropdown list.
+     *
      * @api
      *
      * @return int

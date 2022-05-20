@@ -16,11 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 class DeleteUnzerCredentialsController extends AbstractUnzerCredentialsController
 {
     /**
-     * @var string
-     */
-    public const ROUTE_UNZER_CREDENTIALS_DELETE = '/unzer-gui/delete-unzer-credentials';
-
-    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return array<string, mixed>

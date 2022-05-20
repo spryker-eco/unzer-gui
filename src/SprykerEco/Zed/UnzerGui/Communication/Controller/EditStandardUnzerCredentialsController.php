@@ -16,11 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 class EditStandardUnzerCredentialsController extends AbstractUnzerCredentialsController
 {
     /**
-     * @var string
-     */
-    public const ROUTE_STANDARD_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-standard-unzer-credentials';
-
-    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>

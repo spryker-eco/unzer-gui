@@ -15,12 +15,32 @@ use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use Generated\Shared\Transfer\UnzerKeypairTransfer;
 use SprykerEco\Shared\Unzer\UnzerConstants;
 use SprykerEco\Zed\UnzerGui\Communication\Finder\MerchantFinderInterface;
-use SprykerEco\Zed\UnzerGui\Communication\Form\UnzerCredentialsCreateForm;
 use SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface;
 use SprykerEco\Zed\UnzerGui\UnzerGuiConfig;
 
 class UnzerCredentialsFormDataProvider
 {
+    /**
+     * @var string
+     *
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Form\AbstractUnzerCredentialsForm::CREDENTIALS_TYPE_CHOICES_OPTION
+     */
+    protected const CREDENTIALS_TYPE_CHOICES_OPTION = 'type_choices';
+
+    /**
+     * @var string
+     *
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Form\AbstractUnzerCredentialsForm::MERCHANT_REFERENCE_CHOICES_OPTION
+     */
+    protected const MERCHANT_REFERENCE_CHOICES_OPTION = 'merchant_reference_choices';
+
+    /**
+     * @var string
+     *
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Form\AbstractUnzerCredentialsForm::OPTION_CURRENT_ID
+     */
+    protected const OPTION_CURRENT_ID = 'current_id';
+
     /**
      * @var \SprykerEco\Zed\UnzerGui\Dependency\UnzerGuiToUnzerFacadeInterface
      */
@@ -90,9 +110,9 @@ class UnzerCredentialsFormDataProvider
         return [
             'data_class' => UnzerCredentialsTransfer::class,
             'label' => false,
-            UnzerCredentialsCreateForm::OPTION_CURRENT_ID => $idUnzerCredentials,
-            UnzerCredentialsCreateForm::CREDENTIALS_TYPE_CHOICES_OPTION => $this->unzerGuiConfig->getUnzerCredentialsTypeChoices(),
-            UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION => $this->merchantFinder->getMerchants(new MerchantCriteriaTransfer()),
+            static::OPTION_CURRENT_ID => $idUnzerCredentials,
+            static::CREDENTIALS_TYPE_CHOICES_OPTION => $this->unzerGuiConfig->getUnzerCredentialsTypeChoices(),
+            static::MERCHANT_REFERENCE_CHOICES_OPTION => $this->merchantFinder->getMerchants(new MerchantCriteriaTransfer()),
         ];
     }
 

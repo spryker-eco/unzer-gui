@@ -10,6 +10,7 @@ General,General
 "Sync payment methods","Sync payment methods"
 "Payment methods synced successfully.","Payment methods synced successfully."
 "Credentials type","Credentials type"
+"Main merchant Credentials","Main merchant Credentials"
 "Available in Stores","Available in Stores"
 "Add Unzer Credentials","Add Unzer Credentials"
 "External Merchant Credentials","External Merchant Credentials"
@@ -37,4 +38,3 @@ Back,Back
 "Unzer Credentials deleted successfully.","Unzer Credentials deleted successfully."
 "Unzer Credentials have not been deleted successfully.","Unzer Credentials have not been deleted."
 "CSRF token is not valid","CSRF token is not valid"
-

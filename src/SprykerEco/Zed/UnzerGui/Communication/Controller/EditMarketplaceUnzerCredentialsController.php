@@ -20,11 +20,6 @@ class EditMarketplaceUnzerCredentialsController extends AbstractUnzerCredentials
     /**
      * @var string
      */
-    public const ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-marketplace-unzer-credentials';
-
-    /**
-     * @var string
-     */
     protected const ROUTE_MERCHANT_UNZER_CREDENTIALS_ADD = '/unzer-gui/create-merchant-unzer-credentials';
 
     /**

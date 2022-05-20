@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\UnzerGui\Communication\Form;
 
+use Generated\Shared\Transfer\UnzerCredentialsTransfer;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -46,7 +47,7 @@ class MerchantUnzerCredentialsEditForm extends MerchantUnzerCredentialsCreateFor
      */
     protected function addIdParentUnzerCredentialsField(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(static::FIELD_PARENT_ID_UNZER_CREDENTIALS, HiddenType::class);
+        $builder->add(UnzerCredentialsTransfer::PARENT_ID_UNZER_CREDENTIALS, HiddenType::class);
 
         return $this;
     }

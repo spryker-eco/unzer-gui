@@ -7,16 +7,6 @@
         <property name="message" type="string"/>
     </transfer>
 
-    <transfer name="UnzerValidationResponse">
-        <property name="isSuccessful" type="bool"/>
-        <property name="parameterMessages" type="UnzerCredentialsParameterMessage[]" singular="parameterMessage"/>
-    </transfer>
-
-    <transfer name="UnzerCredentialsParameterMessage">
-        <property name="messages" type="Message[]" singular="message"/>
-        <property name="parameter" type="string"/>
-    </transfer>
-
     <transfer name="UnzerCredentials">
         <property name="type" type="int"/>
         <property name="parentIdUnzerCredentials" type="int"/>

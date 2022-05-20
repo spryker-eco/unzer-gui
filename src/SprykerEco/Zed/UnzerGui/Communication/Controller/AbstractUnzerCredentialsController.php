@@ -18,12 +18,12 @@ abstract class AbstractUnzerCredentialsController extends AbstractController
     /**
      * @var string
      */
-    public const ROUTE_UNZER_CREDENTIALS_LIST = '/unzer-gui/list-unzer-credentials';
+    protected const ROUTE_UNZER_CREDENTIALS_LIST = '/unzer-gui/list-unzer-credentials';
 
     /**
      * @var string
      */
-    public const PARAMETER_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+    protected const PARAMETER_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
 
     /**
      * @var string

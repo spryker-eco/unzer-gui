@@ -37,6 +37,13 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     protected const LABEL_PARTICIPANT_ID = 'Participant Id';
 
     /**
+     * @var string
+     *
+     * @uses \SprykerEco\Zed\UnzerGui\Communication\Form\AbstractUnzerCredentialsForm::MERCHANT_REFERENCE_CHOICES_OPTION
+     */
+    protected const MERCHANT_REFERENCE_CHOICES_OPTION = 'merchant_reference_choices';
+
+    /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void
@@ -45,7 +52,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined(UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION);
+        $resolver->setDefined(static::MERCHANT_REFERENCE_CHOICES_OPTION);
 
         $resolver->setDefaults([
             'data_class' => UnzerCredentialsTransfer::class,
@@ -62,7 +69,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     {
         $this
             ->addIdUnzerCredentialsField($builder)
-            ->addMerchantReferenceField($builder, $options[UnzerCredentialsCreateForm::MERCHANT_REFERENCE_CHOICES_OPTION])
+            ->addMerchantReferenceField($builder, $options[static::MERCHANT_REFERENCE_CHOICES_OPTION])
             ->addParticipantIdField($builder)
             ->addTypeField($builder)
             ->addUnzerKeypairTypeField($builder);
@@ -105,6 +112,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
             'choices' => array_flip($choices),
             'multiple' => false,
             'required' => false,
+            'label' => static::LABEL_MERCHANT_REFERENCE,
         ]);
 
         return $this;
@@ -119,6 +127,7 @@ class UnzerMainMerchantCredentialsType extends AbstractType
     {
         $builder->add(UnzerCredentialsTransfer::PARTICIPANT_ID, TextType::class, [
             'required' => true,
+            'label' => static::LABEL_PARTICIPANT_ID,
         ]);
 
         return $this;

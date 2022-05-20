@@ -16,11 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 class EditMerchantUnzerCredentialsController extends AbstractMerchantUnzerCredentialsController
 {
     /**
-     * @var string
-     */
-    public const ROUTE_MERCHANT_UNZER_CREDENTIALS_EDIT = '/unzer-gui/edit-merchant-unzer-credentials';
-
-    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
