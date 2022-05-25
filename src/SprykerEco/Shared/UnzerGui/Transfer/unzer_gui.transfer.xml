@@ -19,7 +19,6 @@
         <property name="storeRelation" type="StoreRelation"/>
     </transfer>
 
-
     <transfer name="UnzerCredentialsResponse">
         <property name="isSuccessful" type="bool"/>
         <property name="messages" type="Message[]" singular="message"/>

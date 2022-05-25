@@ -156,7 +156,7 @@ class UnzerCredentialsTable extends AbstractTable
     {
         $this->unzerCredentialsQuery
             ->groupByIdUnzerCredentials()
-            ->filterByType_In([UnzerConstants::UNZER_CONFIG_TYPE_STANDARD, UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE])
+            ->filterByType_In([UnzerConstants::UNZER_CREDENTIALS_TYPE_STANDARD, UnzerConstants::UNZER_CREDENTIALS_TYPE_MAIN_MARKETPLACE])
             ->useUnzerCredentialsStoreQuery(null, Criteria::LEFT_JOIN)
                 ->leftJoinStore()
                 ->withColumn(
@@ -177,7 +177,7 @@ class UnzerCredentialsTable extends AbstractTable
     {
         $currentType = $unzerCredentials[SpyUnzerCredentialsTableMap::COL_TYPE];
 
-        return UnzerConstants::UNZER_CONFIG_TYPES[$currentType] ?? '';
+        return UnzerConstants::UNZER_CREDENTIALS_TYPES[$currentType] ?? '';
     }
 
     /**
@@ -204,7 +204,7 @@ class UnzerCredentialsTable extends AbstractTable
      */
     protected function buildLinks(array $item): string
     {
-        $editUrl = ($item[SpyUnzerCredentialsTableMap::COL_TYPE] === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) ?
+        $editUrl = ($item[SpyUnzerCredentialsTableMap::COL_TYPE] === UnzerConstants::UNZER_CREDENTIALS_TYPE_MAIN_MARKETPLACE) ?
             static::ROUTE_MARKETPLACE_UNZER_CREDENTIALS_EDIT : static::ROUTE_STANDARD_UNZER_CREDENTIALS_EDIT;
 
         $buttons = [];

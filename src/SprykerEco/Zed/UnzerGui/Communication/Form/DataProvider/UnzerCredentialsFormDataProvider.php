@@ -89,7 +89,7 @@ class UnzerCredentialsFormDataProvider
             $unzerCredentialsTransfer = $unzerCredentialsCollectionTransfer->getUnzerCredentials()->getIterator()->current() ?? $unzerCredentialsTransfer;
         }
 
-        if ($unzerCredentialsTransfer->getType() === UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
+        if ($unzerCredentialsTransfer->getType() === UnzerConstants::UNZER_CREDENTIALS_TYPE_MAIN_MARKETPLACE) {
             $unzerCredentialsTransfer = $this->setChildUnzerCredentials($unzerCredentialsTransfer);
         }
 

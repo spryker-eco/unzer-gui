@@ -54,7 +54,7 @@ class CreateMerchantUnzerCredentialsController extends AbstractMerchantUnzerCred
     {
         /** @var \Generated\Shared\Transfer\UnzerCredentialsTransfer $unzerCredentialsTransfer */
         $unzerCredentialsTransfer = $unzerCredentialsForm->getData();
-        $unzerCredentialsTransfer->setType(UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MERCHANT);
+        $unzerCredentialsTransfer->setType(UnzerConstants::UNZER_CREDENTIALS_TYPE_MARKETPLACE_MERCHANT);
 
         $unzerCredentialsResponseTransfer = $this->getFactory()->getUnzerFacade()->createUnzerCredentials($unzerCredentialsTransfer);
 

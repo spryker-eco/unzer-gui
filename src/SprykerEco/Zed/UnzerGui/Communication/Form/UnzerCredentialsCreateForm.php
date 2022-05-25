@@ -149,7 +149,7 @@ class UnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
             $unzerType = $unzerCredentialsTransfer['type'] ?? null;
             $form = $event->getForm();
 
-            if ((int)$unzerType !== UnzerConstants::UNZER_CONFIG_TYPE_MAIN_MARKETPLACE) {
+            if ((int)$unzerType !== UnzerConstants::UNZER_CREDENTIALS_TYPE_MAIN_MARKETPLACE) {
                 $form->remove(UnzerCredentialsTransfer::CHILD_UNZER_CREDENTIALS);
             }
         });

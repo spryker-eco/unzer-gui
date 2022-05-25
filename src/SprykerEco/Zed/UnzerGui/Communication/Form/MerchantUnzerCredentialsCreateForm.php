@@ -125,7 +125,7 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
     protected function addTypeField(FormBuilderInterface $builder)
     {
         $builder->add(UnzerCredentialsTransfer::TYPE, HiddenType::class, [
-            'data' => UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MERCHANT,
+            'data' => UnzerConstants::UNZER_CREDENTIALS_TYPE_MARKETPLACE_MERCHANT,
             'required' => true,
         ]);
 

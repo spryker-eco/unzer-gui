@@ -150,7 +150,7 @@ class MerchantUnzerCredentialsTable extends AbstractTable
     {
         $this->unzerCredentialsQuery
             ->groupByIdUnzerCredentials()
-            ->filterByType(UnzerConstants::UNZER_CONFIG_TYPE_MARKETPLACE_MERCHANT)
+            ->filterByType(UnzerConstants::UNZER_CREDENTIALS_TYPE_MARKETPLACE_MERCHANT)
             ->filterByParentIdUnzerCredentials($this->parentIdUnzerCredentials);
 
         return $this->unzerCredentialsQuery;
@@ -165,7 +165,7 @@ class MerchantUnzerCredentialsTable extends AbstractTable
     {
         $currentType = $unzerCredentials[SpyUnzerCredentialsTableMap::COL_TYPE];
 
-        return UnzerConstants::UNZER_CONFIG_TYPES[$currentType] ?? '';
+        return UnzerConstants::UNZER_CREDENTIALS_TYPES[$currentType] ?? '';
     }
 
     /**
