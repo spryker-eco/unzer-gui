@@ -46,7 +46,7 @@ class UnzerCredentialsTable extends AbstractTable
      *
      * @uses \SprykerEco\Zed\UnzerGui\Communication\Controller\AbstractUnzerCredentialsController::PARAMETER_ID_UNZER_CREDENTIALS
      */
-    public const PARAMETER_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
+    protected const PARAMETER_ID_UNZER_CREDENTIALS = 'id-unzer-credentials';
 
     /**
      * @var string
