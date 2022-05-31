@@ -36,4 +36,4 @@ Back,Back
 "Unzer Credentials have not been created successfully.","Unzer Credentials have not been created."
 "Unzer Credentials deleted successfully.","Unzer Credentials deleted successfully."
 "Unzer Credentials have not been deleted successfully.","Unzer Credentials have not been deleted."
-"CSRF token is not valid","CSRF token is not valid"
+"CSRF token is not valid.","CSRF token is not valid."
