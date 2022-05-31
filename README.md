@@ -13,4 +13,4 @@ UnzerGui is a user interface module to manage Unzer PSP configuration in the Bac
 composer require spryker-eco/unzer-gui
 ```
 ## Documentation
-[Documentation](https://documentation.spryker.com/industry_partners/payment/unzer-gui/unzer-gui-details.htm)
+[Documentation](https://docs.spryker.com/industry_partners/payment/unzer-gui/unzer-gui-details.htm)
