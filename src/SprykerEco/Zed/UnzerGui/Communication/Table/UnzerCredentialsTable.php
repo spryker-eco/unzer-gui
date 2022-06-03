@@ -114,7 +114,7 @@ class UnzerCredentialsTable extends AbstractTable
     {
         $tableConfiguration->setHeader([
             SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => 'Id',
-            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Credentials List Id',
+            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Name',
             SpyUnzerCredentialsTableMap::COL_TYPE => 'Credentials type',
             SpyUnzerCredentialsStoreTableMap::COL_FK_STORE => 'Available in Stores',
             static::COL_ACTIONS => 'Actions',

@@ -16,10 +16,9 @@
         {% block widget_content %}
             {{ form_start(unzerCredentialsForm) }}
             {{ form_row(unzerCredentialsForm.idUnzerCredentials) }}
-            {{ form_row(unzerCredentialsForm.configName) }}
-            {{ form_row(unzerCredentialsForm.unzerKeypair) }}
             {{ form_row(unzerCredentialsForm.merchantReference) }}
             {{ form_row(unzerCredentialsForm.participantId) }}
+            {{ form_row(unzerCredentialsForm.unzerKeypair) }}
 
             {{ form_widget(unzerCredentialsForm) }}
             <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />

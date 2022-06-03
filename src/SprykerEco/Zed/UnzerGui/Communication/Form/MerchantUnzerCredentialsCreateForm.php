@@ -63,7 +63,6 @@ class MerchantUnzerCredentialsCreateForm extends AbstractUnzerCredentialsForm
     {
         $this
             ->addIdUnzerCredentialsField($builder)
-            ->addNameField($builder)
             ->addUnzerKeypairType($builder)
             ->addMerchantReferenceField($builder, $options[static::MERCHANT_REFERENCE_CHOICES_OPTION])
             ->addParticipantIdField($builder)

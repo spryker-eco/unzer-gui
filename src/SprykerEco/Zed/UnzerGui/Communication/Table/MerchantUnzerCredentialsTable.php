@@ -79,11 +79,10 @@ class MerchantUnzerCredentialsTable extends AbstractTable
 
         $config->setSortable([
             SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS,
-            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME,
         ]);
 
         $config->setSearchable([
-            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME,
+            SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE,
         ]);
 
         $config->setRawColumns([
@@ -109,9 +108,8 @@ class MerchantUnzerCredentialsTable extends AbstractTable
         $tableConfiguration->setHeader([
             SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => 'Id',
             SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => 'Merchant Reference',
-            SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => 'Credential List Id',
-            SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => 'Public Key',
             SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => 'Participant Id',
+            SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => 'Public Key',
             static::COL_ACTIONS => 'Actions',
         ]);
 
@@ -132,7 +130,6 @@ class MerchantUnzerCredentialsTable extends AbstractTable
             $merchantUnzerCredentialItem = [
                 SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS => $queryResultItem[SpyUnzerCredentialsTableMap::COL_ID_UNZER_CREDENTIALS],
                 SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE => $queryResultItem[SpyUnzerCredentialsTableMap::COL_MERCHANT_REFERENCE],
-                SpyUnzerCredentialsTableMap::COL_CONFIG_NAME => $queryResultItem[SpyUnzerCredentialsTableMap::COL_CONFIG_NAME],
                 SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY => $queryResultItem[SpyUnzerCredentialsTableMap::COL_PUBLIC_KEY],
                 SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID => $queryResultItem[SpyUnzerCredentialsTableMap::COL_PARTICIPANT_ID],
                 static::COL_ACTIONS => $this->buildLinks($queryResultItem),
