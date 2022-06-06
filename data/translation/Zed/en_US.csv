@@ -1,0 +1,39 @@
+"Unzer Credentials","Unzer Credentials"
+"Credential List Id","Credential List Id"
+Name,Name
+"Participant Id","Participant Id"
+"Merchant Reference","Merchant Reference"
+Actions,Actions
+Edit,Edit
+Delete,Delete
+General,General
+"Sync payment methods","Sync payment methods"
+"Payment methods synced successfully.","Payment methods synced successfully."
+"Credentials type","Credentials type"
+"Main merchant Credentials","Main merchant Credentials"
+"Available in Stores","Available in Stores"
+"Add Unzer Credentials","Add Unzer Credentials"
+"External Merchant Credentials","External Merchant Credentials"
+Save,Save
+"Add Merchant Unzer Credentials","Add Merchant Unzer Credentials"
+"List of Unzer Credentials","List of Unzer Credentials"
+Back,Back
+"Back to Unzer Credentials","Back to Unzer Credentials"
+"Unzer Merchant Credentials removal confirmation","Unzer Merchant Credentials removal confirmation"
+"Are you sure you want to remove this Merchant Unzer Credentials?","Are you sure you want to remove this Merchant Unzer Credentials?"
+"Removing this will also remove all associated functionalities.","Removing this will also remove all associated functionalities."
+"Remove Unzer Credentials","Remove Unzer Credentials"
+"Unzer Credentials removal confirmation","Unzer Credentials removal confirmation"
+"Are you sure you want to remove this Unzer Credentials?","Are you sure you want to remove this Unzer Credentials?"
+"Edit Unzer Credentials","Edit Unzer Credentials"
+"Edit Merchant Unzer Credentials","Edit Merchant Unzer Credentials"
+"Overview of Unzer Credentials","Overview of Unzer Credentials"
+"Public Key","Public Key"
+"Unzer Credentials have been updated.","Unzer Credentials have been updated."
+"Unzer Credentials have not been updated.","Unzer Credentials have not been updated."
+"Unzer Credentials not found.","Unzer Credentials not found."
+"Unzer Credentials created successfully.","Unzer Credentials created successfully."
+"Unzer Credentials have not been created successfully.","Unzer Credentials have not been created."
+"Unzer Credentials deleted successfully.","Unzer Credentials deleted successfully."
+"Unzer Credentials have not been deleted successfully.","Unzer Credentials have not been deleted."
+"CSRF token is not valid.","CSRF token is not valid."
