@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
-        "spryker-eco/unzer": "^1.0.0",
+        "spryker-eco/unzer": "dev-bugfix/cc-16938/fix-charge-shipping-costs",
         "spryker/gui": "^3.0.0",
         "spryker/kernel": "^3.30.0",
         "spryker/merchant": "^3.0.0",
